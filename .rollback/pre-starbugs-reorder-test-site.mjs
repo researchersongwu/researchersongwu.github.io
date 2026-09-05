@@ -27,7 +27,6 @@ const awardsSection = readFileSync('_sections/06-awards.md', 'utf8');
 const experiencesSection = readFileSync('_sections/08-experiences.md', 'utf8');
 const starbugsSection = readFileSync('_sections/09-starbugs.md', 'utf8');
 const starbugsBody = starbugsSection.replace(/^---\s*[\s\S]*?---\s*/u, '').trim();
-const starbugsRows = starbugsBody.split('\n').filter((line) => /^\|\s*(?:\[)?(?:CVE|CNVD)-\d{4}-\d+/u.test(line));
 const readme = readFileSync('README.md', 'utf8');
 const ccsPublication = readFileSync('_posts/2026-08-01-when-ad-networks-misbehave.md', 'utf8');
 const spPoster = readFileSync('_posts/2026-04-01-understanding-risks-splash-ads-poster.md', 'utf8');
@@ -52,8 +51,7 @@ const assertions = [
   ['four experience entries', (experiencesSection.match(/^\|\s*.+\|\s*(?:Jun|Feb|Jul) 20\d{2} .+\|$/gmu) || []).length === 4],
   ['StarBugs Markdown section', starbugsSection.includes('section_id: starbugs') && starbugsSection.includes('nav: StarBugs')],
   ['StarBugs Markdown content', starbugsBody.includes('## StarBugs') && starbugsBody.includes('| Advisory | Project / Product | Impact |') && !starbugsBody.includes('CVE-YYYY-NNNN')],
-  ['five StarBugs entries', starbugsRows.length === 5],
-  ['complete StarBugs table rows', starbugsRows.every((line) => line.split('|').length === 5)],
+  ['five StarBugs entries', (starbugsBody.match(/^\|\s*(?:\[)?(?:CVE|CNVD)-\d{4}-\d+/gmu) || []).length === 5],
   ['StarBugs Markdown authoring guide', readme.includes('## Add StarBugs') && readme.includes('| Advisory | Project / Product | Impact |')],
   ['blank talk Markdown stays empty', talksSection.trim() === ''],
   ['sections collection', config.includes('sections:') && config.includes('output: false')],

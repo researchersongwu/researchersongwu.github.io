@@ -1,26 +1,22 @@
 diff --git a/_sections/09-starbugs.md b/_sections/09-starbugs.md
-index 2a2a67c..a8ea189 100644
+index a8ea189..c4a4ea9 100644
 --- a/_sections/09-starbugs.md
 +++ b/_sections/09-starbugs.md
-@@ -5,0 +6,13 @@ order: 9
-+
-+## StarBugs
-+
-+I have discovered vulnerabilities in popular open-source software (repositories with more than 1K stars on GitHub), as well as in products maintained by Xiaomi and Photonicat. A selective list is shown below.
-+
-+| Advisory | Project / Product | Impact |
-+| --- | --- | --- |
-+| [CVE-2026-55629](https://github.com/avwo/whistle/security/advisories/GHSA-3vfr-4gwf-qxfp) | [whistle](https://github.com/avwo/whistle) | Path Traversal / Arbitrary File Read |
-+| [CVE-2026-59971](https://github.com/designcomputer/mysql_mcp_server/security/advisories/GHSA-rqfv-2mw9-78g2) | [mysql_mcp_server](https://github.com/designcomputer/mysql_mcp_server) | Unauthenticated SQL Execution |
+@@ -9 +9 @@ order: 9
+-I have discovered vulnerabilities in popular open-source software (repositories with more than 1K stars on GitHub), as well as in products maintained by Xiaomi and Photonicat. A selective list is shown below.
++I have discovered vulnerabilities in popular open-source software (30+ CVE repositories with more than 1K stars on GitHub), as well as in products maintained by Xiaomi and Photonicat. A selective list is shown below.
+@@ -15 +14,0 @@ I have discovered vulnerabilities in popular open-source software (repositories
+-| [CVE-2020-14130](https://trust.mi.com/zh-CN/misrc/bulletins/advisory?cveId=27) | [Xiaomi](https://trust.mi.com/) | |
+@@ -17,0 +17,2 @@ I have discovered vulnerabilities in popular open-source software (repositories
 +| [CVE-2020-14130](https://trust.mi.com/zh-CN/misrc/bulletins/advisory?cveId=27) | [Xiaomi](https://trust.mi.com/) | |
-+| CNVD-2026-29936 | [Photonicat](https://photonicat.com/) | |
-+| CNVD-2026-28302 | [Photonicat](https://photonicat.com/) | |
-+{: .compact-table }
++
 diff --git a/scripts/test-site.mjs b/scripts/test-site.mjs
-index 2f9c938..1781e70 100644
+index 1781e70..4f7f1e6 100644
 --- a/scripts/test-site.mjs
 +++ b/scripts/test-site.mjs
-@@ -53 +53,2 @@ const assertions = [
--  ['blank StarBugs stays hidden until filled', starbugsBody === ''],
-+  ['StarBugs Markdown content', starbugsBody.includes('## StarBugs') && starbugsBody.includes('| Advisory | Project / Product | Impact |') && !starbugsBody.includes('CVE-YYYY-NNNN')],
-+  ['five StarBugs entries', (starbugsBody.match(/^\|\s*(?:\[)?(?:CVE|CNVD)-\d{4}-\d+/gmu) || []).length === 5],
+@@ -29,0 +30 @@ const starbugsBody = starbugsSection.replace(/^---\s*[\s\S]*?---\s*/u, '').trim(
++const starbugsRows = starbugsBody.split('\n').filter((line) => /^\|\s*(?:\[)?(?:CVE|CNVD)-\d{4}-\d+/u.test(line));
+@@ -54 +55,2 @@ const assertions = [
+-  ['five StarBugs entries', (starbugsBody.match(/^\|\s*(?:\[)?(?:CVE|CNVD)-\d{4}-\d+/gmu) || []).length === 5],
++  ['five StarBugs entries', starbugsRows.length === 5],
++  ['complete StarBugs table rows', starbugsRows.every((line) => line.split('|').length === 5)],

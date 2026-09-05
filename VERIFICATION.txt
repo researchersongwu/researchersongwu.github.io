@@ -1,10 +1,10 @@
-StarBugs publication verification
+StarBugs reorder deployment verification
 Timestamp: 2026-09-05 Asia/Shanghai
 
 Changed branch/field:
 - Branch: main
-- Field: _sections/09-starbugs.md / introduction and five vulnerability rows
-- Result: the user-supplied StarBugs Markdown was normalized into a valid three-column table; English wording, project capitalization, one broken repository link, and obvious impact wording were corrected. Unspecified impact cells remain empty.
+- Field: _sections/09-starbugs.md / introduction, vulnerability ordering, and complete table cells
+- Result: the 30+ CVE introduction is preserved, the two Photonicat CNVD entries appear before the Xiaomi CVE entry, and all five Markdown rows render with three columns.
 
 Artifacts:
 - MODIFIED_FILE: /Users/xiaoming/mypersonalwebsite/_sections/09-starbugs.md
@@ -13,49 +13,36 @@ Artifacts:
 - ROLLBACK: /Users/xiaoming/mypersonalwebsite/ROLLBACK.sh
 
 Preserved originals:
-- .rollback/pre-starbugs-publish-09-starbugs.md
-  SHA-256: f6332ce5e4aeb98b760e2be591a258a5aacfe4d229d4f953cddc5dec218c2022
-- .rollback/pre-starbugs-publish-test-site.mjs
-  SHA-256: 533d213a16d84d646cf250d4771b3350840c0273a3335d117f2e6a6363bd4075
+- .rollback/pre-starbugs-reorder-09-starbugs.md
+  SHA-256: cff2fbbafb8320919e757d03e5c32954e1b4c0c70d6786cf34298c0396253f8c
+- .rollback/pre-starbugs-reorder-test-site.mjs
+  SHA-256: dd64265891dc6007e8fa0b6cd394448d732a6de4ed91f2d2731297ba11960e9d
 
 Modified state:
 - _sections/09-starbugs.md
-  SHA-256: 1f7cf9ce2510fd9c9b1675b1faa89deb7529079dfbbe2f7cc2f045b0790a1e5e
+  SHA-256: eec42f53b52fc671d77deaa0e55bbc1e5786ebf712533b401ad2534dfe88ed4c
 - scripts/test-site.mjs
-  SHA-256: dd64265891dc6007e8fa0b6cd394448d732a6de4ed91f2d2731297ba11960e9d
-
-LINK CHECK
-COMMAND: curl -k -L -sS -o /dev/null -w '%{http_code} %{url_effective}' URL
-INPUT: the two GitHub advisories, whistleL/whistle repositories, mysql_mcp_server repository, Xiaomi advisory, and Photonicat homepage
-LITERAL OUTPUT/RESULT:
-200 https://github.com/avwo/whistle/security/advisories/GHSA-3vfr-4gwf-qxfp
-404 https://github.com/avwo/whistleL
-200 https://github.com/avwo/whistle
-200 https://github.com/designcomputer/mysql_mcp_server/security/advisories/GHSA-rqfv-2mw9-78g2
-200 https://github.com/designcomputer/mysql_mcp_server
-200 https://trust.mi.com/zh-CN/misrc/bulletins/advisory?cveId=27
-200 https://photonicat.com/
-EXIT STATUS: 0
+  SHA-256: db09fcabc0df2d82148afa70d432df227a863abb9b795b1928c3c83377c45e7f
 
 BASELINE
 COMMAND: git archive HEAD | tar -x -C TARGET_COPY; npm test
-INPUT: clean HEAD 35ec1fb009cf3e9e047fe1819f0092f275426098 in a temporary copy
-LITERAL OUTPUT/RESULT:
-> academic-homepage-template@1.0.0 test
-> node scripts/test-site.mjs
-
-PASS modified: 34/34 checks
-BASELINE_EXIT_STATUS=0
-BASELINE_CLEANUP_EXIT_STATUS=0
-
-MODIFIED
-COMMAND: npm test; npm run build:docker; inspect _site/index.html StarBugs table
-INPUT: normalized _sections/09-starbugs.md with five user-provided entries
+INPUT: clean HEAD f63fef152e686bbacfbdede9513ce76a10650196 in a temporary copy
 LITERAL OUTPUT/RESULT:
 > academic-homepage-template@1.0.0 test
 > node scripts/test-site.mjs
 
 PASS modified: 35/35 checks
+BASELINE_EXIT_STATUS=0
+BASELINE_CLEANUP_EXIT_STATUS=0
+
+MODIFIED
+COMMAND: npm test; npm run build:docker; inspect _site/index.html StarBugs introduction, order, and column count
+INPUT: latest _sections/09-starbugs.md with the 30+ CVE introduction and reordered entries
+LITERAL OUTPUT/RESULT:
+> academic-homepage-template@1.0.0 test
+> node scripts/test-site.mjs
+
+PASS modified: 36/36 checks
 MODIFIED_TEST_EXIT_STATUS=0
 
 > academic-homepage-template@1.0.0 build:docker
@@ -68,24 +55,26 @@ Configuration file: /srv/_config.yml
        Destination: /srv/_site
  Incremental build: disabled. Enable with --incremental
       Generating...
-                    done in 0.095 seconds.
+                    done in 0.065 seconds.
  Auto-regeneration: disabled. Use --watch to enable.
 MODIFIED_BUILD_EXIT_STATUS=0
 STARBUGS_SECTION_RENDERED=true
+STARBUGS_INTRO_30_PLUS_CVE=true
 STARBUGS_ROWS=5
+STARBUGS_COLUMNS_PER_ROW=3
 STARBUGS_1=CVE-2026-55629 | whistle | Path Traversal / Arbitrary File Read
 STARBUGS_2=CVE-2026-59971 | mysql_mcp_server | Unauthenticated SQL Execution
-STARBUGS_3=CVE-2020-14130 | Xiaomi |
-STARBUGS_4=CNVD-2026-29936 | Photonicat |
-STARBUGS_5=CNVD-2026-28302 | Photonicat |
+STARBUGS_3=CNVD-2026-29936 | Photonicat |
+STARBUGS_4=CNVD-2026-28302 | Photonicat |
+STARBUGS_5=CVE-2020-14130 | Xiaomi |
 MODIFIED_RENDER_EXIT_STATUS=0
 
 ROLLBACK
 COMMAND: ./ROLLBACK.sh TARGET_COPY; compare StarBugs and test files
-INPUT: /tmp/mypersonalwebsite-starbugs-publish-rollback-RQTS8l
+INPUT: /tmp/mypersonalwebsite-starbugs-reorder-rollback-TARGET
 LITERAL OUTPUT/RESULT:
-ROLLBACK restored the pre-publish StarBugs Markdown and tests in /tmp/mypersonalwebsite-starbugs-publish-rollback-RQTS8l
-ROLLBACK_RESULT=starbugs_user_input_restored=true; test_restored=true
+ROLLBACK restored the pre-update StarBugs ordering and tests in /tmp/mypersonalwebsite-starbugs-reorder-rollback-TARGET
+ROLLBACK_RESULT=starbugs_restored=true; test_restored=true
 ROLLBACK_EXIT_STATUS=script=0 starbugs=0 test=0
 ROLLBACK_CLEANUP_EXIT_STATUS=0
-RESTORED BEHAVIOR/STATUS: the test copy returned to the exact user-supplied pre-normalization Markdown and tests. The workspace MODIFIED_FILE remains changed with the valid rendered table.
+RESTORED BEHAVIOR/STATUS: the test copy returned to the pre-update StarBugs ordering and tests. The workspace MODIFIED_FILE remains changed with the requested ordering and completed table rows.
