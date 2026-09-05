@@ -1,33 +1,38 @@
-diff --git a/.rollback/pre-reupload-publication.md b/_posts/2026-08-01-when-ad-networks-misbehave.md
-index bdce1bf..b340da5 100644
---- a/.rollback/pre-reupload-publication.md
-+++ b/_posts/2026-08-01-when-ad-networks-misbehave.md
-@@ -7,6 +7,7 @@ authors: "<strong>Song Wu</strong>, Bo Wang, Yifan Zhang, Yinfeng Cao, Xueqiang
- venue: "To appear in the proceedings of the ACM Conference on Computer and Communications Security (CCS), 2026."
- paper: "https://researchersongwu.github.io/"
- artifact: "https://researchersongwu.github.io/"
--features: "Discovered Semi-Drive-By Ads, triggered by incidental rather than explicit user actions."
--features:"Built AdHive to detect them across 32,758 apps, recovering about $600K in losses"
-+features:
-+  - "Discovered Semi-Drive-By Ads, triggered by incidental rather than explicit user actions."
-+  - "Built AdHive to detect them across 32,758 apps, recovering about $600K in losses."
- ---
-diff --git a/.rollback/pre-reupload-publication-renderer.md b/_sections/04-publications.md
-index 815863a..3001b1a 100644
---- a/.rollback/pre-reupload-publication-renderer.md
-+++ b/_sections/04-publications.md
-@@ -21,7 +21,13 @@ order: 4
-     {% if post.slides %}{% if has_previous_link %} / {% endif %}<a href="{{ post.slides | relative_url }}">slides</a>{% endif %}
-   </p>
-   <p><em>{{ post.venue }}</em></p>
--  {% if post.features %}<p class="feature-line"><span class="square"></span>{{ post.features }}</p>{% endif %}
-+  {% if post.features %}
-+    {% if post.features.first %}
-+      {% for feature in post.features %}<p class="feature-line"><span class="square"></span>{{ feature }}</p>{% endfor %}
-+    {% else %}
-+      <p class="feature-line"><span class="square"></span>{{ post.features }}</p>
-+    {% endif %}
-+  {% endif %}
-   {% if post.award %}<p class="feature-line"><span class="square red"></span><strong>{{ post.award }}</strong></p>{% endif %}
- </article>
- {% endfor %}
+diff --git a/.rollback/pre-poster-post.empty b/_posts/2026-04-01-understanding-risks-splash-ads-poster.md
+index e69de29..04897ff 100644
+--- a/.rollback/pre-poster-post.empty
++++ b/_posts/2026-04-01-understanding-risks-splash-ads-poster.md
+@@ -0,0 +1,9 @@
++---
++layout: post
++title: "Understanding Risks of Semi-Drive-By Splash Ads"
++date: 2026-04-01
++categories: poster
++authors: "<strong>Song Wu</strong>, Yifan Zhang, Xueqiang Wang, Yinfeng Cao§, Bo Wang, Qin Wang"
++venue: "Poster, IEEE Symposium on Security and Privacy (S&P), 2026."
++abstract: "https://sp2026.ieee-security.org/downloads/posters/sp2026posters-final91.pdf"
++---
+diff --git a/.rollback/pre-poster-section.empty b/_sections/05-posters.md
+index e69de29..e2ca2ac 100644
+--- a/.rollback/pre-poster-section.empty
++++ b/_sections/05-posters.md
+@@ -0,0 +1,19 @@
++---
++section_id: posters
++nav: Posters
++order: 5
++---
++
++{% assign poster_posts = site.posts | where_exp: 'post', "post.categories contains 'poster'" %}
++{% if poster_posts.size > 0 %}
++## Posters
++
++{% for post in poster_posts %}
++<article class="publication poster" id="poster-{{ forloop.index }}">
++  <h3>{{ post.title }}</h3>
++  <p>{{ post.authors }}</p>
++  {% if post.abstract %}<p class="paper-links"><a href="{{ post.abstract }}">abstract</a></p>{% endif %}
++  {% if post.venue %}<p><em>{{ post.venue }}</em></p>{% endif %}
++</article>
++{% endfor %}
++{% endif %}
