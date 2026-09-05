@@ -41,7 +41,7 @@ const assertions = [
   ['poster loop in Markdown', posterSection.includes('for post in poster_posts')],
   ['poster category', posterSection.includes("post.categories contains 'poster'")],
   ['S&P 2026 poster Markdown', spPoster.includes('Understanding Risks of Semi-Drive-By Splash Ads') && spPoster.includes('sp2026posters-final91.pdf')],
-  ['Awards Markdown section', awardsSection.includes('## Selected Honors & Awards') && awardsSection.includes('Huawei HarmonyOS Security Training Camp')],
+  ['Awards Markdown section', awardsSection.includes('## Awards') && awardsSection.includes('Huawei HarmonyOS Security Training Camp')],
   ['ten award entries', (awardsSection.match(/^\| .+ \| 20\d{2} \|$/gmu) || []).length === 10],
   ['blank talk Markdown stays empty', talksSection.trim() === ''],
   ['sections collection', config.includes('sections:') && config.includes('output: false')],
