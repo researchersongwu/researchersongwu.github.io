@@ -1,0 +1,49 @@
+---
+---
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="{{ page.author }}">
+  <meta name="description" content="{{ page.description }}">
+  <title>{{ page.title }}</title>
+  <link rel="stylesheet" href="{{ '/style.css' | relative_url }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css?family=Lato:400,500,700,400italic,700italic" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bree+Serif&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+</head>
+<body>
+  {% assign homepage_sections = site.sections | sort: 'order' %}
+  <div class="page-wrapper">
+    <nav class="side-nav" aria-label="Section navigation">
+      {% for section in homepage_sections %}
+      {% assign visible_content = section.content | strip %}
+      {% if section.section_id and visible_content != '' %}
+      <a href="#{{ section.section_id }}">{{ section.nav }}</a>
+      {% endif %}
+      {% endfor %}
+    </nav>
+
+    <main class="main-content">
+      {% for section in homepage_sections %}
+      {% assign visible_content = section.content | strip %}
+      {% if section.section_id and visible_content != '' %}
+      <section id="{{ section.section_id }}" class="page-section {{ section.section_class }}">
+        {{ section.content }}
+      </section>
+      {% endif %}
+      {% endfor %}
+
+      <footer>
+        <p>Template adapted from <a href="https://github.com/jackfromeast/jackfromeast.github.io">jackfromeast.github.io</a>; original design lineage credits <a href="https://jonbarron.info">Jon Barron</a>.</p>
+        <p>Last updated: {{ site.time | date: '%Y' }}</p>
+      </footer>
+    </main>
+  </div>
+  <script src="{{ '/script.js' | relative_url }}"></script>
+</body>
+</html>

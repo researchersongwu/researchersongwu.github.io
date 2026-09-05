@@ -7,5 +7,7 @@ authors: "<strong>Song Wu</strong>, Bo Wang, Yifan Zhang, Yinfeng Cao, Xueqiang 
 venue: "To appear in the proceedings of the ACM Conference on Computer and Communications Security (CCS), 2026."
 paper: "https://researchersongwu.github.io/"
 artifact: "https://researchersongwu.github.io/"
-features: "We investigate the security risks posed by semi-drive-by splash advertisements when ad networks misbehave."
+features: "Discovered Semi-Drive-By Ads, triggered by incidental rather than explicit user actions.
+
+Built AdHive to detect them across 32,758 apps, recovering about $600K in losses"
 ---
