@@ -1,53 +1,50 @@
-FlowDroid StarBug deployment verification
+CV link re-upload verification
 Timestamp: 2026-09-05 Asia/Shanghai
 
 Changed branch/field:
 - Branch: main
-- Field: _sections/09-starbugs.md / CVE-2021-32754 FlowDroid row
-- Result: the new FlowDroid XXE entry is normalized as a valid three-column Markdown row and placed before the Xiaomi entry.
+- Field: _sections/01-about.md / CV href
+- Result: the About-page CV button now points to the supplied Google Drive document and the matching site test verifies that URL.
 
 Artifacts:
-- MODIFIED_FILE: /Users/xiaoming/mypersonalwebsite/_sections/09-starbugs.md
+- MODIFIED_FILE: /Users/xiaoming/mypersonalwebsite/_sections/01-about.md
 - DIFF_FILE: /Users/xiaoming/mypersonalwebsite/DIFF_FILE.patch
 - VERIFICATION: /Users/xiaoming/mypersonalwebsite/VERIFICATION.txt
 - ROLLBACK: /Users/xiaoming/mypersonalwebsite/ROLLBACK.sh
 
 Preserved originals:
-- .rollback/pre-flowdroid-09-starbugs.md
-  SHA-256: 25fae5f859e9ed3899357f7147afb07ef432db320a6d5906c258eabf2724fe1e
-- .rollback/pre-flowdroid-test-site.mjs
-  SHA-256: 9dda77d60457aa1e3531a4e74fce302f5f49a597c417b2a99f9490b1f9a7b143
-
-Modified state:
-- _sections/09-starbugs.md
-  SHA-256: 2bf3f9db310772097a50b78234f01a95a51306687c422471c07febf006e56330
-- scripts/test-site.mjs
+- /Users/xiaoming/mypersonalwebsite/.rollback/pre-cv-drive-01-about.md
+  SHA-256: d93fb328bc1cc722e0d83f95e526dc44a026d8d410d4c0e3d5289e18c261d1ac
+- /Users/xiaoming/mypersonalwebsite/.rollback/pre-cv-drive-test-site.mjs
   SHA-256: 6bba63ccb4ee9c4de7a8069b15032604d831994a272440f6864fcf6349c43518
 
+Modified state:
+- /Users/xiaoming/mypersonalwebsite/_sections/01-about.md
+  SHA-256: 563c80f9e41ea4375d8793691a388005e0559c6a68cbadfadb4e619f58cb2ea5
+- /Users/xiaoming/mypersonalwebsite/scripts/test-site.mjs
+  SHA-256: d6b5deb0c4dde5538026b1b97ed8d57924969763a0f0907ae74e7b426d4637b8
+
 LINK CHECK
-COMMAND: curl -k -L -sS -o OUTPUT -w '%{http_code} %{url_effective}' URL; inspect advisory title/CVE
-INPUT: FlowDroid GHSA advisory and project repository
+COMMAND: curl -L -sS -o /dev/null -w 'HTTP=%{http_code}\nEFFECTIVE_URL=%{url_effective}\n' URL
+INPUT: https://drive.google.com/file/d/1LQzn6nGzeM7zSsRffSrk5yQ1WG8pyLWe/view?usp=drive_link
 LITERAL OUTPUT/RESULT:
-200 https://github.com/secure-software-engineering/FlowDroid/security/advisories/GHSA-39r7-275f-rvgw
-200 https://github.com/secure-software-engineering/FlowDroid
-<title>Improper Restriction of XML External Entity Reference in de.tud.sse · Advisory · secure-software-engineering/FlowDroid · GitHub
-CVE-2021-32754
-EXIT STATUS: 0
+HTTP=200
+EFFECTIVE_URL=https://drive.google.com/file/d/1LQzn6nGzeM7zSsRffSrk5yQ1WG8pyLWe/view?usp=drive_link
+LINK_EXIT_STATUS=0
 
 BASELINE
 COMMAND: git archive HEAD | tar -x -C TARGET_COPY; npm test
-INPUT: clean HEAD cecfe2d9761c12c4281c435c390923a0ef77eaeb in a temporary copy
+INPUT: clean HEAD 7393824 in /tmp/mypersonalwebsite-cv-baseline.EGOR2i
 LITERAL OUTPUT/RESULT:
 > academic-homepage-template@1.0.0 test
 > node scripts/test-site.mjs
 
-PASS modified: 38/38 checks
+PASS modified: 39/39 checks
 BASELINE_EXIT_STATUS=0
-BASELINE_CLEANUP_EXIT_STATUS=0
 
 MODIFIED
-COMMAND: npm test; npm run build:docker; inspect _site/index.html StarBugs table
-INPUT: _sections/09-starbugs.md with CVE-2021-32754 / FlowDroid / XXE
+COMMAND: npm test; npm run build:docker; inspect _site/index.html CV href
+INPUT: _sections/01-about.md with the Google Drive CV URL and scripts/test-site.mjs with its matching assertion
 LITERAL OUTPUT/RESULT:
 > academic-homepage-template@1.0.0 test
 > node scripts/test-site.mjs
@@ -65,27 +62,23 @@ Configuration file: /srv/_config.yml
        Destination: /srv/_site
  Incremental build: disabled. Enable with --incremental
       Generating...
-                    done in 0.07 seconds.
+                    done in 0.074 seconds.
  Auto-regeneration: disabled. Use --watch to enable.
 MODIFIED_BUILD_EXIT_STATUS=0
-STARBUGS_SECTION_RENDERED=true
-STARBUGS_ROWS=6
-FLOWDROID_ENTRY_RENDERED=true
-FLOWDROID_IMPACT=XXE
-STARBUGS_1=CVE-2026-55629 | whistle | Path Traversal / Arbitrary File Read
-STARBUGS_2=CVE-2026-59971 | mysql_mcp_server | Unauthenticated SQL Execution
-STARBUGS_3=CNVD-2026-29936 | Photonicat | Command Injection
-STARBUGS_4=CNVD-2026-28302 | Photonicat | Command Injection
-STARBUGS_5=CVE-2021-32754 | FlowDroid | XXE
-STARBUGS_6=CVE-2020-14130 | Xiaomi | One-Click Command Execution
+CV_DRIVE_LINK_RENDERED=true
+RENDERED_CV_HREF=https://drive.google.com/file/d/1LQzn6nGzeM7zSsRffSrk5yQ1WG8pyLWe/view?usp=drive_link
 MODIFIED_RENDER_EXIT_STATUS=0
 
 ROLLBACK
-COMMAND: ./ROLLBACK.sh TARGET_COPY; compare StarBugs and test files
-INPUT: /tmp/mypersonalwebsite-flowdroid-rollback-TARGET
+COMMAND: ./ROLLBACK.sh TARGET_COPY; compare About and test files; npm test
+INPUT: /tmp/mypersonalwebsite-cv-rollback.6nJWt1
 LITERAL OUTPUT/RESULT:
-ROLLBACK restored the pre-normalization FlowDroid entry and tests in /tmp/mypersonalwebsite-flowdroid-rollback-TARGET
-ROLLBACK_RESULT=starbugs_restored=true; test_restored=true
-ROLLBACK_EXIT_STATUS=script=0 starbugs=0 test=0
-ROLLBACK_CLEANUP_EXIT_STATUS=0
-RESTORED BEHAVIOR/STATUS: the test copy returned to the user-supplied pre-normalization FlowDroid row and tests. The workspace MODIFIED_FILE remains changed with the valid FlowDroid row.
+ROLLBACK restored the local CV link and its test in /tmp/mypersonalwebsite-cv-rollback.6nJWt1
+
+> academic-homepage-template@1.0.0 test
+> node scripts/test-site.mjs
+
+PASS modified: 39/39 checks
+ROLLBACK_RESULT=about_restored=true; test_restored=true
+ROLLBACK_EXIT_STATUS=script=0 about=0 test=0 behavior=0
+RESTORED BEHAVIOR/STATUS: the test copy returned to the local assets/cv.pdf link and its 39/39 test suite passed. The workspace MODIFIED_FILE remains changed with the Google Drive CV link.
