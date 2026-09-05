@@ -45,7 +45,7 @@ const assertions = [
   ['Awards Markdown section', awardsSection.includes('## Selected Honors & Awards') && awardsSection.includes('Huawei HarmonyOS Security Training Camp')],
   ['ten award entries', (awardsSection.match(/^\| .+ \| 20\d{2} \|$/gmu) || []).length === 10],
   ['Experience Markdown section', experiencesSection.includes('## Experience') && experiencesSection.includes('Johns Hopkins University') && experiencesSection.includes('University of Central Florida')],
-  ['four experience entries', (experiencesSection.match(/^\|\s*.+\|\s*(?:Jun|Feb|Jul) 20\d{2} .+\|$/gmu) || []).length === 4],
+  ['four experience entries', (experiencesSection.match(/^\| .+ \| (?:Jun|Feb|Jul) 20\d{2} .+ \|$/gmu) || []).length === 4],
   ['blank talk Markdown stays empty', talksSection.trim() === ''],
   ['sections collection', config.includes('sections:') && config.includes('output: false')],
   ['publication Markdown folder', existsSync('_posts/.gitkeep')],
