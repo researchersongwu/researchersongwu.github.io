@@ -12,8 +12,8 @@ I have discovered vulnerabilities in popular open-source software (30+ CVE repos
 | --- | --- | --- |
 | [CVE-2026-55629](https://github.com/avwo/whistle/security/advisories/GHSA-3vfr-4gwf-qxfp) | [whistle](https://github.com/avwo/whistle) | Path Traversal / Arbitrary File Read |
 | [CVE-2026-59971](https://github.com/designcomputer/mysql_mcp_server/security/advisories/GHSA-rqfv-2mw9-78g2) | [mysql_mcp_server](https://github.com/designcomputer/mysql_mcp_server) | Unauthenticated SQL Execution |
-| CNVD-2026-29936 | [Photonicat](https://photonicat.com/) | Command Injection |
-| CNVD-2026-28302 | [Photonicat](https://photonicat.com/) | Command Injection |
-| [CVE-2020-14130](https://trust.mi.com/zh-CN/misrc/bulletins/advisory?cveId=27) | [Xiaomi](https://trust.mi.com/) | One-Click Command Execution |
+| CNVD-2026-29936 | [Photonicat](https://photonicat.com/) |command injection|
+| CNVD-2026-28302 | [Photonicat](https://photonicat.com/) |command injection |
+| [CVE-2020-14130](https://trust.mi.com/zh-CN/misrc/bulletins/advisory?cveId=27) | [Xiaomi](https://trust.mi.com/) |oneclick command excution|
 
 {: .compact-table }
