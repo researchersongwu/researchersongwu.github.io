@@ -9,7 +9,7 @@ section_class: about-section
 
 # Song Wu
 
-I am currently a remote research intern at Johns Hopkins University, advised by Prof. Yinzhi Cao. I am looking for a Ph.D. position. I received my master's degree from [Wuhan University](https://en.wikipedia.org/wiki/Wuhan_University). My research interests broadly span web security, systems security, LLM security, and security/privacy measurement.
+I am looking for a Ph.D. position. I got my master degree from [Wuhan University](https://en.wikipedia.org/wiki/Wuhan_University). My research interests broadly span web security, systems security, LLM security, and security/privacy measurement.
 
 
 

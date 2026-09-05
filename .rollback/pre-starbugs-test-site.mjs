@@ -25,9 +25,6 @@ const posterSection = readFileSync('_sections/05-posters.md', 'utf8');
 const talksSection = readFileSync('_sections/05-talks.md', 'utf8');
 const awardsSection = readFileSync('_sections/06-awards.md', 'utf8');
 const experiencesSection = readFileSync('_sections/08-experiences.md', 'utf8');
-const starbugsSection = readFileSync('_sections/09-starbugs.md', 'utf8');
-const starbugsBody = starbugsSection.replace(/^---\s*[\s\S]*?---\s*/u, '').trim();
-const readme = readFileSync('README.md', 'utf8');
 const ccsPublication = readFileSync('_posts/2026-08-01-when-ad-networks-misbehave.md', 'utf8');
 const spPoster = readFileSync('_posts/2026-04-01-understanding-risks-splash-ads-poster.md', 'utf8');
 const publishedSources = [layout, readFileSync('index.md', 'utf8'), sectionSources].join('\n');
@@ -36,7 +33,7 @@ const assertions = [
   ['Jekyll entry Markdown', existsSync('index.md')],
   ['minimal default layout', layout.includes('{{ section.content }}')],
   ['Markdown section loop', layout.includes('site.sections')],
-  ['ten Markdown sections', sectionFiles.length === 10],
+  ['nine Markdown sections', sectionFiles.length === 9],
   ['publication loop in Markdown', publicationSection.includes('for post in research_posts')],
   ['research category', publicationSection.includes("post.categories contains 'research'")],
   ['artifact publication link', publicationSection.includes('post.artifact')],
@@ -49,17 +46,13 @@ const assertions = [
   ['ten award entries', (awardsSection.match(/^\| .+ \| 20\d{2} \|$/gmu) || []).length === 10],
   ['Experience Markdown section', experiencesSection.includes('## Experience') && experiencesSection.includes('Johns Hopkins University') && experiencesSection.includes('University of Central Florida')],
   ['four experience entries', (experiencesSection.match(/^\|\s*.+\|\s*(?:Jun|Feb|Jul) 20\d{2} .+\|$/gmu) || []).length === 4],
-  ['StarBugs Markdown section', starbugsSection.includes('section_id: starbugs') && starbugsSection.includes('nav: StarBugs')],
-  ['blank StarBugs stays hidden until filled', starbugsBody === ''],
-  ['StarBugs Markdown authoring guide', readme.includes('## Add StarBugs') && readme.includes('| Advisory | Project / Product | Impact |')],
   ['blank talk Markdown stays empty', talksSection.trim() === ''],
   ['sections collection', config.includes('sections:') && config.includes('output: false')],
   ['publication Markdown folder', existsSync('_posts/.gitkeep')],
   ['talk Markdown folder', existsSync('_talks/.gitkeep')],
   ['empty-section suppression', layout.includes("visible_content != ''")],
   ['uploaded profile image', sectionSources.includes('images/personal.png') && existsSync('images/personal.png')],
-  ['JHU remote research internship biography', sectionSources.includes('I am currently a remote research intern at Johns Hopkins University, advised by Prof. Yinzhi Cao.')],
-  ['master degree grammar', sectionSources.includes("I received my master's degree")],
+  ['independent researcher biography', sectionSources.includes('I am an independent researcher')],
   ['CV link in About', sectionSources.includes('href="assets/cv.pdf"')],
   ['valid CV placeholder PDF', existsSync('assets/cv.pdf') && readFileSync('assets/cv.pdf').subarray(0, 5).toString() === '%PDF-'],
   ['Sass entry', existsSync('style.scss')],

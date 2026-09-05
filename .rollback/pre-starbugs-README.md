@@ -37,10 +37,9 @@ _sections/05-talks.md
 _sections/06-awards.md
 _sections/07-services.md
 _sections/08-experiences.md
-_sections/09-starbugs.md
 ```
 
-All section files are Markdown. Their Front Matter controls the navigation label and display order.
+All eight files are Markdown. Their Front Matter controls the navigation label and display order.
 
 Leave the body of a section Markdown file empty to hide that section and its navigation item. Empty publication and talk folders likewise produce no placeholder content.
 
@@ -72,29 +71,6 @@ Jekyll reads this Markdown automatically and adds it to Publications in reverse 
 ## Add a talk
 
 Create a Markdown file in `_talks/` using the examples already present there. Jekyll automatically adds it to Talks.
-
-## Add StarBugs
-
-Edit this Markdown file:
-
-```text
-_sections/09-starbugs.md
-```
-
-Keep its existing Front Matter and add content below the closing `---`. The following Markdown matches the reference site's introductory paragraph and three-column vulnerability list:
-
-```md
-## StarBugs
-
-I have discovered vulnerabilities in popular open-source projects and widely used products. A selective list is shown below.
-
-| Advisory | Project / Product | Impact |
-| --- | --- | --- |
-| [CVE-YYYY-NNNN](ADVISORY_URL) | [PROJECT_NAME](PROJECT_URL) | VULNERABILITY_TYPE |
-{: .compact-table }
-```
-
-Duplicate the final table row for each vulnerability. Until content is added below the Front Matter, StarBugs stays hidden from the page and navigation.
 
 ## Local development
 
