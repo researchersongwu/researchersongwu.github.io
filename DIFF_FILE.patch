@@ -1,22 +1,17 @@
 diff --git a/_sections/09-starbugs.md b/_sections/09-starbugs.md
-index a8ea189..c4a4ea9 100644
+index c4a4ea9..3e8603b 100644
 --- a/_sections/09-starbugs.md
 +++ b/_sections/09-starbugs.md
-@@ -9 +9 @@ order: 9
--I have discovered vulnerabilities in popular open-source software (repositories with more than 1K stars on GitHub), as well as in products maintained by Xiaomi and Photonicat. A selective list is shown below.
-+I have discovered vulnerabilities in popular open-source software (30+ CVE repositories with more than 1K stars on GitHub), as well as in products maintained by Xiaomi and Photonicat. A selective list is shown below.
-@@ -15 +14,0 @@ I have discovered vulnerabilities in popular open-source software (repositories
+@@ -15,3 +15,3 @@ I have discovered vulnerabilities in popular open-source software (30+ CVE repos
+-| CNVD-2026-29936 | [Photonicat](https://photonicat.com/) | |
+-| CNVD-2026-28302 | [Photonicat](https://photonicat.com/) | |
 -| [CVE-2020-14130](https://trust.mi.com/zh-CN/misrc/bulletins/advisory?cveId=27) | [Xiaomi](https://trust.mi.com/) | |
-@@ -17,0 +17,2 @@ I have discovered vulnerabilities in popular open-source software (repositories
-+| [CVE-2020-14130](https://trust.mi.com/zh-CN/misrc/bulletins/advisory?cveId=27) | [Xiaomi](https://trust.mi.com/) | |
-+
++| CNVD-2026-29936 | [Photonicat](https://photonicat.com/) | Command Injection |
++| CNVD-2026-28302 | [Photonicat](https://photonicat.com/) | Command Injection |
++| [CVE-2020-14130](https://trust.mi.com/zh-CN/misrc/bulletins/advisory?cveId=27) | [Xiaomi](https://trust.mi.com/) | One-Click Command Execution |
 diff --git a/scripts/test-site.mjs b/scripts/test-site.mjs
-index 1781e70..4f7f1e6 100644
+index 4f7f1e6..02114f8 100644
 --- a/scripts/test-site.mjs
 +++ b/scripts/test-site.mjs
-@@ -29,0 +30 @@ const starbugsBody = starbugsSection.replace(/^---\s*[\s\S]*?---\s*/u, '').trim(
-+const starbugsRows = starbugsBody.split('\n').filter((line) => /^\|\s*(?:\[)?(?:CVE|CNVD)-\d{4}-\d+/u.test(line));
-@@ -54 +55,2 @@ const assertions = [
--  ['five StarBugs entries', (starbugsBody.match(/^\|\s*(?:\[)?(?:CVE|CNVD)-\d{4}-\d+/gmu) || []).length === 5],
-+  ['five StarBugs entries', starbugsRows.length === 5],
-+  ['complete StarBugs table rows', starbugsRows.every((line) => line.split('|').length === 5)],
+@@ -56,0 +57 @@ const assertions = [
++  ['StarBugs impact wording', starbugsBody.includes('Command Injection') && starbugsBody.includes('One-Click Command Execution')],

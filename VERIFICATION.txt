@@ -1,10 +1,10 @@
-StarBugs reorder deployment verification
+StarBugs impact update deployment verification
 Timestamp: 2026-09-05 Asia/Shanghai
 
 Changed branch/field:
 - Branch: main
-- Field: _sections/09-starbugs.md / introduction, vulnerability ordering, and complete table cells
-- Result: the 30+ CVE introduction is preserved, the two Photonicat CNVD entries appear before the Xiaomi CVE entry, and all five Markdown rows render with three columns.
+- Field: _sections/09-starbugs.md / Impact column for two Photonicat entries and one Xiaomi entry
+- Result: the supplied impact descriptions are normalized to English title case: Command Injection and One-Click Command Execution.
 
 Artifacts:
 - MODIFIED_FILE: /Users/xiaoming/mypersonalwebsite/_sections/09-starbugs.md
@@ -13,36 +13,36 @@ Artifacts:
 - ROLLBACK: /Users/xiaoming/mypersonalwebsite/ROLLBACK.sh
 
 Preserved originals:
-- .rollback/pre-starbugs-reorder-09-starbugs.md
-  SHA-256: cff2fbbafb8320919e757d03e5c32954e1b4c0c70d6786cf34298c0396253f8c
-- .rollback/pre-starbugs-reorder-test-site.mjs
-  SHA-256: dd64265891dc6007e8fa0b6cd394448d732a6de4ed91f2d2731297ba11960e9d
+- .rollback/pre-starbugs-impacts-09-starbugs.md
+  SHA-256: 866e62c6014da5e5fe6cc8093dd369dacaad91ed69c32ce847e155602a64e73b
+- .rollback/pre-starbugs-impacts-test-site.mjs
+  SHA-256: db09fcabc0df2d82148afa70d432df227a863abb9b795b1928c3c83377c45e7f
 
 Modified state:
 - _sections/09-starbugs.md
-  SHA-256: eec42f53b52fc671d77deaa0e55bbc1e5786ebf712533b401ad2534dfe88ed4c
+  SHA-256: 82618f8adbc545a2052917f3ef94a3db947298131070d1fbe1ffe84d260394af
 - scripts/test-site.mjs
-  SHA-256: db09fcabc0df2d82148afa70d432df227a863abb9b795b1928c3c83377c45e7f
+  SHA-256: 92a121586a2b0899088ff563508e5b4700c4fa2b169e861a97dadc592d856b12
 
 BASELINE
 COMMAND: git archive HEAD | tar -x -C TARGET_COPY; npm test
-INPUT: clean HEAD f63fef152e686bbacfbdede9513ce76a10650196 in a temporary copy
-LITERAL OUTPUT/RESULT:
-> academic-homepage-template@1.0.0 test
-> node scripts/test-site.mjs
-
-PASS modified: 35/35 checks
-BASELINE_EXIT_STATUS=0
-BASELINE_CLEANUP_EXIT_STATUS=0
-
-MODIFIED
-COMMAND: npm test; npm run build:docker; inspect _site/index.html StarBugs introduction, order, and column count
-INPUT: latest _sections/09-starbugs.md with the 30+ CVE introduction and reordered entries
+INPUT: clean HEAD 43bfaa6e12fb166af8080e18e045f5099157d7e2 in a temporary copy
 LITERAL OUTPUT/RESULT:
 > academic-homepage-template@1.0.0 test
 > node scripts/test-site.mjs
 
 PASS modified: 36/36 checks
+BASELINE_EXIT_STATUS=0
+BASELINE_CLEANUP_EXIT_STATUS=0
+
+MODIFIED
+COMMAND: npm test; npm run build:docker; inspect _site/index.html StarBugs Impact column
+INPUT: _sections/09-starbugs.md with three newly supplied impact descriptions
+LITERAL OUTPUT/RESULT:
+> academic-homepage-template@1.0.0 test
+> node scripts/test-site.mjs
+
+PASS modified: 37/37 checks
 MODIFIED_TEST_EXIT_STATUS=0
 
 > academic-homepage-template@1.0.0 build:docker
@@ -59,22 +59,21 @@ Configuration file: /srv/_config.yml
  Auto-regeneration: disabled. Use --watch to enable.
 MODIFIED_BUILD_EXIT_STATUS=0
 STARBUGS_SECTION_RENDERED=true
-STARBUGS_INTRO_30_PLUS_CVE=true
 STARBUGS_ROWS=5
 STARBUGS_COLUMNS_PER_ROW=3
 STARBUGS_1=CVE-2026-55629 | whistle | Path Traversal / Arbitrary File Read
 STARBUGS_2=CVE-2026-59971 | mysql_mcp_server | Unauthenticated SQL Execution
-STARBUGS_3=CNVD-2026-29936 | Photonicat |
-STARBUGS_4=CNVD-2026-28302 | Photonicat |
-STARBUGS_5=CVE-2020-14130 | Xiaomi |
+STARBUGS_3=CNVD-2026-29936 | Photonicat | Command Injection
+STARBUGS_4=CNVD-2026-28302 | Photonicat | Command Injection
+STARBUGS_5=CVE-2020-14130 | Xiaomi | One-Click Command Execution
 MODIFIED_RENDER_EXIT_STATUS=0
 
 ROLLBACK
 COMMAND: ./ROLLBACK.sh TARGET_COPY; compare StarBugs and test files
-INPUT: /tmp/mypersonalwebsite-starbugs-reorder-rollback-TARGET
+INPUT: /tmp/mypersonalwebsite-starbugs-impacts-rollback-TARGET
 LITERAL OUTPUT/RESULT:
-ROLLBACK restored the pre-update StarBugs ordering and tests in /tmp/mypersonalwebsite-starbugs-reorder-rollback-TARGET
+ROLLBACK restored the pre-normalization StarBugs impacts and tests in /tmp/mypersonalwebsite-starbugs-impacts-rollback-TARGET
 ROLLBACK_RESULT=starbugs_restored=true; test_restored=true
 ROLLBACK_EXIT_STATUS=script=0 starbugs=0 test=0
 ROLLBACK_CLEANUP_EXIT_STATUS=0
-RESTORED BEHAVIOR/STATUS: the test copy returned to the pre-update StarBugs ordering and tests. The workspace MODIFIED_FILE remains changed with the requested ordering and completed table rows.
+RESTORED BEHAVIOR/STATUS: the test copy returned to the user's pre-normalization impact text and matching tests. The workspace MODIFIED_FILE remains changed with the normalized impact wording.
