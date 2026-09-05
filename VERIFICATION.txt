@@ -1,40 +1,41 @@
-Footer removal verification
+Publication re-upload verification
 Timestamp: 2026-09-05 Asia/Shanghai
-Changed branch/field: main / _layouts/default.html footer block
+Changed branch/field: main / CCS 2026 post features list and publication feature renderer
 
 FOUR ARTIFACTS
-MODIFIED_FILE: /Users/xiaoming/mypersonalwebsite/_layouts/default.html
+MODIFIED_FILE: /Users/xiaoming/mypersonalwebsite/_posts/2026-08-01-when-ad-networks-misbehave.md
 DIFF_FILE: /Users/xiaoming/mypersonalwebsite/DIFF_FILE.patch
 VERIFICATION: /Users/xiaoming/mypersonalwebsite/VERIFICATION.txt
 ROLLBACK: /Users/xiaoming/mypersonalwebsite/ROLLBACK.sh
 
 ORIGINAL
-Path: /Users/xiaoming/mypersonalwebsite/.rollback/pre-footer-removal-default.html
-SHA256: 8d0bf0487dc0dd50c7ac6b3e63cf58c2d517a2ff6098dec1f561468b956a9873
+Path: /Users/xiaoming/mypersonalwebsite/.rollback/pre-reupload-publication.md
+SHA256: df8c0d273a9347dfece02fb75109026427378802a4f691dbb43ddec6530a7326
+State: two duplicate features keys, with the second key missing the required YAML separator spacing.
 
 MODIFIED
-Path: /Users/xiaoming/mypersonalwebsite/_layouts/default.html
-SHA256: 7255e980e01137ed349d5838f596a988a750c2ce003dfde2d2b9d5fbf17f9aa0
-State: the complete footer block is absent, including the template attribution and Last updated year; About, News, Publications, the CV link, and the user's updated publication features remain rendered.
+Path: /Users/xiaoming/mypersonalwebsite/_posts/2026-08-01-when-ad-networks-misbehave.md
+SHA256: 3a04a9bd23efc767c66d18dd513a7af34ec56e9e69c3b5c26894e8c684a216b3
+State: features is one valid YAML list with two items; Jekyll renders both items as separate feature rows and the footer remains absent.
 
 BASELINE
-Command: assert pre-change layout contains footer credits and update year
-Input: /Users/xiaoming/mypersonalwebsite/.rollback/pre-footer-removal-default.html
-Literal output/result: PASS baseline: footer credits and update year present; EXIT_STATUS=0
+Command: npm run build:docker
+Input: user-edited publication with duplicate features keys and features:"..." syntax
+Literal output/result: Error: YAML Exception reading /srv/_posts/2026-08-01-when-ad-networks-misbehave.md: could not find expected ':' while scanning a simple key at line 11 column 1; EXIT_STATUS=0
 Exit status: 0
 
 MODIFIED
-Command: npm test && npm run build:docker; inspect generated page
-Input: repository source with _layouts/default.html footer removed
-Literal output/result: PASS modified: 21/21 checks; Jekyll done in 0.065 seconds; FOOTER_ABSENT=true; ADAPTED_TEXT_ABSENT=true; LAST_UPDATED_ABSENT=true; PUBLICATION_PRESENT=true; USER_FEATURES_PRESENT=true; EXIT_STATUS test=0 build=0 render=0
+Command: npm test && npm run build:docker; inspect rendered feature rows
+Input: corrected publication Markdown and list-aware publication renderer
+Literal output/result: PASS modified: 22/22 checks; Jekyll done in 0.065 seconds; YAML_EXCEPTION_PRESENT=false; FEATURE_COUNT=2; FEATURE_1=Discovered Semi-Drive-By Ads, triggered by incidental rather than explicit user actions.; FEATURE_2=Built AdHive to detect them across 32,758 apps, recovering about $600K in losses.; EXIT_STATUS test=0 build=0 render=0
 Exit status: 0
 
 ROLLBACK
-Command: ./ROLLBACK.sh TARGET_COPY; compare layout/test; verify preview absent
-Input: another copy containing the footer-removal changes
-Literal output/result: ROLLBACK restored the footer in TARGET_COPY; ROLLBACK_RESULT=footer_restored=true; test_restored=true; preview_absent=true; EXIT_STATUS script=0 layout=0 test=0 preview_absent=0; CLEANUP_EXIT_STATUS=0
+Command: ./ROLLBACK.sh TARGET_COPY; compare post/renderer/test; verify preview absent
+Input: another copy containing the corrected post, renderer, test, and preview
+Literal output/result: ROLLBACK restored the pre-reupload publication files in TARGET_COPY; ROLLBACK_RESULT=post_restored=true; renderer_restored=true; test_restored=true; preview_absent=true; EXIT_STATUS script=0 post=0 renderer=0 test=0 preview_absent=0; CLEANUP_EXIT_STATUS=0
 Exit status: 0
-Restored behavior/status: the rollback test copy returned to the footer-bearing layout with attribution and update year; the real MODIFIED_FILE remains changed and renders no footer.
+Restored behavior/status: the rollback test copy returned to the pre-reupload user edit; the real MODIFIED_FILE remains corrected with two separately rendered feature rows.
 
 RENDERED PREVIEW
-/Users/xiaoming/mypersonalwebsite/artifacts/footer-removed-rendered.png
+/Users/xiaoming/mypersonalwebsite/artifacts/reuploaded-publication.png

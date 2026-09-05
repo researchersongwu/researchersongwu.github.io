@@ -21,13 +21,7 @@ order: 4
     {% if post.slides %}{% if has_previous_link %} / {% endif %}<a href="{{ post.slides | relative_url }}">slides</a>{% endif %}
   </p>
   <p><em>{{ post.venue }}</em></p>
-  {% if post.features %}
-    {% if post.features.first %}
-      {% for feature in post.features %}<p class="feature-line"><span class="square"></span>{{ feature }}</p>{% endfor %}
-    {% else %}
-      <p class="feature-line"><span class="square"></span>{{ post.features }}</p>
-    {% endif %}
-  {% endif %}
+  {% if post.features %}<p class="feature-line"><span class="square"></span>{{ post.features }}</p>{% endif %}
   {% if post.award %}<p class="feature-line"><span class="square red"></span><strong>{{ post.award }}</strong></p>{% endif %}
 </article>
 {% endfor %}

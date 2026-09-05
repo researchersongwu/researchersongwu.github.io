@@ -1,16 +1,33 @@
-diff --git a/.rollback/pre-footer-removal-default.html b/_layouts/default.html
-index e796763..96e4e81 100644
---- a/.rollback/pre-footer-removal-default.html
-+++ b/_layouts/default.html
-@@ -37,11 +37,6 @@
-       </section>
-       {% endif %}
-       {% endfor %}
--
--      <footer>
--        <p>Template adapted from <a href="https://github.com/jackfromeast/jackfromeast.github.io">jackfromeast.github.io</a>; original design lineage credits <a href="https://jonbarron.info">Jon Barron</a>.</p>
--        <p>Last updated: {{ site.time | date: '%Y' }}</p>
--      </footer>
-     </main>
-   </div>
-   <script src="{{ '/script.js' | relative_url }}"></script>
+diff --git a/.rollback/pre-reupload-publication.md b/_posts/2026-08-01-when-ad-networks-misbehave.md
+index bdce1bf..b340da5 100644
+--- a/.rollback/pre-reupload-publication.md
++++ b/_posts/2026-08-01-when-ad-networks-misbehave.md
+@@ -7,6 +7,7 @@ authors: "<strong>Song Wu</strong>, Bo Wang, Yifan Zhang, Yinfeng Cao, Xueqiang
+ venue: "To appear in the proceedings of the ACM Conference on Computer and Communications Security (CCS), 2026."
+ paper: "https://researchersongwu.github.io/"
+ artifact: "https://researchersongwu.github.io/"
+-features: "Discovered Semi-Drive-By Ads, triggered by incidental rather than explicit user actions."
+-features:"Built AdHive to detect them across 32,758 apps, recovering about $600K in losses"
++features:
++  - "Discovered Semi-Drive-By Ads, triggered by incidental rather than explicit user actions."
++  - "Built AdHive to detect them across 32,758 apps, recovering about $600K in losses."
+ ---
+diff --git a/.rollback/pre-reupload-publication-renderer.md b/_sections/04-publications.md
+index 815863a..3001b1a 100644
+--- a/.rollback/pre-reupload-publication-renderer.md
++++ b/_sections/04-publications.md
+@@ -21,7 +21,13 @@ order: 4
+     {% if post.slides %}{% if has_previous_link %} / {% endif %}<a href="{{ post.slides | relative_url }}">slides</a>{% endif %}
+   </p>
+   <p><em>{{ post.venue }}</em></p>
+-  {% if post.features %}<p class="feature-line"><span class="square"></span>{{ post.features }}</p>{% endif %}
++  {% if post.features %}
++    {% if post.features.first %}
++      {% for feature in post.features %}<p class="feature-line"><span class="square"></span>{{ feature }}</p>{% endfor %}
++    {% else %}
++      <p class="feature-line"><span class="square"></span>{{ post.features }}</p>
++    {% endif %}
++  {% endif %}
+   {% if post.award %}<p class="feature-line"><span class="square red"></span><strong>{{ post.award }}</strong></p>{% endif %}
+ </article>
+ {% endfor %}

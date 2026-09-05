@@ -22,7 +22,6 @@ const sectionFiles = readdirSync('_sections').filter((name) => name.endsWith('.m
 const sectionSources = sectionFiles.map((name) => readFileSync(`_sections/${name}`, 'utf8')).join('\n');
 const publicationSection = readFileSync('_sections/04-publications.md', 'utf8');
 const talksSection = readFileSync('_sections/05-talks.md', 'utf8');
-const ccsPublication = readFileSync('_posts/2026-08-01-when-ad-networks-misbehave.md', 'utf8');
 const publishedSources = [layout, readFileSync('index.md', 'utf8'), sectionSources].join('\n');
 
 const assertions = [
@@ -34,7 +33,6 @@ const assertions = [
   ['research category', publicationSection.includes("post.categories contains 'research'")],
   ['artifact publication link', publicationSection.includes('post.artifact')],
   ['CCS 2026 publication Markdown', existsSync('_posts/2026-08-01-when-ad-networks-misbehave.md')],
-  ['publication feature list', ccsPublication.includes('features:\n  - ') && publicationSection.includes('for feature in post.features')],
   ['blank talk Markdown stays empty', talksSection.trim() === ''],
   ['sections collection', config.includes('sections:') && config.includes('output: false')],
   ['publication Markdown folder', existsSync('_posts/.gitkeep')],
