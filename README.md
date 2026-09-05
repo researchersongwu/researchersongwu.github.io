@@ -1,5 +1,7 @@
 # Markdown-Only Jekyll Academic Homepage
 
+Live site: <https://researchersongwu.github.io/>
+
 Every piece of editable homepage content lives in a Markdown file. The HTML layout is only a rendering shell; routine updates do not require editing HTML, YAML data files, or CSS.
 
 ## Edit your profile

@@ -1,6 +1,6 @@
 Markdown-only Jekyll homepage verification
 Timestamp: 2026-09-05 Asia/Shanghai
-Changed branch/field: main / jekyll.sections, jekyll.posts, jekyll.talks, layout.content_renderer
+Changed branch/field: main / jekyll.sections, jekyll.posts, jekyll.talks, layout.content_renderer, pages.deployment
 
 FOUR ARTIFACTS
 MODIFIED_FILE: /Users/xiaoming/mypersonalwebsite/_layouts/default.html
@@ -65,3 +65,28 @@ Desktop screenshot: /Users/xiaoming/mypersonalwebsite/artifacts/markdown-only-je
 Mobile screenshot: /Users/xiaoming/mypersonalwebsite/artifacts/markdown-only-jekyll-mobile.png
 Literal output/result: desktop 1280x2428; mobile 390x3250
 Exit status: 0
+
+GITHUB REPOSITORY
+Command: gh repo create researchersongwu.github.io --public --source=. --remote=origin --push --description "Markdown-driven Jekyll academic homepage"
+Input: local main branch and authenticated account researchersongwu
+Literal output/result: https://github.com/researchersongwu/researchersongwu.github.io
+Repository result: PUBLIC; default branch main
+
+DEPLOYMENT
+Command: gh run watch 33951970111 --repo researchersongwu/researchersongwu.github.io --exit-status
+Input: workflow Deploy static site to Pages, run 33951970111
+Literal output/result: deploy in 33s; Build with Jekyll passed; Upload artifact passed; Deploy to GitHub Pages passed; Complete job passed
+Exit status: 0
+
+LIVE HTTP
+Command: curl -sS -L -o /tmp/live-home.html -w 'HTTP %{http_code} final=%{url_effective} bytes=%{size_download}\n' https://researchersongwu.github.io/
+Input: GET https://researchersongwu.github.io/
+Literal output/result: HTTP 200 final=https://researchersongwu.github.io/ bytes=9045; TITLE=<title>Your Name; SECTIONS=8; PUBLICATIONS=3; LIQUID_MARKERS=0
+Exit status: 0
+
+LIVE BROWSER
+Command: Python Playwright test against https://researchersongwu.github.io/
+Input: deployed GitHub Pages site at 1280x900
+Literal output/result: PASS live browser: title=Your Name; sections=8; publications=3; HTTPS rendered
+Exit status: 0
+Screenshot: /Users/xiaoming/mypersonalwebsite/artifacts/github-pages-live.png
