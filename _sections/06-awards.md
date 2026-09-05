@@ -3,3 +3,19 @@ section_id: awards
 nav: Awards
 order: 6
 ---
+
+## Awards
+
+| Award | Year |
+| --- | --- |
+| Outstanding Individual, Huawei HarmonyOS Security Training Camp | 2021 |
+| First Prize, Vivo Qianjing Cup Cybersecurity Competition | 2021 |
+| First Prize, National College Student Information Security Contest (CTF) | 2019 |
+| First Prize, National College Student Information Security Contest (Project) | 2019 |
+| Third Place, TCTF University Division | 2019 |
+| Third Prize, West Lake Cybersecurity Forum (Team Competition) | 2018 |
+| Second Place, Anheng Monthly Cybersecurity Competition (Individual) | 2018 |
+| Best Defense Team, China Cybersecurity Technology Competition (AWD) | 2018 |
+| Third Prize, China Cybersecurity Technology Competition (AI) | 2018 |
+| Third Prize, Wangding Cup (National Online Competition) | 2018 |
+{: .compact-table }
