@@ -1,13 +1,18 @@
-diff --git a/.rollback/pre-reupload-about.md b/_sections/01-about.md
-index f4c9ef4..d40009f 100644
---- a/.rollback/pre-reupload-about.md
-+++ b/_sections/01-about.md
-@@ -9,7 +9,7 @@ section_class: about-section
- 
- # Song Wu
- 
--I am a indepent researcher currently looking for a Ph.D. position. I got my master degree from [Wuhan University](https://en.wikipedia.org/wiki/Wuhan_University). My research interests broadly span web security, systems security, LLM security, and security and privacy measurement.
-+I am an independent researcher currently looking for a Ph.D. position. I got my master degree from [Wuhan University](https://en.wikipedia.org/wiki/Wuhan_University). My research interests broadly span web security, systems security, LLM security, and security and privacy measurement.
- 
- 
- 
+diff --git a/.rollback/pre-experiences-08-experiences.md b/_sections/08-experiences.md
+index cca19d2..d5ef36d 100644
+--- a/.rollback/pre-experiences-08-experiences.md
++++ b/_sections/08-experiences.md
+@@ -3,3 +3,13 @@ section_id: experiences
+ nav: Experiences
+ order: 8
+ ---
++
++## Experience
++
++| Institution and Role | Period |
++| --- | --- |
++| **Johns Hopkins University** — Remote Intern, advised by Prof. Yinzhi Cao | Jun 2026 – Present |
++| **University of Central Florida** — Remote Intern, advised by Prof. Xueqiang Wang | Feb 2026 – Jun 2026 |
++| **Alibaba** — Software Engineer | Jul 2023 – Aug 2025 |
++| **ByteDance** — Intern Engineer | Jun 2022 – Sep 2022 |
++{: .compact-table }
