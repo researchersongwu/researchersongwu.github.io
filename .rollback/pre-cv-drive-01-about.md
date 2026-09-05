@@ -21,7 +21,7 @@ Besides, I ever led the binary security group of Xidian University’s CTF team 
 
 <p class="social-links">
   <a href="mailto:researchersongwu@gmail.com"><i class="fas fa-envelope"></i> Email</a><span>/</span>
-  <a href="https://drive.google.com/file/d/1LQzn6nGzeM7zSsRffSrk5yQ1WG8pyLWe/view?usp=drive_link"><i class="fas fa-file-pdf"></i> CV</a>
+  <a href="assets/cv.pdf"><i class="fas fa-file-pdf"></i> CV</a>
 </p>
 
 <div class="clear"></div>

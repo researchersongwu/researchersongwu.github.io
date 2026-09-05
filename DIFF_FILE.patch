@@ -1,15 +1,26 @@
-diff --git a/_sections/09-starbugs.md b/_sections/09-starbugs.md
-index a9eafe4..d398f0b 100644
---- a/_sections/09-starbugs.md
-+++ b/_sections/09-starbugs.md
-@@ -16,0 +17 @@ I have discovered vulnerabilities in popular open-source software (over 30 CVEs
-+| [CVE-2021-32754](https://github.com/secure-software-engineering/FlowDroid/security/advisories/GHSA-39r7-275f-rvgw) | [FlowDroid](https://github.com/secure-software-engineering/FlowDroid) | XXE |
+diff --git a/_sections/01-about.md b/_sections/01-about.md
+index 894fbdb..a8442c4 100644
+--- a/_sections/01-about.md
++++ b/_sections/01-about.md
+@@ -21,7 +21,7 @@ Besides, I ever led the binary security group of Xidian University’s CTF team
+ 
+ <p class="social-links">
+   <a href="mailto:researchersongwu@gmail.com"><i class="fas fa-envelope"></i> Email</a><span>/</span>
+-  <a href="assets/cv.pdf"><i class="fas fa-file-pdf"></i> CV</a>
++  <a href="https://drive.google.com/file/d/1LQzn6nGzeM7zSsRffSrk5yQ1WG8pyLWe/view?usp=drive_link"><i class="fas fa-file-pdf"></i> CV</a>
+ </p>
+ 
+ <div class="clear"></div>
 diff --git a/scripts/test-site.mjs b/scripts/test-site.mjs
-index 06e64f5..1339754 100644
+index 1339754..b0ebabb 100644
 --- a/scripts/test-site.mjs
 +++ b/scripts/test-site.mjs
-@@ -55 +55 @@ const assertions = [
--  ['five StarBugs entries', starbugsRows.length === 5],
-+  ['six StarBugs entries', starbugsRows.length === 6],
-@@ -58,0 +59 @@ const assertions = [
-+  ['FlowDroid StarBug entry', starbugsBody.includes('[CVE-2021-32754](https://github.com/secure-software-engineering/FlowDroid/security/advisories/GHSA-39r7-275f-rvgw)') && starbugsBody.includes('[FlowDroid](https://github.com/secure-software-engineering/FlowDroid) | XXE')],
+@@ -66,7 +66,7 @@ const assertions = [
+   ['uploaded profile image', sectionSources.includes('images/personal.png') && existsSync('images/personal.png')],
+   ['JHU remote research internship biography', sectionSources.includes('I am currently a remote research intern at Johns Hopkins University, advised by Prof. Yinzhi Cao.')],
+   ['master degree grammar', sectionSources.includes("I received my master's degree")],
+-  ['CV link in About', sectionSources.includes('href="assets/cv.pdf"')],
++  ['CV link in About', sectionSources.includes('href="https://drive.google.com/file/d/1LQzn6nGzeM7zSsRffSrk5yQ1WG8pyLWe/view?usp=drive_link"')],
+   ['valid CV placeholder PDF', existsSync('assets/cv.pdf') && readFileSync('assets/cv.pdf').subarray(0, 5).toString() === '%PDF-'],
+   ['Sass entry', existsSync('style.scss')],
+   ['Jekyll workflow', workflow.includes('actions/jekyll-build-pages@v1')],

@@ -66,7 +66,7 @@ const assertions = [
   ['uploaded profile image', sectionSources.includes('images/personal.png') && existsSync('images/personal.png')],
   ['JHU remote research internship biography', sectionSources.includes('I am currently a remote research intern at Johns Hopkins University, advised by Prof. Yinzhi Cao.')],
   ['master degree grammar', sectionSources.includes("I received my master's degree")],
-  ['CV link in About', sectionSources.includes('href="https://drive.google.com/file/d/1LQzn6nGzeM7zSsRffSrk5yQ1WG8pyLWe/view?usp=drive_link"')],
+  ['CV link in About', sectionSources.includes('href="assets/cv.pdf"')],
   ['valid CV placeholder PDF', existsSync('assets/cv.pdf') && readFileSync('assets/cv.pdf').subarray(0, 5).toString() === '%PDF-'],
   ['Sass entry', existsSync('style.scss')],
   ['Jekyll workflow', workflow.includes('actions/jekyll-build-pages@v1')],
