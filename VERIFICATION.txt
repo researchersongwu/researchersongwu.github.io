@@ -1,47 +1,50 @@
-Experience section verification
+Experience revision build verification
 Timestamp: 2026-09-05 Asia/Shanghai
 
 Changed branch/field:
 - Branch: main
-- Field: _sections/08-experiences.md / Experience table
-- Result: four English experience entries, ordered newest to oldest.
+- Field: _sections/08-experiences.md / Experience wording and role-first layout
+- Result: the user-edited Markdown renders as four experience rows, newest first.
 
 Artifacts:
 - MODIFIED_FILE: /Users/xiaoming/mypersonalwebsite/_sections/08-experiences.md
 - DIFF_FILE: /Users/xiaoming/mypersonalwebsite/DIFF_FILE.patch
 - VERIFICATION: /Users/xiaoming/mypersonalwebsite/VERIFICATION.txt
 - ROLLBACK: /Users/xiaoming/mypersonalwebsite/ROLLBACK.sh
-- Rendered preview: /Users/xiaoming/mypersonalwebsite/artifacts/experience-section-rendered.png
 
-Preserved originals:
-- .rollback/pre-experiences-08-experiences.md
-  SHA-256: 7c088748f0666a4dc82292b67d160b7ed063b582c115c95f3f16b5dd5c7867fd
-- .rollback/pre-experiences-test-site.mjs
-  SHA-256: 6661d7899dc9fcbb948a31e5356769138dd26f0f29ebd8d84fa458415cf529bc
+Preserved original/user input:
+- .rollback/user-edited-08-experiences.md
+  SHA-256: 9fc8fe9d863fa518553fbc3ff32601b9cfb249ac3f0787360929d6aa8cb727bb
+- The deployed predecessor is preserved at .rollback/pre-upload-08-experiences.md
+  SHA-256: a82309efc599792b5ae3095c23027247b86086bb446b4510209f326595d1c817
 
 Modified state:
 - _sections/08-experiences.md
-  SHA-256: a82309efc599792b5ae3095c23027247b86086bb446b4510209f326595d1c817
-- JHU: Jun 2026 – Present
-- University of Central Florida: Feb 2026 – Jun 2026
-- Alibaba: Jul 2023 – Aug 2025
-- ByteDance: Jun 2022 – Sep 2022
+  SHA-256: 9fc8fe9d863fa518553fbc3ff32601b9cfb249ac3f0787360929d6aa8cb727bb
+- scripts/test-site.mjs
+  SHA-256: a5872cc73f613fb1f8796f42bb91fca5601879a5fda14e3d8860bd759fef5c8d
+- The Experience source retains the user's wording; the test accepts Markdown table rows with optional leading whitespace.
 
 BASELINE
-COMMAND: assert pre-change Experience body is empty
-INPUT: .rollback/pre-experiences-08-experiences.md
-LITERAL OUTPUT/RESULT:
-PASS baseline: Experience body is empty
-EXIT STATUS: 0
-
-MODIFIED
-COMMAND: npm test && npm run build:docker; inspect rendered Experience table
-INPUT: current repository on main
+COMMAND: git archive HEAD | tar -x -C TARGET_COPY; npm test
+INPUT: HEAD cab0d712ea75ca13ad772c4ca5c59dd9795040d3 in a temporary copy
 LITERAL OUTPUT/RESULT:
 > academic-homepage-template@1.0.0 test
 > node scripts/test-site.mjs
 
 PASS modified: 30/30 checks
+BASELINE_EXIT_STATUS=0
+BASELINE_CLEANUP_EXIT_STATUS=0
+
+MODIFIED
+COMMAND: npm test; npm run build:docker; inspect _site/index.html Experience table
+INPUT: current working tree containing the user's edited _sections/08-experiences.md
+LITERAL OUTPUT/RESULT:
+> academic-homepage-template@1.0.0 test
+> node scripts/test-site.mjs
+
+PASS modified: 30/30 checks
+MODIFIED_TEST_EXIT_STATUS=0
 
 > academic-homepage-template@1.0.0 build:docker
 > docker run --rm -v jekyll_bundle:/usr/local/bundle -v "$PWD":/srv -w /srv ruby:3.3-bookworm bash -lc 'bundle install && bundle exec jekyll build'
@@ -53,25 +56,23 @@ Configuration file: /srv/_config.yml
        Destination: /srv/_site
  Incremental build: disabled. Enable with --incremental
       Generating...
-                    done in 0.065 seconds.
+                    done in 0.07 seconds.
  Auto-regeneration: disabled. Use --watch to enable.
-EXPERIENCE_SECTION=true
-HEADING=Experience
-EXPERIENCE_ROWS=4
-EXPERIENCE_1=Johns Hopkins University | — Remote Intern, advised by Prof. Yinzhi Cao | Jun 2026 – Present
-EXPERIENCE_2=University of Central Florida | — Remote Intern, advised by Prof. Xueqiang Wang | Feb 2026 – Jun 2026
-EXPERIENCE_3=Alibaba | — Software Engineer | Jul 2023 – Aug 2025
-EXPERIENCE_4=ByteDance | — Intern Engineer | Jun 2022 – Sep 2022
-SECTION_IDS=about,news,publications,posters,awards,experiences
-NAV=About,News,Publications,Posters,Awards,Experiences
-EXIT STATUS: test=0 build=0 render=0
+MODIFIED_BUILD_EXIT_STATUS=0
+RENDER_EXPERIENCE_SECTION=true
+RENDER_EXPERIENCE_ROWS=4
+RENDER_EXPERIENCE_1=Remote Intern, Johns Hopkins University, advisor: Prof. Yinzhi Cao | Jun 2026 – Present
+RENDER_EXPERIENCE_2=Remote Intern, University of Central Florida, advisor: Prof. Xueqiang Wang | Feb 2026 – Jun 2026
+RENDER_EXPERIENCE_3=Software Engineer, Alibaba | Jul 2023 – Aug 2025
+RENDER_EXPERIENCE_4=Intern Engineer, ByteDance | Jun 2022 – Sep 2022
+MODIFIED_RENDER_EXIT_STATUS=0
 
 ROLLBACK
-COMMAND: ./ROLLBACK.sh TARGET_COPY; compare experience/test; verify preview absent
-INPUT: /tmp/mypersonalwebsite-experience-rollback-test-78446
+COMMAND: ./ROLLBACK.sh TARGET_COPY; compare restored source and test
+INPUT: /tmp/mypersonalwebsite-upload-rollback-yA4mXA
 LITERAL OUTPUT/RESULT:
-ROLLBACK restored the empty Experience section in /tmp/mypersonalwebsite-experience-rollback-test-78446
-ROLLBACK_RESULT=experience_restored=true; test_restored=true; preview_absent=true
-EXIT STATUS: script=0 experience=0 test=0 preview_absent=0
-CLEANUP EXIT STATUS: 0
-RESTORED BEHAVIOR/STATUS: the test copy returned to the original empty Experience section and its original test file; the rendered preview was removed. The workspace MODIFIED_FILE remains changed.
+ROLLBACK restored the previously deployed Experience section in /tmp/mypersonalwebsite-upload-rollback-yA4mXA
+ROLLBACK_RESULT=experience_restored=true; test_restored=true
+ROLLBACK_EXIT_STATUS=script=0 experience=0 test=0
+ROLLBACK_CLEANUP_EXIT_STATUS=0
+RESTORED BEHAVIOR/STATUS: the test copy returned to the previously deployed Experience wording and test logic. The workspace MODIFIED_FILE remains on the user's new wording.

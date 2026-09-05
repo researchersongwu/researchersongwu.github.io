@@ -1,18 +1,20 @@
-diff --git a/.rollback/pre-experiences-08-experiences.md b/_sections/08-experiences.md
-index cca19d2..d5ef36d 100644
---- a/.rollback/pre-experiences-08-experiences.md
+diff --git a/_sections/08-experiences.md b/_sections/08-experiences.md
+index d5ef36d..f86f27d 100644
+--- a/_sections/08-experiences.md
 +++ b/_sections/08-experiences.md
-@@ -3,3 +3,13 @@ section_id: experiences
- nav: Experiences
- order: 8
- ---
-+
-+## Experience
-+
-+| Institution and Role | Period |
-+| --- | --- |
-+| **Johns Hopkins University** — Remote Intern, advised by Prof. Yinzhi Cao | Jun 2026 – Present |
-+| **University of Central Florida** — Remote Intern, advised by Prof. Xueqiang Wang | Feb 2026 – Jun 2026 |
-+| **Alibaba** — Software Engineer | Jul 2023 – Aug 2025 |
-+| **ByteDance** — Intern Engineer | Jun 2022 – Sep 2022 |
-+{: .compact-table }
+@@ -11,4 +11,4 @@ order: 8
+-| **Johns Hopkins University** — Remote Intern, advised by Prof. Yinzhi Cao | Jun 2026 – Present |
+-| **University of Central Florida** — Remote Intern, advised by Prof. Xueqiang Wang | Feb 2026 – Jun 2026 |
+-| **Alibaba** — Software Engineer | Jul 2023 – Aug 2025 |
+-| **ByteDance** — Intern Engineer | Jun 2022 – Sep 2022 |
++| Remote Intern, Johns Hopkins University, advisor: Prof. Yinzhi Cao | Jun 2026 – Present |
++| Remote Intern, University of Central Florida, advisor: Prof. Xueqiang Wang | Feb 2026 – Jun 2026 |
++|Software Engineer, Alibaba | Jul 2023 – Aug 2025 |
++|Intern Engineer, ByteDance | Jun 2022 – Sep 2022 |
+diff --git a/scripts/test-site.mjs b/scripts/test-site.mjs
+index ebf6bbd..6dc4c7b 100644
+--- a/scripts/test-site.mjs
++++ b/scripts/test-site.mjs
+@@ -48 +48 @@ const assertions = [
+-  ['four experience entries', (experiencesSection.match(/^\| .+ \| (?:Jun|Feb|Jul) 20\d{2} .+ \|$/gmu) || []).length === 4],
++  ['four experience entries', (experiencesSection.match(/^\|\s*.+\|\s*(?:Jun|Feb|Jul) 20\d{2} .+\|$/gmu) || []).length === 4],
