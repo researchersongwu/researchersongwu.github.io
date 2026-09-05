@@ -1,0 +1,213 @@
+diff --git a/.rollback/original-index.html b/index.html
+index 170cc5e..ebacfb8 100644
+--- a/.rollback/original-index.html
++++ b/index.html
+@@ -1,5 +1,205 @@
+ <!doctype html>
+-<html lang="zh-CN">
+-  <head><meta charset="utf-8"><title>Academic Homepage Starter</title></head>
+-  <body><main><h1>Your Name</h1><p>Academic homepage starter.</p></main></body>
++<html lang="zh-CN" data-theme="light">
++  <head>
++    <meta charset="UTF-8" />
++    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
++    <meta name="description" content="你的名字的学术主页：研究方向、论文、经历与联系方式。" />
++    <meta name="color-scheme" content="light dark" />
++    <title>你的名字 · Academic Homepage</title>
++    <link rel="preconnect" href="https://fonts.googleapis.com" />
++    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
++    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Libre+Franklin:wght@500;600;700&family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet" />
++    <link rel="stylesheet" href="styles.css" />
++  </head>
++  <body>
++    <a class="skip-link" href="#main">跳到正文</a>
++
++    <header class="site-header" aria-label="网站导航">
++      <a class="wordmark" href="#about" aria-label="回到首页">
++        <span class="wordmark-mark" aria-hidden="true">YN</span>
++        <span>你的名字</span>
++      </a>
++      <nav class="desktop-nav" aria-label="主导航">
++        <a href="#about">简介</a>
++        <a href="#news">动态</a>
++        <a href="#research">研究</a>
++        <a href="#publications">论文</a>
++        <a href="#experience">经历</a>
++      </nav>
++      <div class="header-actions">
++        <button class="icon-button" id="theme-toggle" type="button" aria-label="切换深色模式" title="切换深色模式">
++          <i data-lucide="moon" aria-hidden="true"></i>
++        </button>
++        <button class="icon-button mobile-only" id="menu-toggle" type="button" aria-label="打开菜单" aria-expanded="false" title="打开菜单">
++          <i data-lucide="menu" aria-hidden="true"></i>
++        </button>
++      </div>
++    </header>
++
++    <nav class="mobile-nav" id="mobile-nav" aria-label="移动端导航" hidden>
++      <a href="#about">简介</a><a href="#news">动态</a><a href="#research">研究</a>
++      <a href="#publications">论文</a><a href="#experience">经历</a>
++    </nav>
++
++    <main id="main">
++      <section class="hero section-shell" id="about">
++        <div class="hero-copy reveal">
++          <p class="eyebrow">博士研究生 · 计算机科学</p>
++          <h1>你的名字<br /><span>Your Name</span></h1>
++          <p class="intro">
++            我是 <a href="#">某某大学</a> 计算机学院博士研究生，导师是
++            <a href="#">导师姓名教授</a>。我的研究关注人工智能、计算机视觉与可信机器学习，
++            致力于让智能系统更可靠、更高效，也更容易被真实世界采用。
++          </p>
++          <p class="availability"><span aria-hidden="true"></span>正在寻找 2027 年研究实习与合作机会</p>
++          <div class="profile-links" aria-label="个人链接">
++            <a href="mailto:you@example.com"><i data-lucide="mail" aria-hidden="true"></i>邮箱</a>
++            <a href="https://github.com/yourname"><i data-lucide="github" aria-hidden="true"></i>GitHub</a>
++            <a href="#"><i data-lucide="graduation-cap" aria-hidden="true"></i>Google Scholar</a>
++            <a href="assets/cv-placeholder.txt"><i data-lucide="file-text" aria-hidden="true"></i>简历</a>
++          </div>
++        </div>
++        <aside class="portrait-panel reveal" aria-label="个人资料照片占位">
++          <div class="portrait-placeholder" role="img" aria-label="请替换为你的个人照片">
++            <span>YN</span>
++            <small>YOUR PHOTO</small>
++          </div>
++          <div class="portrait-caption">
++            <strong>研究关键词</strong>
++            <p>AI Systems · Vision · Trustworthy ML</p>
++          </div>
++        </aside>
++      </section>
++
++      <section class="section-shell content-section" id="news">
++        <div class="section-heading reveal">
++          <p class="section-index">01 / NEWS</p>
++          <h2>近期动态</h2>
++          <p>记录论文、报告和学术服务的最新进展。</p>
++        </div>
++        <div class="news-list reveal">
++          <article class="news-item featured-news">
++            <time datetime="2026-08">2026.08</time>
++            <div><span class="new-label">NEW</span><p>一篇论文被 <strong>顶级国际会议 ABC 2026</strong> 接收，代码与项目主页即将公开。</p></div>
++          </article>
++          <article class="news-item">
++            <time datetime="2026-05">2026.05</time>
++            <p>受邀在某某研究院进行关于「可信多模态学习」的学术报告。</p>
++          </article>
++          <article class="news-item">
++            <time datetime="2026-02">2026.02</time>
++            <p>加入某某实验室，开始关于高效视觉基础模型的新项目。</p>
++          </article>
++          <article class="news-item older-news" hidden>
++            <time datetime="2025-11">2025.11</time>
++            <p>获得校级优秀研究生奖学金。</p>
++          </article>
++          <button class="text-button" id="news-toggle" type="button" aria-expanded="false">
++            查看更早动态 <i data-lucide="arrow-down" aria-hidden="true"></i>
++          </button>
++        </div>
++      </section>
++
++      <section class="research-band" id="research">
++        <div class="section-shell">
++          <div class="section-heading reveal">
++            <p class="section-index">02 / RESEARCH</p>
++            <h2>研究方向</h2>
++            <p>从基础方法到真实场景，围绕三个相互关联的主题开展研究。</p>
++          </div>
++          <div class="research-grid">
++            <article class="research-card reveal">
++              <span class="card-number">A</span><i data-lucide="scan-eye" aria-hidden="true"></i>
++              <h3>视觉感知</h3>
++              <p>研究开放世界中的视觉理解、跨模态表征与数据高效学习。</p>
++              <a href="#publications">相关论文 <i data-lucide="arrow-right" aria-hidden="true"></i></a>
++            </article>
++            <article class="research-card reveal">
++              <span class="card-number">B</span><i data-lucide="brain-circuit" aria-hidden="true"></i>
++              <h3>基础模型</h3>
++              <p>探索大模型适配、推理加速与面向专业领域的智能体系统。</p>
++              <a href="#publications">相关论文 <i data-lucide="arrow-right" aria-hidden="true"></i></a>
++            </article>
++            <article class="research-card reveal">
++              <span class="card-number">C</span><i data-lucide="shield-check" aria-hidden="true"></i>
++              <h3>可信学习</h3>
++              <p>提升模型在分布偏移、噪声数据与复杂交互环境中的可靠性。</p>
++              <a href="#publications">相关论文 <i data-lucide="arrow-right" aria-hidden="true"></i></a>
++            </article>
++          </div>
++        </div>
++      </section>
++
++      <section class="section-shell content-section" id="publications">
++        <div class="section-heading publications-heading reveal">
++          <div><p class="section-index">03 / PUBLICATIONS</p><h2>代表性论文</h2></div>
++          <div class="filter-group" role="group" aria-label="按年份筛选论文">
++            <button class="filter-button active" type="button" data-year="all">全部</button>
++            <button class="filter-button" type="button" data-year="2026">2026</button>
++            <button class="filter-button" type="button" data-year="2025">2025</button>
++          </div>
++        </div>
++        <div class="publication-list reveal">
++          <article class="publication" data-year="2026">
++            <div class="publication-visual visual-one" aria-hidden="true"><span>01</span></div>
++            <div class="publication-body">
++              <div class="pub-meta"><span>ABC 2026</span><span>ORAL</span></div>
++              <h3>Learning Reliable Representations in an Open World</h3>
++              <p class="authors"><strong>Your Name</strong>, Collaborator A, Advisor B</p>
++              <p>提出一种在持续变化的数据分布中学习稳定表征的新方法。</p>
++              <div class="pub-links"><a href="#"><i data-lucide="file-text"></i>Paper</a><a href="#"><i data-lucide="code-2"></i>Code</a><a href="#"><i data-lucide="presentation"></i>Slides</a></div>
++            </div>
++          </article>
++          <article class="publication" data-year="2025">
++            <div class="publication-visual visual-two" aria-hidden="true"><span>02</span></div>
++            <div class="publication-body">
++              <div class="pub-meta"><span>XYZ 2025</span><span>SPOTLIGHT</span></div>
++              <h3>Efficient Adaptation for Multimodal Foundation Models</h3>
++              <p class="authors">Collaborator A, <strong>Your Name</strong>, Advisor B</p>
++              <p>以更少参数和计算开销完成多模态基础模型的领域适配。</p>
++              <div class="pub-links"><a href="#"><i data-lucide="file-text"></i>Paper</a><a href="#"><i data-lucide="code-2"></i>Code</a><a href="#"><i data-lucide="monitor-play"></i>Demo</a></div>
++            </div>
++          </article>
++          <article class="publication" data-year="2025">
++            <div class="publication-visual visual-three" aria-hidden="true"><span>03</span></div>
++            <div class="publication-body">
++              <div class="pub-meta"><span>Journal 2025</span></div>
++              <h3>Uncertainty-Aware Learning under Distribution Shift</h3>
++              <p class="authors"><strong>Your Name</strong>, Collaborator C</p>
++              <p>利用可校准不确定性估计提高部署阶段的模型决策质量。</p>
++              <div class="pub-links"><a href="#"><i data-lucide="file-text"></i>Paper</a><a href="#"><i data-lucide="database"></i>Data</a></div>
++            </div>
++          </article>
++        </div>
++      </section>
++
++      <section class="section-shell content-section" id="experience">
++        <div class="section-heading reveal">
++          <p class="section-index">04 / EXPERIENCE</p><h2>经历与荣誉</h2>
++        </div>
++        <div class="experience-layout reveal">
++          <div class="timeline">
++            <article><time>2024 — 至今</time><div><h3>某某大学 · 博士研究生</h3><p>计算机科学与技术 · 某某实验室</p></div></article>
++            <article><time>2023 夏</time><div><h3>某某研究院 · 研究实习生</h3><p>多模态学习与智能系统组</p></div></article>
++            <article><time>2020 — 2024</time><div><h3>某某大学 · 工学学士</h3><p>计算机科学与技术</p></div></article>
++          </div>
++          <aside class="honors">
++            <h3><i data-lucide="award" aria-hidden="true"></i>Selected Honors</h3>
++            <ul><li><span>2026</span>国家奖学金</li><li><span>2025</span>优秀论文提名</li><li><span>2024</span>优秀毕业生</li></ul>
++          </aside>
++        </div>
++      </section>
++    </main>
++
++    <footer>
++      <div class="section-shell footer-inner">
++        <div><strong>你的名字</strong><p>在研究中保持好奇，在表达中追求清晰。</p></div>
++        <div class="footer-links"><a href="mailto:you@example.com">Email</a><a href="https://github.com/yourname">GitHub</a><a href="#about">返回顶部 ↑</a></div>
++        <p class="copyright">© <span id="year"></span> Your Name · Built for GitHub Pages</p>
++      </div>
++    </footer>
++
++    <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script>
++    <script src="script.js"></script>
++  </body>
+ </html>

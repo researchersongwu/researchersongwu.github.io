@@ -1,0 +1,9 @@
+{
+  "name": "academic-homepage-template",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "python3 -m http.server 8080",
+    "test": "node scripts/test-site.mjs index.html"
+  }
+}

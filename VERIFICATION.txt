@@ -1,0 +1,54 @@
+Academic homepage local build verification
+Timestamp: 2026-09-05 Asia/Shanghai
+Changed branch/field: main / site.profile, site.news, site.research, site.publications, site.experience
+
+FOUR ARTIFACTS
+MODIFIED_FILE: /Users/xiaoming/mypersonalwebsite/index.html
+DIFF_FILE: /Users/xiaoming/mypersonalwebsite/DIFF_FILE.patch
+VERIFICATION: /Users/xiaoming/mypersonalwebsite/VERIFICATION.txt
+ROLLBACK: /Users/xiaoming/mypersonalwebsite/ROLLBACK.sh
+
+ORIGINAL
+Path: /Users/xiaoming/mypersonalwebsite/.rollback/original-index.html
+SHA256: 98f5497dfd10daf97a5452c17556c99aeff082dda171673a8757c5953ba93ae0
+
+MODIFIED
+Path: /Users/xiaoming/mypersonalwebsite/index.html
+SHA256: e1b0716cf191caf07a8a90fed5cee46200482d8f7f4d5d81be8b1cb0662f0a37
+State: final academic homepage remains in index.html
+
+BASELINE
+Command: node scripts/test-site.mjs .rollback/original-index.html --baseline
+Input: .rollback/original-index.html
+Literal output/result: PASS baseline: 2/2 checks
+Exit status: 0
+
+MODIFIED
+Command: npm test
+Input: index.html, styles.css, script.js, .github/workflows/pages.yml
+Literal output/result: PASS modified: 9/9 checks
+Exit status: 0
+
+BROWSER
+Command: Python Playwright interaction test against http://127.0.0.1:8080/
+Input: theme toggle, publication year 2026, 390x844 mobile menu
+Literal output/result: PASS interactions: theme=dark; 2026-filter=1 result; mobile-menu=visible
+Exit status: 0
+
+HTTP
+Command: curl -sS -o /tmp/homepage-local.html -w 'HTTP %{http_code} bytes=%{size_download}\n' http://127.0.0.1:8080/
+Input: GET /
+Literal output/result: HTTP 200 bytes=11572
+Exit status: 0
+
+ROLLBACK
+Command: cp index.html .rollback/rollback-test.html && ./ROLLBACK.sh .rollback/rollback-test.html && node scripts/test-site.mjs .rollback/rollback-test.html --baseline && cmp -s .rollback/original-index.html .rollback/rollback-test.html
+Input: .rollback/rollback-test.html
+Literal output/result: ROLLBACK restored .rollback/rollback-test.html from .rollback/original-index.html; PASS baseline: 2/2 checks; EXIT_STATUS script=0 test=0 cmp=0
+Exit status: 0
+Restored behavior/status: baseline title and heading restored; SHA256 returned to 98f5497dfd10daf97a5452c17556c99aeff082dda171673a8757c5953ba93ae0. Live MODIFIED_FILE stayed changed at e1b0716cf191caf07a8a90fed5cee46200482d8f7f4d5d81be8b1cb0662f0a37.
+
+VISUAL
+Screenshot: /Users/xiaoming/mypersonalwebsite/artifacts/homepage-final.png
+Literal output/result: PASS visual: full page rendered at 1280x4517
+Exit status: 0
