@@ -6,7 +6,7 @@ order: 9
 
 ## StarBugs
 
-I have discovered vulnerabilities in popular open-source software (over 30 CVEs in repositories with more than 1K stars on GitHub), as well as in products maintained by Xiaomi, Photonicat, Microsoft, and others. A selective list is shown below.
+I have discovered vulnerabilities in popular open-source software (over 30+ CVEs in repos with >1K stars on GitHub), as well as in products maintained by Xiaomi, Photonicat, Microsoft, etc. A selective list is shown below.
 
 | Advisory | Project / Product | Impact |
 | --- | --- | --- |

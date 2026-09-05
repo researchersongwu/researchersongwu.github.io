@@ -55,7 +55,6 @@ const assertions = [
   ['five StarBugs entries', starbugsRows.length === 5],
   ['complete StarBugs table rows', starbugsRows.every((line) => line.split('|').length === 5)],
   ['StarBugs impact wording', starbugsBody.includes('Command Injection') && starbugsBody.includes('One-Click Command Execution')],
-  ['StarBugs summary wording', starbugsBody.includes('over 30 CVEs in repositories with more than 1K stars on GitHub') && starbugsBody.includes('Xiaomi, Photonicat, Microsoft, and others')],
   ['StarBugs Markdown authoring guide', readme.includes('## Add StarBugs') && readme.includes('| Advisory | Project / Product | Impact |')],
   ['blank talk Markdown stays empty', talksSection.trim() === ''],
   ['sections collection', config.includes('sections:') && config.includes('output: false')],

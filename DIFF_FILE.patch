@@ -1,17 +1,13 @@
 diff --git a/_sections/09-starbugs.md b/_sections/09-starbugs.md
-index c4a4ea9..3e8603b 100644
+index 3e8603b..a9eafe4 100644
 --- a/_sections/09-starbugs.md
 +++ b/_sections/09-starbugs.md
-@@ -15,3 +15,3 @@ I have discovered vulnerabilities in popular open-source software (30+ CVE repos
--| CNVD-2026-29936 | [Photonicat](https://photonicat.com/) | |
--| CNVD-2026-28302 | [Photonicat](https://photonicat.com/) | |
--| [CVE-2020-14130](https://trust.mi.com/zh-CN/misrc/bulletins/advisory?cveId=27) | [Xiaomi](https://trust.mi.com/) | |
-+| CNVD-2026-29936 | [Photonicat](https://photonicat.com/) | Command Injection |
-+| CNVD-2026-28302 | [Photonicat](https://photonicat.com/) | Command Injection |
-+| [CVE-2020-14130](https://trust.mi.com/zh-CN/misrc/bulletins/advisory?cveId=27) | [Xiaomi](https://trust.mi.com/) | One-Click Command Execution |
+@@ -9 +9 @@ order: 9
+-I have discovered vulnerabilities in popular open-source software (30+ CVE repositories with more than 1K stars on GitHub), as well as in products maintained by Xiaomi and Photonicat. A selective list is shown below.
++I have discovered vulnerabilities in popular open-source software (over 30 CVEs in repositories with more than 1K stars on GitHub), as well as in products maintained by Xiaomi, Photonicat, Microsoft, and others. A selective list is shown below.
 diff --git a/scripts/test-site.mjs b/scripts/test-site.mjs
-index 4f7f1e6..02114f8 100644
+index 02114f8..06e64f5 100644
 --- a/scripts/test-site.mjs
 +++ b/scripts/test-site.mjs
-@@ -56,0 +57 @@ const assertions = [
-+  ['StarBugs impact wording', starbugsBody.includes('Command Injection') && starbugsBody.includes('One-Click Command Execution')],
+@@ -57,0 +58 @@ const assertions = [
++  ['StarBugs summary wording', starbugsBody.includes('over 30 CVEs in repositories with more than 1K stars on GitHub') && starbugsBody.includes('Xiaomi, Photonicat, Microsoft, and others')],
