@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "python3 -m http.server 8080",
-    "test": "node scripts/test-site.mjs index.html"
+    "dev": "bundle exec jekyll serve --livereload --port 8080",
+    "dev:docker": "docker run --rm -p 8080:8080 -v jekyll_bundle:/usr/local/bundle -v \"$PWD\":/srv -w /srv ruby:3.3-bookworm bash -lc 'bundle install && bundle exec jekyll serve --host 0.0.0.0 --port 8080'",
+    "build": "bundle exec jekyll build",
+    "build:docker": "docker run --rm -v jekyll_bundle:/usr/local/bundle -v \"$PWD\":/srv -w /srv ruby:3.3-bookworm bash -lc 'bundle install && bundle exec jekyll build'",
+    "test": "node scripts/test-site.mjs"
   }
 }

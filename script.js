@@ -19,5 +19,4 @@
 
   window.addEventListener('scroll', updateNavigation, { passive: true });
   updateNavigation();
-  document.querySelector('#updated-year').textContent = new Date().getFullYear();
 })();

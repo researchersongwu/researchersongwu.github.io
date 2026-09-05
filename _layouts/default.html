@@ -1,0 +1,159 @@
+---
+---
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="{{ site.name }}">
+  <meta name="description" content="{{ site.description }}">
+  <title>{{ site.name }}</title>
+  <link rel="stylesheet" href="{{ '/style.css' | relative_url }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css?family=Lato:400,500,700,400italic,700italic" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bree+Serif&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+</head>
+
+<body>
+  <div class="page-wrapper">
+    <nav class="side-nav" aria-label="页面导航">
+      <a href="#about">About</a>
+      <a href="#news">News</a>
+      <a href="#research">Research</a>
+      <a href="#publications">Publications</a>
+      <a href="#talks">Talks</a>
+      <a href="#awards">Awards</a>
+      <a href="#services">Services</a>
+      <a href="#experiences">Experiences</a>
+    </nav>
+
+    <main class="main-content">
+      <table class="layout-table" id="about">
+        <tr>
+          <td class="about-copy">
+            <h1>{{ site.name }}{% if site.name_cn %} · {{ site.name_cn }}{% endif %}</h1>
+            <p>
+              我目前是 <a href="{{ site.university_url }}">{{ site.university }}</a> {{ site.position }}，
+              师从 <a href="{{ site.advisor_url }}">{{ site.advisor }}</a>。在此之前，我在 {{ site.previous_university }} 获得学士学位。
+            </p>
+            <p>
+              我的研究兴趣主要包括 <strong>{{ site.research_interests }}</strong>。
+              {{ site.research_summary }}
+            </p>
+            <p>
+              {{ site.contact_note }}
+            </p>
+            <p class="social-links">
+              <a href="mailto:{{ site.email }}"><i class="fas fa-envelope"></i> Email</a><span>/</span>
+              <a href="https://github.com/{{ site.github }}"><i class="fab fa-github"></i> GitHub</a><span>/</span>
+              <a href="{{ site.cv | relative_url }}"><i class="fas fa-file-pdf"></i> CV</a><span>/</span>
+              <a href="{{ site.scholar }}"><i class="ai ai-google-scholar"></i> Scholar</a><span>/</span>
+              <a href="{{ site.linkedin }}"><i class="fab fa-linkedin"></i> LinkedIn</a>
+            </p>
+          </td>
+          <td class="about-photo-cell">
+            {% if site.avatar %}
+            <img class="profile-photo" src="{{ site.avatar | relative_url }}" alt="{{ site.name }}">
+            {% else %}
+            <div class="photo-placeholder" role="img" aria-label="个人照片占位符">
+              <span>YOUR<br>PHOTO</span>
+              <small>images/profile.jpg</small>
+            </div>
+            {% endif %}
+          </td>
+        </tr>
+      </table>
+
+      <section id="news" class="page-section">
+        <h2>News</h2>
+        <table class="news-table">
+          {% for item in site.data.news %}
+          <tr><td class="news-date">{% if item.new %}<span class="new-mark">new</span>{% endif %} {{ item.date }}</td><td>{{ item.content }}</td></tr>
+          {% endfor %}
+        </table>
+      </section>
+
+      <section id="research" class="page-section">
+        <h2>Research Directions</h2>
+        <p>我的研究主要围绕两个相互补充的方向展开：</p>
+        <p>
+          <strong>方向一：基础模型与多模态学习。</strong>
+          研究视觉、语言及其他模态之间的统一表征，探索数据高效的模型训练、适配与推理方法。
+        </p>
+        <ul>
+          <li>视觉与语言表征：[<a href="#paper-1">ABC '26</a>]，[<a href="#paper-2">XYZ '25</a>]</li>
+          <li>高效模型适配：[<a href="#paper-2">XYZ '25</a>]</li>
+        </ul>
+        <p>
+          <strong>方向二：可信机器学习。</strong>
+          研究模型在分布偏移、噪声数据和开放环境中的可靠性，并设计可解释、可校准的智能系统。
+        </p>
+        <ul>
+          <li>不确定性估计：[<a href="#paper-3">Journal '24</a>]</li>
+          <li>开放世界学习：[<a href="#paper-1">ABC '26</a>]</li>
+        </ul>
+      </section>
+
+      <section id="publications" class="page-section">
+        <h2>Publications</h2>
+
+        {% for post in site.posts %}
+        {% if post.categories contains 'research' %}
+        <article class="publication" id="paper-{{ forloop.index }}">
+          <h3>{{ post.title }}</h3>
+          <p>{{ post.authors }}</p>
+          <p class="paper-links">
+            {% if post.pdf %}<a href="{{ post.pdf | relative_url }}">paper</a> /{% endif %}
+            {% if post.poster %} <a href="{{ post.poster | relative_url }}">poster</a> /{% endif %}
+            {% if post.code %} <a href="{{ post.code }}">code</a> /{% endif %}
+            {% if post.slides %} <a href="{{ post.slides | relative_url }}">slides</a> /{% endif %}
+          </p>
+          <p><em>{{ post.venue }}</em></p>
+          {% if post.features %}<p class="feature-line"><span class="square"></span>{{ post.features }}</p>{% endif %}
+          {% if post.award %}<p class="feature-line"><span class="square red"></span><strong>{{ post.award }}</strong></p>{% endif %}
+        </article>
+        {% endif %}
+        {% endfor %}
+      </section>
+
+      <section id="talks" class="page-section">
+        <h2>Talks</h2>
+        {% assign sorted_talks = site.talks | sort: 'date' | reverse %}
+        {% for talk in sorted_talks %}
+        <div class="list-entry">
+          <div><strong>{{ talk.title }}</strong><br>{{ talk.role }}, <em>{{ talk.venue }}</em><br>{% if talk.link %}<a href="{{ talk.link }}">link</a> /{% endif %}{% if talk.slides %} <a href="{{ talk.slides | relative_url }}">slides</a> /{% endif %}{% if talk.video %} <a href="{{ talk.video }}">video</a> /{% endif %}</div>
+          <time>{{ talk.display_date }}</time>
+        </div>
+        {% endfor %}
+      </section>
+
+      <section id="awards" class="page-section">
+        <h2>Selected Honors &amp; Awards</h2>
+        {% for award in site.data.awards %}<div class="compact-row"><span>{{ award.name }}</span><time>{{ award.date }}</time></div>{% endfor %}
+      </section>
+
+      <section id="services" class="page-section">
+        <h2>Professional Services</h2>
+        {% for group in site.data.services %}
+        <h3 class="block-title">{{ group.role }}</h3>
+        <ul class="services-list">{% for item in group.items %}<li>{{ item }}</li>{% endfor %}</ul>
+        {% endfor %}
+      </section>
+
+      <section id="experiences" class="page-section">
+        <h2>Experiences</h2>
+        {% for experience in site.data.experiences %}<div class="compact-row"><span><strong>{{ experience.role }}</strong>, {{ experience.organization }}</span><time>{{ experience.date }}</time></div>{% endfor %}
+      </section>
+
+      <footer>
+        <p>Template adapted from <a href="https://github.com/jackfromeast/jackfromeast.github.io">jackfromeast.github.io</a>; original design lineage credits <a href="https://jonbarron.info">Jon Barron</a>.</p>
+        <p>Last updated: {{ site.time | date: '%Y' }}</p>
+      </footer>
+    </main>
+  </div>
+  <script src="{{ '/script.js' | relative_url }}"></script>
+</body>
+</html>

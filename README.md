@@ -1,43 +1,71 @@
-# Academic Homepage Template
+# Jekyll Academic Homepage
 
-这是以 [jackfromeast/jackfromeast.github.io](https://github.com/jackfromeast/jackfromeast.github.io) 为直接视觉模板制作的静态版本：相同的窄栏学术主页布局、左侧固定目录、表格式 About/News，以及 Research、Publications、Talks、Awards、Services、Experiences 等版块。
+直接采用 `jackfromeast.github.io` 的 Jekyll 内容维护方式：每篇论文写成一个 `_posts/*.md` 文件，页面通过 Liquid 循环自动生成 Publications；报告放入 `_talks/*.md` 后自动生成 Talks。
 
-## 本地预览
+## 第一次配置
+
+编辑 `_config.yml`，填写姓名、学校、导师、邮箱、GitHub、Scholar、LinkedIn 和研究方向。
+
+## 新增论文
+
+复制示例：
 
 ```bash
-npm test
-npm run dev
+cp _posts/2026-08-01-open-world.md _posts/2027-01-01-my-paper.md
+```
+
+修改新文件的 YAML Front Matter：
+
+```yaml
+---
+layout: post
+title: "论文标题"
+date: 2027-01-01
+categories: research
+authors: "Author A, <strong>Your Name</strong>, Author B"
+venue: "Conference Name, 2027"
+pdf: "/assets/paper.pdf"
+code: "https://github.com/USER/PROJECT"
+slides: "/assets/slides.pdf"
+award: "Oral Presentation"
+---
+```
+
+论文 PDF 放入 `assets/`。
+
+## 新增报告
+
+复制 `_talks/` 内的示例 Markdown，并修改 `title`、`date`、`role`、`venue`、`link`、`slides` 和 `video`。
+
+## 其他内容
+
+- 最新动态：`_data/news.yml`
+- 奖项：`_data/awards.yml`
+- 学术服务：`_data/services.yml`
+- 经历：`_data/experiences.yml`
+- 页面结构：`_layouts/default.html`
+- 样式：`style.scss`
+
+## 本地运行
+
+```bash
+bundle install
+bundle exec jekyll serve --livereload --port 8080
 ```
 
 访问 `http://localhost:8080`。
 
-## 修改内容
+如果使用 Docker：
 
-在 `index.html` 中搜索以下占位符：
-
-- `Your Name`、`你的名字`
-- `YOUR_USERNAME`
-- `you@example.com`
-- `某某大学`、`导师姓名`
-- 示例论文、报告、奖项和经历
-
-将个人照片保存为 `images/profile.jpg`，随后用下面的标签替换 `.photo-placeholder`：
-
-```html
-<img class="profile-photo" src="images/profile.jpg" alt="Your Name">
+```bash
+npm run build:docker
+npm run dev:docker
 ```
-
-将简历保存为 `assets/cv.pdf`，并把简历链接改成 `assets/cv.pdf`。
 
 ## GitHub Pages
 
-```bash
-git remote add origin https://github.com/YOUR_USERNAME/YOUR_USERNAME.github.io.git
-git push -u origin main
-```
-
-仓库 Settings → Pages → Source 选择 **GitHub Actions**。当前 `.github/workflows/pages.yml` 已配置静态部署。
+推送到 `main` 后，`.github/workflows/pages.yml` 会用 Jekyll 构建 `_site` 并部署。仓库 Settings → Pages → Source 选择 **GitHub Actions**。
 
 ## Attribution
 
-Template adapted from `jackfromeast.github.io`; its upstream repository retains the MIT license and credits Jon Barron's academic website design.
+Template adapted from `jackfromeast.github.io`; upstream repository uses the MIT license and credits Jon Barron's academic website design.

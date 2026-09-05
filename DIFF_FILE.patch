@@ -1,357 +1,184 @@
-diff --git a/.rollback/original-index.html b/index.html
-index ebacfb8..786cd38 100644
+diff --git a/.rollback/original-index.html b/_layouts/default.html
+index 786cd38..0840c78 100644
 --- a/.rollback/original-index.html
-+++ b/index.html
-@@ -1,205 +1,164 @@
--<!doctype html>
--<html lang="zh-CN" data-theme="light">
--  <head>
--    <meta charset="UTF-8" />
--    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
--    <meta name="description" content="你的名字的学术主页：研究方向、论文、经历与联系方式。" />
--    <meta name="color-scheme" content="light dark" />
--    <title>你的名字 · Academic Homepage</title>
--    <link rel="preconnect" href="https://fonts.googleapis.com" />
--    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
--    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Libre+Franklin:wght@500;600;700&family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet" />
--    <link rel="stylesheet" href="styles.css" />
--  </head>
--  <body>
--    <a class="skip-link" href="#main">跳到正文</a>
-+<!DOCTYPE HTML>
-+<html lang="zh-CN">
-+<head>
-+  <meta charset="utf-8">
-+  <meta name="viewport" content="width=device-width, initial-scale=1">
-+  <meta name="author" content="Your Name">
-+  <meta name="description" content="Your Name 的个人学术主页">
-+  <title>Your Name</title>
-+  <link rel="stylesheet" href="styles.css">
-+  <link rel="preconnect" href="https://fonts.googleapis.com">
-+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-+  <link href="https://fonts.googleapis.com/css?family=Lato:400,500,700,400italic,700italic" rel="stylesheet">
-+  <link href="https://fonts.googleapis.com/css2?family=Bree+Serif&display=swap" rel="stylesheet">
-+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous">
-+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-+</head>
++++ b/_layouts/default.html
+@@ -1,12 +1,14 @@
++---
++---
+ <!DOCTYPE HTML>
+ <html lang="zh-CN">
+ <head>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+-  <meta name="author" content="Your Name">
+-  <meta name="description" content="Your Name 的个人学术主页">
+-  <title>Your Name</title>
+-  <link rel="stylesheet" href="styles.css">
++  <meta name="author" content="{{ site.name }}">
++  <meta name="description" content="{{ site.description }}">
++  <title>{{ site.name }}</title>
++  <link rel="stylesheet" href="{{ '/style.css' | relative_url }}">
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css?family=Lato:400,500,700,400italic,700italic" rel="stylesheet">
+@@ -32,31 +34,35 @@
+       <table class="layout-table" id="about">
+         <tr>
+           <td class="about-copy">
+-            <h1>Your Name · 你的名字</h1>
++            <h1>{{ site.name }}{% if site.name_cn %} · {{ site.name_cn }}{% endif %}</h1>
+             <p>
+-              我目前是 <a href="https://example.edu">某某大学</a> 计算机科学专业博士研究生，
+-              师从 <a href="#">导师姓名教授</a>。在此之前，我在某某大学获得学士学位。
++              我目前是 <a href="{{ site.university_url }}">{{ site.university }}</a> {{ site.position }}，
++              师从 <a href="{{ site.advisor_url }}">{{ site.advisor }}</a>。在此之前，我在 {{ site.previous_university }} 获得学士学位。
+             </p>
+             <p>
+-              我的研究兴趣主要包括 <strong>人工智能、计算机视觉与可信机器学习</strong>。
+-              我关注真实环境中的智能系统，并研究可靠、高效且可解释的学习方法。
++              我的研究兴趣主要包括 <strong>{{ site.research_interests }}</strong>。
++              {{ site.research_summary }}
+             </p>
+             <p>
+-              我乐于讨论研究想法与合作机会。如果你对我的工作感兴趣，欢迎通过邮件联系我。
++              {{ site.contact_note }}
+             </p>
+             <p class="social-links">
+-              <a href="mailto:you@example.com"><i class="fas fa-envelope"></i> Email</a><span>/</span>
+-              <a href="https://github.com/YOUR_USERNAME"><i class="fab fa-github"></i> GitHub</a><span>/</span>
+-              <a href="assets/cv-placeholder.txt"><i class="fas fa-file-pdf"></i> CV</a><span>/</span>
+-              <a href="#"><i class="ai ai-google-scholar"></i> Scholar</a><span>/</span>
+-              <a href="#"><i class="fab fa-linkedin"></i> LinkedIn</a>
++              <a href="mailto:{{ site.email }}"><i class="fas fa-envelope"></i> Email</a><span>/</span>
++              <a href="https://github.com/{{ site.github }}"><i class="fab fa-github"></i> GitHub</a><span>/</span>
++              <a href="{{ site.cv | relative_url }}"><i class="fas fa-file-pdf"></i> CV</a><span>/</span>
++              <a href="{{ site.scholar }}"><i class="ai ai-google-scholar"></i> Scholar</a><span>/</span>
++              <a href="{{ site.linkedin }}"><i class="fab fa-linkedin"></i> LinkedIn</a>
+             </p>
+           </td>
+           <td class="about-photo-cell">
++            {% if site.avatar %}
++            <img class="profile-photo" src="{{ site.avatar | relative_url }}" alt="{{ site.name }}">
++            {% else %}
+             <div class="photo-placeholder" role="img" aria-label="个人照片占位符">
+               <span>YOUR<br>PHOTO</span>
+               <small>images/profile.jpg</small>
+             </div>
++            {% endif %}
+           </td>
+         </tr>
+       </table>
+@@ -64,10 +70,9 @@
+       <section id="news" class="page-section">
+         <h2>News</h2>
+         <table class="news-table">
+-          <tr><td class="news-date"><span class="new-mark">new</span> Aug 2026</td><td>一篇论文被 <strong>Conference ABC 2026</strong> 接收。</td></tr>
+-          <tr><td class="news-date"><span class="new-mark">new</span> May 2026</td><td>受邀在某某研究院进行学术报告。</td></tr>
+-          <tr><td class="news-date">Feb 2026</td><td>开始一项关于可信多模态学习的新研究。</td></tr>
+-          <tr><td class="news-date">Dec 2025</td><td>获得某某奖学金。</td></tr>
++          {% for item in site.data.news %}
++          <tr><td class="news-date">{% if item.new %}<span class="new-mark">new</span>{% endif %} {{ item.date }}</td><td>{{ item.content }}</td></tr>
++          {% endfor %}
+         </table>
+       </section>
  
--    <header class="site-header" aria-label="网站导航">
--      <a class="wordmark" href="#about" aria-label="回到首页">
--        <span class="wordmark-mark" aria-hidden="true">YN</span>
--        <span>你的名字</span>
--      </a>
--      <nav class="desktop-nav" aria-label="主导航">
--        <a href="#about">简介</a>
--        <a href="#news">动态</a>
--        <a href="#research">研究</a>
--        <a href="#publications">论文</a>
--        <a href="#experience">经历</a>
--      </nav>
--      <div class="header-actions">
--        <button class="icon-button" id="theme-toggle" type="button" aria-label="切换深色模式" title="切换深色模式">
--          <i data-lucide="moon" aria-hidden="true"></i>
--        </button>
--        <button class="icon-button mobile-only" id="menu-toggle" type="button" aria-label="打开菜单" aria-expanded="false" title="打开菜单">
--          <i data-lucide="menu" aria-hidden="true"></i>
--        </button>
--      </div>
--    </header>
+@@ -95,70 +100,60 @@
+       <section id="publications" class="page-section">
+         <h2>Publications</h2>
+ 
+-        <article class="publication" id="paper-1">
+-          <h3>Learning Reliable Representations in an Open World</h3>
+-          <p><strong>Your Name</strong>, Collaborator A, Collaborator B, and Advisor Name</p>
+-          <p class="paper-links"><a href="#">paper</a> / <a href="#">poster</a> / <a href="#">code</a> / <a href="#">slides</a> /</p>
+-          <p><em>Conference ABC, 2026</em></p>
+-          <p class="feature-line"><span class="square red"></span><strong>Oral Presentation</strong></p>
+-        </article>
 -
--    <nav class="mobile-nav" id="mobile-nav" aria-label="移动端导航" hidden>
--      <a href="#about">简介</a><a href="#news">动态</a><a href="#research">研究</a>
--      <a href="#publications">论文</a><a href="#experience">经历</a>
-+<body>
-+  <div class="page-wrapper">
-+    <nav class="side-nav" aria-label="页面导航">
-+      <a href="#about">About</a>
-+      <a href="#news">News</a>
-+      <a href="#research">Research</a>
-+      <a href="#publications">Publications</a>
-+      <a href="#talks">Talks</a>
-+      <a href="#awards">Awards</a>
-+      <a href="#services">Services</a>
-+      <a href="#experiences">Experiences</a>
-     </nav>
- 
--    <main id="main">
--      <section class="hero section-shell" id="about">
--        <div class="hero-copy reveal">
--          <p class="eyebrow">博士研究生 · 计算机科学</p>
--          <h1>你的名字<br /><span>Your Name</span></h1>
--          <p class="intro">
--            我是 <a href="#">某某大学</a> 计算机学院博士研究生，导师是
--            <a href="#">导师姓名教授</a>。我的研究关注人工智能、计算机视觉与可信机器学习，
--            致力于让智能系统更可靠、更高效，也更容易被真实世界采用。
--          </p>
--          <p class="availability"><span aria-hidden="true"></span>正在寻找 2027 年研究实习与合作机会</p>
--          <div class="profile-links" aria-label="个人链接">
--            <a href="mailto:you@example.com"><i data-lucide="mail" aria-hidden="true"></i>邮箱</a>
--            <a href="https://github.com/yourname"><i data-lucide="github" aria-hidden="true"></i>GitHub</a>
--            <a href="#"><i data-lucide="graduation-cap" aria-hidden="true"></i>Google Scholar</a>
--            <a href="assets/cv-placeholder.txt"><i data-lucide="file-text" aria-hidden="true"></i>简历</a>
--          </div>
--        </div>
--        <aside class="portrait-panel reveal" aria-label="个人资料照片占位">
--          <div class="portrait-placeholder" role="img" aria-label="请替换为你的个人照片">
--            <span>YN</span>
--            <small>YOUR PHOTO</small>
--          </div>
--          <div class="portrait-caption">
--            <strong>研究关键词</strong>
--            <p>AI Systems · Vision · Trustworthy ML</p>
--          </div>
--        </aside>
-+    <main class="main-content">
-+      <table class="layout-table" id="about">
-+        <tr>
-+          <td class="about-copy">
-+            <h1>Your Name · 你的名字</h1>
-+            <p>
-+              我目前是 <a href="https://example.edu">某某大学</a> 计算机科学专业博士研究生，
-+              师从 <a href="#">导师姓名教授</a>。在此之前，我在某某大学获得学士学位。
-+            </p>
-+            <p>
-+              我的研究兴趣主要包括 <strong>人工智能、计算机视觉与可信机器学习</strong>。
-+              我关注真实环境中的智能系统，并研究可靠、高效且可解释的学习方法。
-+            </p>
-+            <p>
-+              我乐于讨论研究想法与合作机会。如果你对我的工作感兴趣，欢迎通过邮件联系我。
-+            </p>
-+            <p class="social-links">
-+              <a href="mailto:you@example.com"><i class="fas fa-envelope"></i> Email</a><span>/</span>
-+              <a href="https://github.com/YOUR_USERNAME"><i class="fab fa-github"></i> GitHub</a><span>/</span>
-+              <a href="assets/cv-placeholder.txt"><i class="fas fa-file-pdf"></i> CV</a><span>/</span>
-+              <a href="#"><i class="ai ai-google-scholar"></i> Scholar</a><span>/</span>
-+              <a href="#"><i class="fab fa-linkedin"></i> LinkedIn</a>
-+            </p>
-+          </td>
-+          <td class="about-photo-cell">
-+            <div class="photo-placeholder" role="img" aria-label="个人照片占位符">
-+              <span>YOUR<br>PHOTO</span>
-+              <small>images/profile.jpg</small>
-+            </div>
-+          </td>
-+        </tr>
-+      </table>
-+
-+      <section id="news" class="page-section">
-+        <h2>News</h2>
-+        <table class="news-table">
-+          <tr><td class="news-date"><span class="new-mark">new</span> Aug 2026</td><td>一篇论文被 <strong>Conference ABC 2026</strong> 接收。</td></tr>
-+          <tr><td class="news-date"><span class="new-mark">new</span> May 2026</td><td>受邀在某某研究院进行学术报告。</td></tr>
-+          <tr><td class="news-date">Feb 2026</td><td>开始一项关于可信多模态学习的新研究。</td></tr>
-+          <tr><td class="news-date">Dec 2025</td><td>获得某某奖学金。</td></tr>
-+        </table>
+-        <article class="publication" id="paper-2">
+-          <h3>Efficient Adaptation for Multimodal Foundation Models</h3>
+-          <p>Collaborator A, <strong>Your Name</strong>, Collaborator C, and Advisor Name</p>
+-          <p class="paper-links"><a href="#">paper</a> / <a href="#">poster</a> / <a href="#">code</a> / <a href="#">slides</a> /</p>
+-          <p><em>Conference XYZ, 2025</em></p>
+-          <p class="feature-line"><span class="square"></span>Project page and code are available.</p>
+-        </article>
+-
+-        <article class="publication" id="paper-3">
+-          <h3>Uncertainty-Aware Learning under Distribution Shift</h3>
+-          <p><strong>Your Name</strong> and Collaborator D</p>
+-          <p class="paper-links"><a href="#">paper</a> / <a href="#">code</a> /</p>
+-          <p><em>International Journal of Example Research, 2024</em></p>
++        {% for post in site.posts %}
++        {% if post.categories contains 'research' %}
++        <article class="publication" id="paper-{{ forloop.index }}">
++          <h3>{{ post.title }}</h3>
++          <p>{{ post.authors }}</p>
++          <p class="paper-links">
++            {% if post.pdf %}<a href="{{ post.pdf | relative_url }}">paper</a> /{% endif %}
++            {% if post.poster %} <a href="{{ post.poster | relative_url }}">poster</a> /{% endif %}
++            {% if post.code %} <a href="{{ post.code }}">code</a> /{% endif %}
++            {% if post.slides %} <a href="{{ post.slides | relative_url }}">slides</a> /{% endif %}
++          </p>
++          <p><em>{{ post.venue }}</em></p>
++          {% if post.features %}<p class="feature-line"><span class="square"></span>{{ post.features }}</p>{% endif %}
++          {% if post.award %}<p class="feature-line"><span class="square red"></span><strong>{{ post.award }}</strong></p>{% endif %}
+         </article>
++        {% endif %}
++        {% endfor %}
        </section>
  
--      <section class="section-shell content-section" id="news">
--        <div class="section-heading reveal">
--          <p class="section-index">01 / NEWS</p>
--          <h2>近期动态</h2>
--          <p>记录论文、报告和学术服务的最新进展。</p>
+       <section id="talks" class="page-section">
+         <h2>Talks</h2>
++        {% assign sorted_talks = site.talks | sort: 'date' | reverse %}
++        {% for talk in sorted_talks %}
+         <div class="list-entry">
+-          <div><strong>Trustworthy Multimodal Learning in the Open World</strong><br>Invited Speaker, <em>Example Research Seminar</em><br><a href="#">link</a> / <a href="#">slides</a> / <a href="#">video</a> /</div>
+-          <time>Aug 2026</time>
 -        </div>
--        <div class="news-list reveal">
--          <article class="news-item featured-news">
--            <time datetime="2026-08">2026.08</time>
--            <div><span class="new-label">NEW</span><p>一篇论文被 <strong>顶级国际会议 ABC 2026</strong> 接收，代码与项目主页即将公开。</p></div>
--          </article>
--          <article class="news-item">
--            <time datetime="2026-05">2026.05</time>
--            <p>受邀在某某研究院进行关于「可信多模态学习」的学术报告。</p>
--          </article>
--          <article class="news-item">
--            <time datetime="2026-02">2026.02</time>
--            <p>加入某某实验室，开始关于高效视觉基础模型的新项目。</p>
--          </article>
--          <article class="news-item older-news" hidden>
--            <time datetime="2025-11">2025.11</time>
--            <p>获得校级优秀研究生奖学金。</p>
--          </article>
--          <button class="text-button" id="news-toggle" type="button" aria-expanded="false">
--            查看更早动态 <i data-lucide="arrow-down" aria-hidden="true"></i>
--          </button>
--        </div>
-+      <section id="research" class="page-section">
-+        <h2>Research Directions</h2>
-+        <p>我的研究主要围绕两个相互补充的方向展开：</p>
-+        <p>
-+          <strong>方向一：基础模型与多模态学习。</strong>
-+          研究视觉、语言及其他模态之间的统一表征，探索数据高效的模型训练、适配与推理方法。
-+        </p>
-+        <ul>
-+          <li>视觉与语言表征：[<a href="#paper-1">ABC '26</a>]，[<a href="#paper-2">XYZ '25</a>]</li>
-+          <li>高效模型适配：[<a href="#paper-2">XYZ '25</a>]</li>
-+        </ul>
-+        <p>
-+          <strong>方向二：可信机器学习。</strong>
-+          研究模型在分布偏移、噪声数据和开放环境中的可靠性，并设计可解释、可校准的智能系统。
-+        </p>
-+        <ul>
-+          <li>不确定性估计：[<a href="#paper-3">Journal '24</a>]</li>
-+          <li>开放世界学习：[<a href="#paper-1">ABC '26</a>]</li>
-+        </ul>
-       </section>
- 
--      <section class="research-band" id="research">
--        <div class="section-shell">
--          <div class="section-heading reveal">
--            <p class="section-index">02 / RESEARCH</p>
--            <h2>研究方向</h2>
--            <p>从基础方法到真实场景，围绕三个相互关联的主题开展研究。</p>
--          </div>
--          <div class="research-grid">
--            <article class="research-card reveal">
--              <span class="card-number">A</span><i data-lucide="scan-eye" aria-hidden="true"></i>
--              <h3>视觉感知</h3>
--              <p>研究开放世界中的视觉理解、跨模态表征与数据高效学习。</p>
--              <a href="#publications">相关论文 <i data-lucide="arrow-right" aria-hidden="true"></i></a>
--            </article>
--            <article class="research-card reveal">
--              <span class="card-number">B</span><i data-lucide="brain-circuit" aria-hidden="true"></i>
--              <h3>基础模型</h3>
--              <p>探索大模型适配、推理加速与面向专业领域的智能体系统。</p>
--              <a href="#publications">相关论文 <i data-lucide="arrow-right" aria-hidden="true"></i></a>
--            </article>
--            <article class="research-card reveal">
--              <span class="card-number">C</span><i data-lucide="shield-check" aria-hidden="true"></i>
--              <h3>可信学习</h3>
--              <p>提升模型在分布偏移、噪声数据与复杂交互环境中的可靠性。</p>
--              <a href="#publications">相关论文 <i data-lucide="arrow-right" aria-hidden="true"></i></a>
--            </article>
--          </div>
--        </div>
-+      <section id="publications" class="page-section">
-+        <h2>Publications</h2>
-+
-+        <article class="publication" id="paper-1">
-+          <h3>Learning Reliable Representations in an Open World</h3>
-+          <p><strong>Your Name</strong>, Collaborator A, Collaborator B, and Advisor Name</p>
-+          <p class="paper-links"><a href="#">paper</a> / <a href="#">poster</a> / <a href="#">code</a> / <a href="#">slides</a> /</p>
-+          <p><em>Conference ABC, 2026</em></p>
-+          <p class="feature-line"><span class="square red"></span><strong>Oral Presentation</strong></p>
-+        </article>
-+
-+        <article class="publication" id="paper-2">
-+          <h3>Efficient Adaptation for Multimodal Foundation Models</h3>
-+          <p>Collaborator A, <strong>Your Name</strong>, Collaborator C, and Advisor Name</p>
-+          <p class="paper-links"><a href="#">paper</a> / <a href="#">poster</a> / <a href="#">code</a> / <a href="#">slides</a> /</p>
-+          <p><em>Conference XYZ, 2025</em></p>
-+          <p class="feature-line"><span class="square"></span>Project page and code are available.</p>
-+        </article>
-+
-+        <article class="publication" id="paper-3">
-+          <h3>Uncertainty-Aware Learning under Distribution Shift</h3>
-+          <p><strong>Your Name</strong> and Collaborator D</p>
-+          <p class="paper-links"><a href="#">paper</a> / <a href="#">code</a> /</p>
-+          <p><em>International Journal of Example Research, 2024</em></p>
-+        </article>
-       </section>
- 
--      <section class="section-shell content-section" id="publications">
--        <div class="section-heading publications-heading reveal">
--          <div><p class="section-index">03 / PUBLICATIONS</p><h2>代表性论文</h2></div>
--          <div class="filter-group" role="group" aria-label="按年份筛选论文">
--            <button class="filter-button active" type="button" data-year="all">全部</button>
--            <button class="filter-button" type="button" data-year="2026">2026</button>
--            <button class="filter-button" type="button" data-year="2025">2025</button>
--          </div>
-+      <section id="talks" class="page-section">
-+        <h2>Talks</h2>
-+        <div class="list-entry">
-+          <div><strong>Trustworthy Multimodal Learning in the Open World</strong><br>Invited Speaker, <em>Example Research Seminar</em><br><a href="#">link</a> / <a href="#">slides</a> / <a href="#">video</a> /</div>
-+          <time>Aug 2026</time>
+-        <div class="list-entry">
+-          <div><strong>Efficient Adaptation of Foundation Models</strong><br>Speaker, <em>Example Workshop</em><br><a href="#">link</a> / <a href="#">slides</a> /</div>
+-          <time>Dec 2025</time>
++          <div><strong>{{ talk.title }}</strong><br>{{ talk.role }}, <em>{{ talk.venue }}</em><br>{% if talk.link %}<a href="{{ talk.link }}">link</a> /{% endif %}{% if talk.slides %} <a href="{{ talk.slides | relative_url }}">slides</a> /{% endif %}{% if talk.video %} <a href="{{ talk.video }}">video</a> /{% endif %}</div>
++          <time>{{ talk.display_date }}</time>
          </div>
--        <div class="publication-list reveal">
--          <article class="publication" data-year="2026">
--            <div class="publication-visual visual-one" aria-hidden="true"><span>01</span></div>
--            <div class="publication-body">
--              <div class="pub-meta"><span>ABC 2026</span><span>ORAL</span></div>
--              <h3>Learning Reliable Representations in an Open World</h3>
--              <p class="authors"><strong>Your Name</strong>, Collaborator A, Advisor B</p>
--              <p>提出一种在持续变化的数据分布中学习稳定表征的新方法。</p>
--              <div class="pub-links"><a href="#"><i data-lucide="file-text"></i>Paper</a><a href="#"><i data-lucide="code-2"></i>Code</a><a href="#"><i data-lucide="presentation"></i>Slides</a></div>
--            </div>
--          </article>
--          <article class="publication" data-year="2025">
--            <div class="publication-visual visual-two" aria-hidden="true"><span>02</span></div>
--            <div class="publication-body">
--              <div class="pub-meta"><span>XYZ 2025</span><span>SPOTLIGHT</span></div>
--              <h3>Efficient Adaptation for Multimodal Foundation Models</h3>
--              <p class="authors">Collaborator A, <strong>Your Name</strong>, Advisor B</p>
--              <p>以更少参数和计算开销完成多模态基础模型的领域适配。</p>
--              <div class="pub-links"><a href="#"><i data-lucide="file-text"></i>Paper</a><a href="#"><i data-lucide="code-2"></i>Code</a><a href="#"><i data-lucide="monitor-play"></i>Demo</a></div>
--            </div>
--          </article>
--          <article class="publication" data-year="2025">
--            <div class="publication-visual visual-three" aria-hidden="true"><span>03</span></div>
--            <div class="publication-body">
--              <div class="pub-meta"><span>Journal 2025</span></div>
--              <h3>Uncertainty-Aware Learning under Distribution Shift</h3>
--              <p class="authors"><strong>Your Name</strong>, Collaborator C</p>
--              <p>利用可校准不确定性估计提高部署阶段的模型决策质量。</p>
--              <div class="pub-links"><a href="#"><i data-lucide="file-text"></i>Paper</a><a href="#"><i data-lucide="database"></i>Data</a></div>
--            </div>
--          </article>
-+        <div class="list-entry">
-+          <div><strong>Efficient Adaptation of Foundation Models</strong><br>Speaker, <em>Example Workshop</em><br><a href="#">link</a> / <a href="#">slides</a> /</div>
-+          <time>Dec 2025</time>
-         </div>
++        {% endfor %}
        </section>
  
--      <section class="section-shell content-section" id="experience">
--        <div class="section-heading reveal">
--          <p class="section-index">04 / EXPERIENCE</p><h2>经历与荣誉</h2>
--        </div>
--        <div class="experience-layout reveal">
--          <div class="timeline">
--            <article><time>2024 — 至今</time><div><h3>某某大学 · 博士研究生</h3><p>计算机科学与技术 · 某某实验室</p></div></article>
--            <article><time>2023 夏</time><div><h3>某某研究院 · 研究实习生</h3><p>多模态学习与智能系统组</p></div></article>
--            <article><time>2020 — 2024</time><div><h3>某某大学 · 工学学士</h3><p>计算机科学与技术</p></div></article>
--          </div>
--          <aside class="honors">
--            <h3><i data-lucide="award" aria-hidden="true"></i>Selected Honors</h3>
--            <ul><li><span>2026</span>国家奖学金</li><li><span>2025</span>优秀论文提名</li><li><span>2024</span>优秀毕业生</li></ul>
--          </aside>
--        </div>
-+      <section id="awards" class="page-section">
-+        <h2>Selected Honors &amp; Awards</h2>
-+        <div class="compact-row"><span>国家奖学金</span><time>2026</time></div>
-+        <div class="compact-row"><span>优秀论文提名，Conference XYZ</span><time>2025</time></div>
-+        <div class="compact-row"><span>优秀毕业生，某某大学</span><time>2024</time></div>
+       <section id="awards" class="page-section">
+         <h2>Selected Honors &amp; Awards</h2>
+-        <div class="compact-row"><span>国家奖学金</span><time>2026</time></div>
+-        <div class="compact-row"><span>优秀论文提名，Conference XYZ</span><time>2025</time></div>
+-        <div class="compact-row"><span>优秀毕业生，某某大学</span><time>2024</time></div>
++        {% for award in site.data.awards %}<div class="compact-row"><span>{{ award.name }}</span><time>{{ award.date }}</time></div>{% endfor %}
        </section>
--    </main>
  
--    <footer>
--      <div class="section-shell footer-inner">
--        <div><strong>你的名字</strong><p>在研究中保持好奇，在表达中追求清晰。</p></div>
--        <div class="footer-links"><a href="mailto:you@example.com">Email</a><a href="https://github.com/yourname">GitHub</a><a href="#about">返回顶部 ↑</a></div>
--        <p class="copyright">© <span id="year"></span> Your Name · Built for GitHub Pages</p>
--      </div>
--    </footer>
-+      <section id="services" class="page-section">
-+        <h2>Professional Services</h2>
-+        <h3 class="block-title">Program Committee</h3>
-+        <ul class="services-list"><li>Conference ABC 2027</li><li>Workshop on Example Research 2026</li></ul>
-+        <h3 class="block-title">Reviewer</h3>
-+        <ul class="services-list"><li>Conference XYZ 2025, 2026</li><li>Journal of Example Research 2025</li></ul>
-+      </section>
+       <section id="services" class="page-section">
+         <h2>Professional Services</h2>
+-        <h3 class="block-title">Program Committee</h3>
+-        <ul class="services-list"><li>Conference ABC 2027</li><li>Workshop on Example Research 2026</li></ul>
+-        <h3 class="block-title">Reviewer</h3>
+-        <ul class="services-list"><li>Conference XYZ 2025, 2026</li><li>Journal of Example Research 2025</li></ul>
++        {% for group in site.data.services %}
++        <h3 class="block-title">{{ group.role }}</h3>
++        <ul class="services-list">{% for item in group.items %}<li>{{ item }}</li>{% endfor %}</ul>
++        {% endfor %}
+       </section>
  
--    <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script>
--    <script src="script.js"></script>
--  </body>
-+      <section id="experiences" class="page-section">
-+        <h2>Experiences</h2>
-+        <div class="compact-row"><span><strong>Ph.D. Student</strong>, 某某大学，导师：Advisor Name</span><time>2024 — Now</time></div>
-+        <div class="compact-row"><span><strong>Research Intern</strong>, 某某研究院</span><time>Summer 2023</time></div>
-+        <div class="compact-row"><span><strong>B.Eng.</strong>, 某某大学，计算机科学</span><time>2020 — 2024</time></div>
-+      </section>
-+
-+      <footer>
-+        <p>Template adapted from <a href="https://github.com/jackfromeast/jackfromeast.github.io">jackfromeast.github.io</a>; original design lineage credits <a href="https://jonbarron.info">Jon Barron</a>.</p>
-+        <p>Last updated: <span id="updated-year"></span></p>
-+      </footer>
-+    </main>
-+  </div>
-+  <script src="script.js"></script>
-+</body>
+       <section id="experiences" class="page-section">
+         <h2>Experiences</h2>
+-        <div class="compact-row"><span><strong>Ph.D. Student</strong>, 某某大学，导师：Advisor Name</span><time>2024 — Now</time></div>
+-        <div class="compact-row"><span><strong>Research Intern</strong>, 某某研究院</span><time>Summer 2023</time></div>
+-        <div class="compact-row"><span><strong>B.Eng.</strong>, 某某大学，计算机科学</span><time>2020 — 2024</time></div>
++        {% for experience in site.data.experiences %}<div class="compact-row"><span><strong>{{ experience.role }}</strong>, {{ experience.organization }}</span><time>{{ experience.date }}</time></div>{% endfor %}
+       </section>
+ 
+       <footer>
+         <p>Template adapted from <a href="https://github.com/jackfromeast/jackfromeast.github.io">jackfromeast.github.io</a>; original design lineage credits <a href="https://jonbarron.info">Jon Barron</a>.</p>
+-        <p>Last updated: <span id="updated-year"></span></p>
++        <p>Last updated: {{ site.time | date: '%Y' }}</p>
+       </footer>
+     </main>
+   </div>
+-  <script src="script.js"></script>
++  <script src="{{ '/script.js' | relative_url }}"></script>
+ </body>
  </html>

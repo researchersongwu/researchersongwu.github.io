@@ -1,22 +1,22 @@
-jackfromeast academic homepage template verification
+Jekyll academic homepage conversion verification
 Timestamp: 2026-09-05 Asia/Shanghai
-Changed branch/field: main / layout.about, layout.news, layout.research, layout.publications, layout.talks, layout.awards, layout.services, layout.experiences
-Upstream: https://github.com/jackfromeast/jackfromeast.github.io.git @ 4248b6f
+Changed branch/field: main / jekyll.site, jekyll.posts, jekyll.talks, jekyll.data, jekyll.layout, pages.build
+Upstream pattern: https://github.com/jackfromeast/jackfromeast.github.io.git @ 4248b6f
 
 FOUR ARTIFACTS
-MODIFIED_FILE: /Users/xiaoming/mypersonalwebsite/index.html
+MODIFIED_FILE: /Users/xiaoming/mypersonalwebsite/_layouts/default.html
 DIFF_FILE: /Users/xiaoming/mypersonalwebsite/DIFF_FILE.patch
 VERIFICATION: /Users/xiaoming/mypersonalwebsite/VERIFICATION.txt
 ROLLBACK: /Users/xiaoming/mypersonalwebsite/ROLLBACK.sh
 
 ORIGINAL
 Path: /Users/xiaoming/mypersonalwebsite/.rollback/original-index.html
-SHA256: e1b0716cf191caf07a8a90fed5cee46200482d8f7f4d5d81be8b1cb0662f0a37
+SHA256: 775744e17d4f64dacaed199c832ca6c80a01b63eee9d0e7e566241e4d74b8828
 
 MODIFIED
-Path: /Users/xiaoming/mypersonalwebsite/index.html
-SHA256: 775744e17d4f64dacaed199c832ca6c80a01b63eee9d0e7e566241e4d74b8828
-State: jackfromeast-style academic homepage remains in index.html
+Path: /Users/xiaoming/mypersonalwebsite/_layouts/default.html
+SHA256: a1e180ed5e9226a108332963bb6b9d04258a86285e49159bfffc25e95fafc46f
+State: Jekyll/Liquid layout remains active; Publications and Talks are generated from Markdown.
 
 BASELINE
 Command: node scripts/test-site.mjs .rollback/original-index.html --baseline
@@ -26,31 +26,37 @@ Exit status: 0
 
 MODIFIED
 Command: npm test
-Input: index.html, styles.css, script.js, .github/workflows/pages.yml
-Literal output/result: PASS modified: 10/10 checks
+Input: _config.yml, index.md, _layouts/default.html, _posts/*.md, _talks/*.md, _data/*.yml, style.scss, .github/workflows/pages.yml
+Literal output/result: PASS modified: 12/12 checks
+Exit status: 0
+
+BUILD
+Command: npm run build:docker
+Input: Jekyll source tree and Gemfile
+Literal output/result: Bundle complete! 3 Gemfile dependencies, 37 gems now installed.; Configuration file: /srv/_config.yml; Destination: /srv/_site; Generating... done in 0.067 seconds.
 Exit status: 0
 
 BROWSER
-Command: Python Playwright interaction test against http://127.0.0.1:8080/
-Input: desktop 1280x900, scroll to #publications, mobile 390x844
-Literal output/result: PASS browser: desktop side-nav visible; Publications active on scroll; mobile side-nav hidden
+Command: Python Playwright test against http://127.0.0.1:8080/
+Input: generated _site/index.html at desktop 1280x900 and mobile 390x844
+Literal output/result: PASS browser: Jekyll rendered 3 Markdown publications; desktop/mobile layout verified
 Exit status: 0
 
 HTTP
-Command: curl -sS -o /tmp/jack-template.html -w 'HTTP %{http_code} bytes=%{size_download}\n' http://127.0.0.1:8080/
-Input: GET /
-Literal output/result: HTTP 200 bytes=8530
+Command: curl -sS -o /tmp/jekyll-home-final.html -w 'HTTP %{http_code} bytes=%{size_download}\n' http://127.0.0.1:8080/
+Input: GET generated /
+Literal output/result: HTTP 200 bytes=9165; PUBLICATIONS=3; LIQUID_MARKERS=0
 Exit status: 0
 
 ROLLBACK
-Command: cp index.html .rollback/rollback-test.html && ./ROLLBACK.sh .rollback/rollback-test.html && node scripts/test-site.mjs .rollback/rollback-test.html --baseline && cmp -s .rollback/original-index.html .rollback/rollback-test.html
+Command: cp _layouts/default.html .rollback/rollback-test.html && ./ROLLBACK.sh .rollback/rollback-test.html && node scripts/test-site.mjs .rollback/rollback-test.html --baseline && cmp -s .rollback/original-index.html .rollback/rollback-test.html
 Input: .rollback/rollback-test.html
 Literal output/result: ROLLBACK restored .rollback/rollback-test.html from .rollback/original-index.html; PASS baseline: 1/1 checks; EXIT_STATUS script=0 test=0 cmp=0
 Exit status: 0
-Restored behavior/status: prior homepage design restored in the rollback test copy; SHA256 returned to e1b0716cf191caf07a8a90fed5cee46200482d8f7f4d5d81be8b1cb0662f0a37. Live MODIFIED_FILE stayed changed at 775744e17d4f64dacaed199c832ca6c80a01b63eee9d0e7e566241e4d74b8828.
+Restored behavior/status: rollback test copy returned to the prior static homepage with SHA256 775744e17d4f64dacaed199c832ca6c80a01b63eee9d0e7e566241e4d74b8828. Live MODIFIED_FILE stayed changed at a1e180ed5e9226a108332963bb6b9d04258a86285e49159bfffc25e95fafc46f.
 
 VISUAL
-Desktop screenshot: /Users/xiaoming/mypersonalwebsite/artifacts/jackfromeast-template.png
-Mobile screenshot: /Users/xiaoming/mypersonalwebsite/artifacts/jackfromeast-template-mobile.png
+Desktop screenshot: /Users/xiaoming/mypersonalwebsite/artifacts/jekyll-homepage.png
+Mobile screenshot: /Users/xiaoming/mypersonalwebsite/artifacts/jekyll-homepage-mobile.png
 Literal output/result: desktop 1280x2379; mobile 390x3099
 Exit status: 0
