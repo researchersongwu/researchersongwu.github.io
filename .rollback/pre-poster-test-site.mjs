@@ -21,25 +21,20 @@ const workflow = readFileSync('.github/workflows/pages.yml', 'utf8');
 const sectionFiles = readdirSync('_sections').filter((name) => name.endsWith('.md')).sort();
 const sectionSources = sectionFiles.map((name) => readFileSync(`_sections/${name}`, 'utf8')).join('\n');
 const publicationSection = readFileSync('_sections/04-publications.md', 'utf8');
-const posterSection = readFileSync('_sections/05-posters.md', 'utf8');
 const talksSection = readFileSync('_sections/05-talks.md', 'utf8');
 const ccsPublication = readFileSync('_posts/2026-08-01-when-ad-networks-misbehave.md', 'utf8');
-const spPoster = readFileSync('_posts/2026-04-01-understanding-risks-splash-ads-poster.md', 'utf8');
 const publishedSources = [layout, readFileSync('index.md', 'utf8'), sectionSources].join('\n');
 
 const assertions = [
   ['Jekyll entry Markdown', existsSync('index.md')],
   ['minimal default layout', layout.includes('{{ section.content }}')],
   ['Markdown section loop', layout.includes('site.sections')],
-  ['nine Markdown sections', sectionFiles.length === 9],
+  ['eight Markdown sections', sectionFiles.length === 8],
   ['publication loop in Markdown', publicationSection.includes('for post in research_posts')],
   ['research category', publicationSection.includes("post.categories contains 'research'")],
   ['artifact publication link', publicationSection.includes('post.artifact')],
   ['CCS 2026 publication Markdown', existsSync('_posts/2026-08-01-when-ad-networks-misbehave.md')],
   ['publication feature list', ccsPublication.includes('features:\n  - ') && publicationSection.includes('for feature in post.features')],
-  ['poster loop in Markdown', posterSection.includes('for post in poster_posts')],
-  ['poster category', posterSection.includes("post.categories contains 'poster'")],
-  ['S&P 2026 poster Markdown', spPoster.includes('Understanding Risks of Semi-Drive-By Splash Ads') && spPoster.includes('sp2026posters-final91.pdf')],
   ['blank talk Markdown stays empty', talksSection.trim() === ''],
   ['sections collection', config.includes('sections:') && config.includes('output: false')],
   ['publication Markdown folder', existsSync('_posts/.gitkeep')],
