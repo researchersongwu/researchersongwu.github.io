@@ -1,29 +1,12 @@
-name: Your Name
-description: Academic homepage of Your Name
-email: you@example.com
-github: YOUR_USERNAME
-scholar: "#"
-linkedin: "#"
-cv: /assets/cv.pdf
-avatar:
-
-university: Example University
-university_url: https://example.edu
-position: a Ph.D. student in Computer Science
-advisor: Professor Advisor Name
-advisor_url: "#"
-previous_university: Previous University
-research_interests: artificial intelligence, computer vision, and trustworthy machine learning
-research_summary: I study intelligent systems in real-world environments and develop reliable, efficient, and interpretable learning methods.
-contact_note: I am always happy to discuss research ideas and potential collaborations. Please feel free to reach out by email.
-
-url: "https://YOUR_USERNAME.github.io"
+url: ""
 baseurl: ""
 permalink: /publication/:title/
 
 collections:
+  sections:
+    output: false
   talks:
-    output: true
+    output: false
 
 plugins:
   - jekyll-sitemap

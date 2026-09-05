@@ -1,81 +1,163 @@
 diff --git a/.rollback/original-index.html b/_layouts/default.html
-index 0840c78..96029b9 100644
+index 96029b9..d2b29b9 100644
 --- a/.rollback/original-index.html
 +++ b/_layouts/default.html
-@@ -1,7 +1,7 @@
- ---
- ---
- <!DOCTYPE HTML>
--<html lang="zh-CN">
-+<html lang="en">
+@@ -5,9 +5,9 @@
  <head>
    <meta charset="utf-8">
    <meta name="viewport" content="width=device-width, initial-scale=1">
-@@ -19,7 +19,7 @@
- 
+-  <meta name="author" content="{{ site.name }}">
+-  <meta name="description" content="{{ site.description }}">
+-  <title>{{ site.name }}</title>
++  <meta name="author" content="{{ page.author }}">
++  <meta name="description" content="{{ page.description }}">
++  <title>{{ page.title }}</title>
+   <link rel="stylesheet" href="{{ '/style.css' | relative_url }}">
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+@@ -16,137 +16,21 @@
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous">
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+ </head>
+-
  <body>
++  {% assign homepage_sections = site.sections | sort: 'order' %}
    <div class="page-wrapper">
--    <nav class="side-nav" aria-label="页面导航">
-+    <nav class="side-nav" aria-label="Section navigation">
-       <a href="#about">About</a>
-       <a href="#news">News</a>
-       <a href="#research">Research</a>
-@@ -34,13 +34,13 @@
-       <table class="layout-table" id="about">
-         <tr>
-           <td class="about-copy">
--            <h1>{{ site.name }}{% if site.name_cn %} · {{ site.name_cn }}{% endif %}</h1>
-+            <h1>{{ site.name }}</h1>
-             <p>
--              我目前是 <a href="{{ site.university_url }}">{{ site.university }}</a> {{ site.position }}，
--              师从 <a href="{{ site.advisor_url }}">{{ site.advisor }}</a>。在此之前，我在 {{ site.previous_university }} 获得学士学位。
-+              I am currently {{ site.position }} at <a href="{{ site.university_url }}">{{ site.university }}</a>,
-+              advised by <a href="{{ site.advisor_url }}">{{ site.advisor }}</a>. Before that, I received my bachelor's degree from {{ site.previous_university }}.
-             </p>
-             <p>
--              我的研究兴趣主要包括 <strong>{{ site.research_interests }}</strong>。
-+              My research interests broadly include <strong>{{ site.research_interests }}</strong>.
-               {{ site.research_summary }}
-             </p>
-             <p>
-@@ -58,7 +58,7 @@
-             {% if site.avatar %}
-             <img class="profile-photo" src="{{ site.avatar | relative_url }}" alt="{{ site.name }}">
-             {% else %}
--            <div class="photo-placeholder" role="img" aria-label="个人照片占位符">
-+            <div class="photo-placeholder" role="img" aria-label="Profile photo placeholder">
-               <span>YOUR<br>PHOTO</span>
-               <small>images/profile.jpg</small>
-             </div>
-@@ -78,22 +78,22 @@
+     <nav class="side-nav" aria-label="Section navigation">
+-      <a href="#about">About</a>
+-      <a href="#news">News</a>
+-      <a href="#research">Research</a>
+-      <a href="#publications">Publications</a>
+-      <a href="#talks">Talks</a>
+-      <a href="#awards">Awards</a>
+-      <a href="#services">Services</a>
+-      <a href="#experiences">Experiences</a>
++      {% for section in homepage_sections %}
++      <a href="#{{ section.section_id }}">{{ section.nav }}</a>
++      {% endfor %}
+     </nav>
  
-       <section id="research" class="page-section">
-         <h2>Research Directions</h2>
--        <p>我的研究主要围绕两个相互补充的方向展开：</p>
-+        <p>My research centers on two complementary directions:</p>
-         <p>
--          <strong>方向一：基础模型与多模态学习。</strong>
--          研究视觉、语言及其他模态之间的统一表征，探索数据高效的模型训练、适配与推理方法。
-+          <strong>Foundation Models and Multimodal Learning.</strong>
-+          I study unified representations across vision, language, and other modalities, with an emphasis on data-efficient training, adaptation, and inference.
-         </p>
-         <ul>
--          <li>视觉与语言表征：[<a href="#paper-1">ABC '26</a>]，[<a href="#paper-2">XYZ '25</a>]</li>
--          <li>高效模型适配：[<a href="#paper-2">XYZ '25</a>]</li>
-+          <li>Vision-language representation: [<a href="#paper-1">ABC '26</a>], [<a href="#paper-2">XYZ '25</a>]</li>
-+          <li>Efficient model adaptation: [<a href="#paper-2">XYZ '25</a>]</li>
-         </ul>
-         <p>
--          <strong>方向二：可信机器学习。</strong>
--          研究模型在分布偏移、噪声数据和开放环境中的可靠性，并设计可解释、可校准的智能系统。
-+          <strong>Trustworthy Machine Learning.</strong>
-+          I investigate reliability under distribution shifts, noisy data, and open-world conditions, and design interpretable and calibrated intelligent systems.
-         </p>
-         <ul>
--          <li>不确定性估计：[<a href="#paper-3">Journal '24</a>]</li>
--          <li>开放世界学习：[<a href="#paper-1">ABC '26</a>]</li>
-+          <li>Uncertainty estimation: [<a href="#paper-3">Journal '24</a>]</li>
-+          <li>Open-world learning: [<a href="#paper-1">ABC '26</a>]</li>
-         </ul>
+     <main class="main-content">
+-      <table class="layout-table" id="about">
+-        <tr>
+-          <td class="about-copy">
+-            <h1>{{ site.name }}</h1>
+-            <p>
+-              I am currently {{ site.position }} at <a href="{{ site.university_url }}">{{ site.university }}</a>,
+-              advised by <a href="{{ site.advisor_url }}">{{ site.advisor }}</a>. Before that, I received my bachelor's degree from {{ site.previous_university }}.
+-            </p>
+-            <p>
+-              My research interests broadly include <strong>{{ site.research_interests }}</strong>.
+-              {{ site.research_summary }}
+-            </p>
+-            <p>
+-              {{ site.contact_note }}
+-            </p>
+-            <p class="social-links">
+-              <a href="mailto:{{ site.email }}"><i class="fas fa-envelope"></i> Email</a><span>/</span>
+-              <a href="https://github.com/{{ site.github }}"><i class="fab fa-github"></i> GitHub</a><span>/</span>
+-              <a href="{{ site.cv | relative_url }}"><i class="fas fa-file-pdf"></i> CV</a><span>/</span>
+-              <a href="{{ site.scholar }}"><i class="ai ai-google-scholar"></i> Scholar</a><span>/</span>
+-              <a href="{{ site.linkedin }}"><i class="fab fa-linkedin"></i> LinkedIn</a>
+-            </p>
+-          </td>
+-          <td class="about-photo-cell">
+-            {% if site.avatar %}
+-            <img class="profile-photo" src="{{ site.avatar | relative_url }}" alt="{{ site.name }}">
+-            {% else %}
+-            <div class="photo-placeholder" role="img" aria-label="Profile photo placeholder">
+-              <span>YOUR<br>PHOTO</span>
+-              <small>images/profile.jpg</small>
+-            </div>
+-            {% endif %}
+-          </td>
+-        </tr>
+-      </table>
+-
+-      <section id="news" class="page-section">
+-        <h2>News</h2>
+-        <table class="news-table">
+-          {% for item in site.data.news %}
+-          <tr><td class="news-date">{% if item.new %}<span class="new-mark">new</span>{% endif %} {{ item.date }}</td><td>{{ item.content }}</td></tr>
+-          {% endfor %}
+-        </table>
+-      </section>
+-
+-      <section id="research" class="page-section">
+-        <h2>Research Directions</h2>
+-        <p>My research centers on two complementary directions:</p>
+-        <p>
+-          <strong>Foundation Models and Multimodal Learning.</strong>
+-          I study unified representations across vision, language, and other modalities, with an emphasis on data-efficient training, adaptation, and inference.
+-        </p>
+-        <ul>
+-          <li>Vision-language representation: [<a href="#paper-1">ABC '26</a>], [<a href="#paper-2">XYZ '25</a>]</li>
+-          <li>Efficient model adaptation: [<a href="#paper-2">XYZ '25</a>]</li>
+-        </ul>
+-        <p>
+-          <strong>Trustworthy Machine Learning.</strong>
+-          I investigate reliability under distribution shifts, noisy data, and open-world conditions, and design interpretable and calibrated intelligent systems.
+-        </p>
+-        <ul>
+-          <li>Uncertainty estimation: [<a href="#paper-3">Journal '24</a>]</li>
+-          <li>Open-world learning: [<a href="#paper-1">ABC '26</a>]</li>
+-        </ul>
+-      </section>
+-
+-      <section id="publications" class="page-section">
+-        <h2>Publications</h2>
+-
+-        {% for post in site.posts %}
+-        {% if post.categories contains 'research' %}
+-        <article class="publication" id="paper-{{ forloop.index }}">
+-          <h3>{{ post.title }}</h3>
+-          <p>{{ post.authors }}</p>
+-          <p class="paper-links">
+-            {% if post.pdf %}<a href="{{ post.pdf | relative_url }}">paper</a> /{% endif %}
+-            {% if post.poster %} <a href="{{ post.poster | relative_url }}">poster</a> /{% endif %}
+-            {% if post.code %} <a href="{{ post.code }}">code</a> /{% endif %}
+-            {% if post.slides %} <a href="{{ post.slides | relative_url }}">slides</a> /{% endif %}
+-          </p>
+-          <p><em>{{ post.venue }}</em></p>
+-          {% if post.features %}<p class="feature-line"><span class="square"></span>{{ post.features }}</p>{% endif %}
+-          {% if post.award %}<p class="feature-line"><span class="square red"></span><strong>{{ post.award }}</strong></p>{% endif %}
+-        </article>
+-        {% endif %}
+-        {% endfor %}
+-      </section>
+-
+-      <section id="talks" class="page-section">
+-        <h2>Talks</h2>
+-        {% assign sorted_talks = site.talks | sort: 'date' | reverse %}
+-        {% for talk in sorted_talks %}
+-        <div class="list-entry">
+-          <div><strong>{{ talk.title }}</strong><br>{{ talk.role }}, <em>{{ talk.venue }}</em><br>{% if talk.link %}<a href="{{ talk.link }}">link</a> /{% endif %}{% if talk.slides %} <a href="{{ talk.slides | relative_url }}">slides</a> /{% endif %}{% if talk.video %} <a href="{{ talk.video }}">video</a> /{% endif %}</div>
+-          <time>{{ talk.display_date }}</time>
+-        </div>
+-        {% endfor %}
+-      </section>
+-
+-      <section id="awards" class="page-section">
+-        <h2>Selected Honors &amp; Awards</h2>
+-        {% for award in site.data.awards %}<div class="compact-row"><span>{{ award.name }}</span><time>{{ award.date }}</time></div>{% endfor %}
+-      </section>
+-
+-      <section id="services" class="page-section">
+-        <h2>Professional Services</h2>
+-        {% for group in site.data.services %}
+-        <h3 class="block-title">{{ group.role }}</h3>
+-        <ul class="services-list">{% for item in group.items %}<li>{{ item }}</li>{% endfor %}</ul>
+-        {% endfor %}
+-      </section>
+-
+-      <section id="experiences" class="page-section">
+-        <h2>Experiences</h2>
+-        {% for experience in site.data.experiences %}<div class="compact-row"><span><strong>{{ experience.role }}</strong>, {{ experience.organization }}</span><time>{{ experience.date }}</time></div>{% endfor %}
++      {% for section in homepage_sections %}
++      <section id="{{ section.section_id }}" class="page-section {{ section.section_class }}">
++        {{ section.content }}
        </section>
++      {% endfor %}
  
+       <footer>
+         <p>Template adapted from <a href="https://github.com/jackfromeast/jackfromeast.github.io">jackfromeast.github.io</a>; original design lineage credits <a href="https://jonbarron.info">Jon Barron</a>.</p>

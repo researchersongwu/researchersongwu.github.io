@@ -1,4 +1,6 @@
 ---
 layout: default
-title: Home
+title: Your Name
+author: Your Name
+description: Academic homepage of Your Name
 ---
