@@ -44,7 +44,6 @@ const assertions = [
   ['Sass entry', existsSync('style.scss')],
   ['Jekyll workflow', workflow.includes('actions/jekyll-build-pages@v1')],
   ['GitHub Pages deployment', workflow.includes('actions/deploy-pages@v4')],
-  ['footer credits removed', !layout.includes('<footer>') && !layout.includes('Last updated:')],
   ['English public content', !/[\u3400-\u9fff]/u.test(publishedSources) && layout.includes('<html lang="en">')]
 ];
 

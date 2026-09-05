@@ -1,42 +1,40 @@
-CCS 2026 publication verification
+Footer removal verification
 Timestamp: 2026-09-05 Asia/Shanghai
-Changed branch/field: main / _posts research publication fields plus _sections/04-publications.md artifact-link rendering
+Changed branch/field: main / _layouts/default.html footer block
 
 FOUR ARTIFACTS
-MODIFIED_FILE: /Users/xiaoming/mypersonalwebsite/_posts/2026-08-01-when-ad-networks-misbehave.md
+MODIFIED_FILE: /Users/xiaoming/mypersonalwebsite/_layouts/default.html
 DIFF_FILE: /Users/xiaoming/mypersonalwebsite/DIFF_FILE.patch
 VERIFICATION: /Users/xiaoming/mypersonalwebsite/VERIFICATION.txt
 ROLLBACK: /Users/xiaoming/mypersonalwebsite/ROLLBACK.sh
 
 ORIGINAL
-Path: /Users/xiaoming/mypersonalwebsite/.rollback/pre-publication-post.empty
-SHA256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
-Renderer backup: /Users/xiaoming/mypersonalwebsite/.rollback/pre-publication-renderer.md
-Renderer SHA256: 7df3adb487f7bd9f4ff7ed433b9a349adfee2f4918cd56cbbe2647e19ddd5954
+Path: /Users/xiaoming/mypersonalwebsite/.rollback/pre-footer-removal-default.html
+SHA256: 8d0bf0487dc0dd50c7ac6b3e63cf58c2d517a2ff6098dec1f561468b956a9873
 
 MODIFIED
-Path: /Users/xiaoming/mypersonalwebsite/_posts/2026-08-01-when-ad-networks-misbehave.md
-SHA256: 5f8c43e22896edf9151aa2d449d57f79571e13f63d70a8785d95c83eb9184ae1
-State: one CCS 2026 publication renders with the requested title, ordered authors, venue, paper link, artifact link, and one English summary sentence.
+Path: /Users/xiaoming/mypersonalwebsite/_layouts/default.html
+SHA256: 7255e980e01137ed349d5838f596a988a750c2ce003dfde2d2b9d5fbf17f9aa0
+State: the complete footer block is absent, including the template attribution and Last updated year; About, News, Publications, the CV link, and the user's updated publication features remain rendered.
 
 BASELINE
-Command: assert empty original post and renderer without artifact field
-Input: .rollback/pre-publication-post.empty and .rollback/pre-publication-renderer.md
-Literal output/result: PASS baseline: no publication post and no artifact field; EXIT_STATUS=0
+Command: assert pre-change layout contains footer credits and update year
+Input: /Users/xiaoming/mypersonalwebsite/.rollback/pre-footer-removal-default.html
+Literal output/result: PASS baseline: footer credits and update year present; EXIT_STATUS=0
 Exit status: 0
 
 MODIFIED
-Command: npm test && npm run build:docker; inspect generated publication
-Input: repository source and _posts/2026-08-01-when-ad-networks-misbehave.md
-Literal output/result: PASS modified: 20/20 checks; Jekyll done in 0.063 seconds; RENDER_RESULT=TITLE=When Ad Networks Misbehave: Understanding Risks of Semi-Drive-By Splash Ads; AUTHORS=Song Wu, Bo Wang, Yifan Zhang, Yinfeng Cao, Xueqiang Wang; FIRST_AUTHOR_BOLD=Song Wu; PAPER_LINK=https://researchersongwu.github.io/; ARTIFACT_LINK=https://researchersongwu.github.io/; VENUE=To appear in the proceedings of the ACM Conference on Computer and Communications Security (CCS), 2026.; SENTENCE=We investigate the security risks posed by semi-drive-by splash advertisements when ad networks misbehave.; LINK_TEXT=paper / artifact; EXIT_STATUS test=0 build=0 render=0
+Command: npm test && npm run build:docker; inspect generated page
+Input: repository source with _layouts/default.html footer removed
+Literal output/result: PASS modified: 21/21 checks; Jekyll done in 0.065 seconds; FOOTER_ABSENT=true; ADAPTED_TEXT_ABSENT=true; LAST_UPDATED_ABSENT=true; PUBLICATION_PRESENT=true; USER_FEATURES_PRESENT=true; EXIT_STATUS test=0 build=0 render=0
 Exit status: 0
 
 ROLLBACK
-Command: ./ROLLBACK.sh TARGET_COPY; compare renderer/test; verify publication and preview absent
-Input: another copy containing the modified renderer, test, publication Markdown, and preview
-Literal output/result: ROLLBACK restored publication renderer and removed the CCS 2026 publication from TARGET_COPY; ROLLBACK_RESULT=renderer_restored=true; test_restored=true; post_absent=true; preview_absent=true; EXIT_STATUS script=0 renderer=0 test=0 post_absent=0 preview_absent=0; CLEANUP_EXIT_STATUS=0
+Command: ./ROLLBACK.sh TARGET_COPY; compare layout/test; verify preview absent
+Input: another copy containing the footer-removal changes
+Literal output/result: ROLLBACK restored the footer in TARGET_COPY; ROLLBACK_RESULT=footer_restored=true; test_restored=true; preview_absent=true; EXIT_STATUS script=0 layout=0 test=0 preview_absent=0; CLEANUP_EXIT_STATUS=0
 Exit status: 0
-Restored behavior/status: the rollback test copy returned to the no-publication state and the artifact field disappeared; the real MODIFIED_FILE remains changed and the CCS 2026 publication remains rendered.
+Restored behavior/status: the rollback test copy returned to the footer-bearing layout with attribution and update year; the real MODIFIED_FILE remains changed and renders no footer.
 
 RENDERED PREVIEW
-/Users/xiaoming/mypersonalwebsite/artifacts/ccs-2026-publication-rendered.png
+/Users/xiaoming/mypersonalwebsite/artifacts/footer-removed-rendered.png
