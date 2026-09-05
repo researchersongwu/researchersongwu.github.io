@@ -2,6 +2,11 @@
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")" && pwd)"
 TARGET_REPO="${1:-$ROOT}"
-PRE_ROLLBACK_COMMIT="7420fe6c116036ddc6330ab2bc98e931a19f69b2"
-git -C "$TARGET_REPO" reset --hard "$PRE_ROLLBACK_COMMIT"
-printf 'ROLLBACK restored %s to pre-rollback commit %s\n' "$TARGET_REPO" "$PRE_ROLLBACK_COMMIT"
+PRE_CHANGE_COMMIT="5a2e58f"
+git -C "$TARGET_REPO" reset --hard "$PRE_CHANGE_COMMIT"
+python3 - "$TARGET_REPO" <<'PY'
+from pathlib import Path
+import sys
+(Path(sys.argv[1]) / 'assets' / 'cv.pdf').unlink(missing_ok=True)
+PY
+printf 'ROLLBACK restored %s to %s and removed assets/cv.pdf\n' "$TARGET_REPO" "$PRE_CHANGE_COMMIT"

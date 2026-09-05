@@ -16,6 +16,16 @@ This Markdown file contains your name, biography, university, advisor, research 
 
 The browser title and description live in the Front Matter of `index.md`, which is also a Markdown file.
 
+## Replace the CV placeholder
+
+Replace this file with your real CV while keeping the same filename:
+
+```text
+assets/cv.pdf
+```
+
+The CV link in About will then open your uploaded document automatically.
+
 ## Edit homepage sections
 
 ```text
