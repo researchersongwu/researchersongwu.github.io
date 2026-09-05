@@ -1,92 +1,41 @@
-Markdown-only Jekyll homepage verification
+Song Wu Markdown-only Jekyll render verification
 Timestamp: 2026-09-05 Asia/Shanghai
-Changed branch/field: main / jekyll.sections, jekyll.posts, jekyll.talks, layout.content_renderer, pages.deployment
+Changed branch/field: main / Markdown section visibility and _sections/01-about.md rendered profile content
 
 FOUR ARTIFACTS
-MODIFIED_FILE: /Users/xiaoming/mypersonalwebsite/_layouts/default.html
+MODIFIED_FILE: /Users/xiaoming/mypersonalwebsite/_sections/01-about.md
 DIFF_FILE: /Users/xiaoming/mypersonalwebsite/DIFF_FILE.patch
 VERIFICATION: /Users/xiaoming/mypersonalwebsite/VERIFICATION.txt
 ROLLBACK: /Users/xiaoming/mypersonalwebsite/ROLLBACK.sh
 
 ORIGINAL
-Path: /Users/xiaoming/mypersonalwebsite/.rollback/original-index.html
-SHA256: 588d1c6880804263f881fd673058b1480e59e34d6015418c0799a8ece941d295
+Path: /Users/xiaoming/mypersonalwebsite/.rollback/pre-render-01-about.md
+SHA256: ea0894a285c1db1d6e4507e3a7cbcb37a621cfe3a1e5080ca675e9c709c6e319
 
 MODIFIED
-Path: /Users/xiaoming/mypersonalwebsite/_layouts/default.html
-SHA256: 576c0e795d8a94e84d95ed3953cec0bb20807c267c775a9fdf9f01013eed24ba
-State: layout only renders Markdown collections; all routine homepage content is stored in .md files.
+Path: /Users/xiaoming/mypersonalwebsite/_sections/01-about.md
+SHA256: eb2da17bb67707bcc17c1b1f52835e0fde3826c0b0f410d939a0bc688f07de78
+State: About and News render from Markdown; empty Research, Publications, Talks, Awards, Services, and Experiences content stays absent from the page and navigation; the uploaded profile photo renders; the missing CV link stays absent.
 
 BASELINE
-Command: node scripts/test-site.mjs .rollback/original-index.html --baseline
-Input: .rollback/original-index.html
-Literal output/result: PASS baseline: 1/1 checks
+Command: node scripts/test-site.mjs .rollback/pre-render-01-about.md --baseline
+Input: /Users/xiaoming/mypersonalwebsite/.rollback/pre-render-01-about.md
+Literal output/result: PASS baseline: 2/2 checks; EXIT_STATUS=0
 Exit status: 0
 
 MODIFIED
-Command: npm test
-Input: index.md, _sections/*.md, _posts/*.md, _talks/*.md, _layouts/default.html, _config.yml
-Literal output/result: PASS modified: 14/14 checks
-Exit status: 0
-
-BUILD
-Command: npm run build:docker
-Input: Markdown-only Jekyll source tree
-Literal output/result: Bundle complete! 3 Gemfile dependencies, 37 gems now installed.; Destination: /srv/_site; Generating... done in 0.105 seconds.
-Exit status: 0
-
-GENERATED RESULT
-Command: rg -n '<section id=|Learning Reliable|Trustworthy Multimodal|\{[%{]' _site/index.html
-Input: _site/index.html
-Literal output/result: SECTIONS=8; PUBLICATIONS=3; LIQUID_MARKERS=0
-Exit status: 0
-
-BROWSER
-Command: Python Playwright test against http://127.0.0.1:8080/
-Input: generated homepage at 1280x900
-Literal output/result: PASS browser: 8 Markdown sections; 3 Markdown publications; 8 generated navigation links
-Exit status: 0
-
-HTTP
-Command: curl -sS -o /tmp/markdown-only-home.html -w 'HTTP %{http_code} bytes=%{size_download}\n' http://127.0.0.1:8080/
-Input: GET generated /
-Literal output/result: HTTP 200 bytes=9045
+Command: npm test && npm run build:docker
+Input: /Users/xiaoming/mypersonalwebsite Markdown/Jekyll source
+Literal output/result: PASS modified: 16/16 checks; Jekyll done in 0.062 seconds; RENDER_RESULT=TITLE=Song Wu; SECTIONS=2; SECTION_IDS=about,news; NAV_LINKS=2; PUBLICATIONS=0; PROFILE_IMAGE=images/personal.png; EXIT_STATUS test=0 build=0 render=0
 Exit status: 0
 
 ROLLBACK
-Command: cp _layouts/default.html .rollback/rollback-test.html && ./ROLLBACK.sh .rollback/rollback-test.html && node scripts/test-site.mjs .rollback/rollback-test.html --baseline && cmp -s .rollback/original-index.html .rollback/rollback-test.html
-Input: .rollback/rollback-test.html
-Literal output/result: ROLLBACK restored .rollback/rollback-test.html from .rollback/original-index.html; PASS baseline: 1/1 checks; EXIT_STATUS script=0 test=0 cmp=0
+Command: cp _sections/01-about.md .rollback/rollback-test-about.md && ./ROLLBACK.sh .rollback/rollback-test-about.md && cmp -s .rollback/pre-render-01-about.md .rollback/rollback-test-about.md
+Input: /Users/xiaoming/mypersonalwebsite/.rollback/rollback-test-about.md
+Literal output/result: ROLLBACK restored .rollback/rollback-test-about.md from .rollback/pre-render-01-about.md; ROLLBACK_RESULT=restored SHA256=ea0894a285c1db1d6e4507e3a7cbcb37a621cfe3a1e5080ca675e9c709c6e319; EXIT_STATUS script=0 cmp=0
 Exit status: 0
-Restored behavior/status: rollback test copy returned to the previous layout with SHA256 588d1c6880804263f881fd673058b1480e59e34d6015418c0799a8ece941d295. Live MODIFIED_FILE stayed changed at 576c0e795d8a94e84d95ed3953cec0bb20807c267c775a9fdf9f01013eed24ba.
+Restored behavior/status: the rollback test copy returned to the pre-render Markdown with the photo placeholder and CV entry; the real MODIFIED_FILE remains rendered with images/personal.png and only the existing Email link.
 
-VISUAL
-Desktop screenshot: /Users/xiaoming/mypersonalwebsite/artifacts/markdown-only-jekyll.png
-Mobile screenshot: /Users/xiaoming/mypersonalwebsite/artifacts/markdown-only-jekyll-mobile.png
-Literal output/result: desktop 1280x2428; mobile 390x3250
-Exit status: 0
-
-GITHUB REPOSITORY
-Command: gh repo create researchersongwu.github.io --public --source=. --remote=origin --push --description "Markdown-driven Jekyll academic homepage"
-Input: local main branch and authenticated account researchersongwu
-Literal output/result: https://github.com/researchersongwu/researchersongwu.github.io
-Repository result: PUBLIC; default branch main
-
-DEPLOYMENT
-Command: gh run watch 33951970111 --repo researchersongwu/researchersongwu.github.io --exit-status
-Input: workflow Deploy static site to Pages, run 33951970111
-Literal output/result: deploy in 33s; Build with Jekyll passed; Upload artifact passed; Deploy to GitHub Pages passed; Complete job passed
-Exit status: 0
-
-LIVE HTTP
-Command: curl -sS -L -o /tmp/live-home.html -w 'HTTP %{http_code} final=%{url_effective} bytes=%{size_download}\n' https://researchersongwu.github.io/
-Input: GET https://researchersongwu.github.io/
-Literal output/result: HTTP 200 final=https://researchersongwu.github.io/ bytes=9045; TITLE=<title>Your Name; SECTIONS=8; PUBLICATIONS=3; LIQUID_MARKERS=0
-Exit status: 0
-
-LIVE BROWSER
-Command: Python Playwright test against https://researchersongwu.github.io/
-Input: deployed GitHub Pages site at 1280x900
-Literal output/result: PASS live browser: title=Your Name; sections=8; publications=3; HTTPS rendered
-Exit status: 0
-Screenshot: /Users/xiaoming/mypersonalwebsite/artifacts/github-pages-live.png
+RENDERED PREVIEWS
+Desktop: /Users/xiaoming/mypersonalwebsite/artifacts/song-wu-rendered.png
+Mobile: /Users/xiaoming/mypersonalwebsite/artifacts/song-wu-rendered-mobile.png

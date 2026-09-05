@@ -1,6 +1,7 @@
 url: ""
 baseurl: ""
 permalink: /publication/:title/
+excerpt_separator: "<!--more-->"
 
 collections:
   sections:

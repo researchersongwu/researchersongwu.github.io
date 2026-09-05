@@ -4,10 +4,11 @@ nav: Publications
 order: 4
 ---
 
+{% assign research_posts = site.posts | where_exp: 'post', "post.categories contains 'research'" %}
+{% if research_posts.size > 0 %}
 ## Publications
 
-{% for post in site.posts %}
-{% if post.categories contains 'research' %}
+{% for post in research_posts %}
 <article class="publication" id="paper-{{ forloop.index }}">
   <h3>{{ post.title }}</h3>
   <p>{{ post.authors }}</p>
@@ -21,5 +22,5 @@ order: 4
   {% if post.features %}<p class="feature-line"><span class="square"></span>{{ post.features }}</p>{% endif %}
   {% if post.award %}<p class="feature-line"><span class="square red"></span><strong>{{ post.award }}</strong></p>{% endif %}
 </article>
-{% endif %}
 {% endfor %}
+{% endif %}

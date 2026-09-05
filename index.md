@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Your Name
-author: Your Name
-description: Academic homepage of Your Name
+title: Song Wu
+author: Song Wu
+description: Academic homepage of Song Wu
 ---

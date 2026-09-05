@@ -6,3 +6,5 @@ _site/
 .sass-cache/
 vendor/
 .bundle/
+
+.rollback/rollback-test-about.md

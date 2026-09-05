@@ -1,1 +1,0 @@
-Place your PDF curriculum vitae at assets/cv.pdf. The CV link is configured in _config.yml.

@@ -21,15 +21,21 @@
   <div class="page-wrapper">
     <nav class="side-nav" aria-label="Section navigation">
       {% for section in homepage_sections %}
+      {% assign visible_content = section.content | strip %}
+      {% if section.section_id and visible_content != '' %}
       <a href="#{{ section.section_id }}">{{ section.nav }}</a>
+      {% endif %}
       {% endfor %}
     </nav>
 
     <main class="main-content">
       {% for section in homepage_sections %}
+      {% assign visible_content = section.content | strip %}
+      {% if section.section_id and visible_content != '' %}
       <section id="{{ section.section_id }}" class="page-section {{ section.section_class }}">
         {{ section.content }}
       </section>
+      {% endif %}
       {% endfor %}
 
       <footer>

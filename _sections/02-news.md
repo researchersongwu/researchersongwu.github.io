@@ -8,8 +8,6 @@ order: 2
 
 | Date | Update |
 | --- | --- |
-| **NEW** Aug 2026 | One paper was accepted by **Conference ABC 2026**. |
-| **NEW** May 2026 | I gave an invited talk at the Example Research Institute. |
-| Feb 2026 | I started a new project on trustworthy multimodal learning. |
-| Dec 2025 | I received the Example Graduate Scholarship. |
+| **NEW** Aug 2026 | One paper was accepted by **ACM CCS 2026**. |
+| **NEW** Apr 2026 | A poster was accepted by IEEE S&P (Oakland) 2026. |
 {: .news-table }

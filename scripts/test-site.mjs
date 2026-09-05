@@ -5,10 +5,13 @@ const baselineFile = process.argv[2];
 const baseline = process.argv.includes('--baseline');
 
 if (baseline) {
-  const html = readFileSync(resolve(baselineFile), 'utf8');
-  const ok = html.includes('class="side-nav"') && html.includes('id="publications"');
-  if (!ok) process.exit(1);
-  console.log('PASS baseline: 1/1 checks');
+  const markdown = readFileSync(resolve(baselineFile), 'utf8');
+  const checks = [
+    markdown.includes('# Song Wu'),
+    markdown.includes('images/personal.png')
+  ];
+  if (!checks.every(Boolean)) process.exit(1);
+  console.log('PASS baseline: 2/2 checks');
   process.exit(0);
 }
 
@@ -26,12 +29,14 @@ const assertions = [
   ['minimal default layout', layout.includes('{{ section.content }}')],
   ['Markdown section loop', layout.includes('site.sections')],
   ['eight Markdown sections', sectionFiles.length === 8],
-  ['publication loop in Markdown', publicationSection.includes('for post in site.posts')],
+  ['publication loop in Markdown', publicationSection.includes('for post in research_posts')],
   ['research category', publicationSection.includes("post.categories contains 'research'")],
-  ['talk collection loop in Markdown', talksSection.includes('for talk in sorted_talks')],
+  ['blank talk Markdown stays empty', talksSection.trim() === ''],
   ['sections collection', config.includes('sections:') && config.includes('output: false')],
-  ['sample research Markdown', existsSync('_posts/2026-08-01-open-world.md')],
-  ['sample talk Markdown', existsSync('_talks/2026-08-01-example-talk.md')],
+  ['publication Markdown folder', existsSync('_posts/.gitkeep')],
+  ['talk Markdown folder', existsSync('_talks/.gitkeep')],
+  ['empty-section suppression', layout.includes("visible_content != ''")],
+  ['uploaded profile image', sectionSources.includes('images/personal.png') && existsSync('images/personal.png')],
   ['Sass entry', existsSync('style.scss')],
   ['Jekyll workflow', workflow.includes('actions/jekyll-build-pages@v1')],
   ['GitHub Pages deployment', workflow.includes('actions/deploy-pages@v4')],

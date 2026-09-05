@@ -31,6 +31,8 @@ _sections/08-experiences.md
 
 All eight files are Markdown. Their Front Matter controls the navigation label and display order.
 
+Leave the body of a section Markdown file empty to hide that section and its navigation item. Empty publication and talk folders likewise produce no placeholder content.
+
 ## Add a publication
 
 Create a dated Markdown file in `_posts/`:
