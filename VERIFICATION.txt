@@ -1,7 +1,6 @@
-Jekyll academic homepage conversion verification
+English-only Jekyll homepage verification
 Timestamp: 2026-09-05 Asia/Shanghai
-Changed branch/field: main / jekyll.site, jekyll.posts, jekyll.talks, jekyll.data, jekyll.layout, pages.build
-Upstream pattern: https://github.com/jackfromeast/jackfromeast.github.io.git @ 4248b6f
+Changed branch/field: main / html.lang, site.profile, site.news, site.research, site.awards, site.experiences, documentation.language
 
 FOUR ARTIFACTS
 MODIFIED_FILE: /Users/xiaoming/mypersonalwebsite/_layouts/default.html
@@ -11,12 +10,12 @@ ROLLBACK: /Users/xiaoming/mypersonalwebsite/ROLLBACK.sh
 
 ORIGINAL
 Path: /Users/xiaoming/mypersonalwebsite/.rollback/original-index.html
-SHA256: 775744e17d4f64dacaed199c832ca6c80a01b63eee9d0e7e566241e4d74b8828
+SHA256: a1e180ed5e9226a108332963bb6b9d04258a86285e49159bfffc25e95fafc46f
 
 MODIFIED
 Path: /Users/xiaoming/mypersonalwebsite/_layouts/default.html
-SHA256: a1e180ed5e9226a108332963bb6b9d04258a86285e49159bfffc25e95fafc46f
-State: Jekyll/Liquid layout remains active; Publications and Talks are generated from Markdown.
+SHA256: 588d1c6880804263f881fd673058b1480e59e34d6015418c0799a8ece941d295
+State: the English Jekyll/Liquid homepage remains active.
 
 BASELINE
 Command: node scripts/test-site.mjs .rollback/original-index.html --baseline
@@ -26,26 +25,32 @@ Exit status: 0
 
 MODIFIED
 Command: npm test
-Input: _config.yml, index.md, _layouts/default.html, _posts/*.md, _talks/*.md, _data/*.yml, style.scss, .github/workflows/pages.yml
-Literal output/result: PASS modified: 12/12 checks
+Input: _config.yml, _layouts/default.html, _data/*.yml, _posts/*.md, _talks/*.md
+Literal output/result: PASS modified: 13/13 checks
 Exit status: 0
+
+LANGUAGE
+Command: rg -n '[\p{Han}]' _config.yml _layouts _data _posts _talks index.md style.scss script.js assets/cv-placeholder.txt
+Input: all published Jekyll source files
+Literal output/result: PASS English-only published sources
+Exit status: 0 (no matches branch)
 
 BUILD
 Command: npm run build:docker
-Input: Jekyll source tree and Gemfile
-Literal output/result: Bundle complete! 3 Gemfile dependencies, 37 gems now installed.; Configuration file: /srv/_config.yml; Destination: /srv/_site; Generating... done in 0.067 seconds.
+Input: English Jekyll source tree
+Literal output/result: Bundle complete! 3 Gemfile dependencies, 37 gems now installed.; Destination: /srv/_site; Generating... done in 0.075 seconds.
 Exit status: 0
 
 BROWSER
 Command: Python Playwright test against http://127.0.0.1:8080/
-Input: generated _site/index.html at desktop 1280x900 and mobile 390x844
-Literal output/result: PASS browser: Jekyll rendered 3 Markdown publications; desktop/mobile layout verified
+Input: generated _site/index.html at desktop 1280x900
+Literal output/result: PASS browser: lang=en; English research copy visible; 3 publications rendered
 Exit status: 0
 
 HTTP
-Command: curl -sS -o /tmp/jekyll-home-final.html -w 'HTTP %{http_code} bytes=%{size_download}\n' http://127.0.0.1:8080/
+Command: curl -sS -o /tmp/english-home.html -w 'HTTP %{http_code} bytes=%{size_download}\n' http://127.0.0.1:8080/
 Input: GET generated /
-Literal output/result: HTTP 200 bytes=9165; PUBLICATIONS=3; LIQUID_MARKERS=0
+Literal output/result: HTTP 200 bytes=9398; LANG=<html lang="en; PUBLICATIONS=3
 Exit status: 0
 
 ROLLBACK
@@ -53,10 +58,10 @@ Command: cp _layouts/default.html .rollback/rollback-test.html && ./ROLLBACK.sh 
 Input: .rollback/rollback-test.html
 Literal output/result: ROLLBACK restored .rollback/rollback-test.html from .rollback/original-index.html; PASS baseline: 1/1 checks; EXIT_STATUS script=0 test=0 cmp=0
 Exit status: 0
-Restored behavior/status: rollback test copy returned to the prior static homepage with SHA256 775744e17d4f64dacaed199c832ca6c80a01b63eee9d0e7e566241e4d74b8828. Live MODIFIED_FILE stayed changed at a1e180ed5e9226a108332963bb6b9d04258a86285e49159bfffc25e95fafc46f.
+Restored behavior/status: the rollback test copy returned to the previous mixed-language Jekyll layout with SHA256 a1e180ed5e9226a108332963bb6b9d04258a86285e49159bfffc25e95fafc46f. Live MODIFIED_FILE stayed English at 588d1c6880804263f881fd673058b1480e59e34d6015418c0799a8ece941d295.
 
 VISUAL
-Desktop screenshot: /Users/xiaoming/mypersonalwebsite/artifacts/jekyll-homepage.png
-Mobile screenshot: /Users/xiaoming/mypersonalwebsite/artifacts/jekyll-homepage-mobile.png
-Literal output/result: desktop 1280x2379; mobile 390x3099
+Desktop screenshot: /Users/xiaoming/mypersonalwebsite/artifacts/jekyll-homepage-en.png
+Mobile screenshot: /Users/xiaoming/mypersonalwebsite/artifacts/jekyll-homepage-en-mobile.png
+Literal output/result: desktop 1280x2434; mobile 390x3293
 Exit status: 0

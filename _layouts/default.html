@@ -1,7 +1,7 @@
 ---
 ---
 <!DOCTYPE HTML>
-<html lang="zh-CN">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -19,7 +19,7 @@
 
 <body>
   <div class="page-wrapper">
-    <nav class="side-nav" aria-label="页面导航">
+    <nav class="side-nav" aria-label="Section navigation">
       <a href="#about">About</a>
       <a href="#news">News</a>
       <a href="#research">Research</a>
@@ -34,13 +34,13 @@
       <table class="layout-table" id="about">
         <tr>
           <td class="about-copy">
-            <h1>{{ site.name }}{% if site.name_cn %} · {{ site.name_cn }}{% endif %}</h1>
+            <h1>{{ site.name }}</h1>
             <p>
-              我目前是 <a href="{{ site.university_url }}">{{ site.university }}</a> {{ site.position }}，
-              师从 <a href="{{ site.advisor_url }}">{{ site.advisor }}</a>。在此之前，我在 {{ site.previous_university }} 获得学士学位。
+              I am currently {{ site.position }} at <a href="{{ site.university_url }}">{{ site.university }}</a>,
+              advised by <a href="{{ site.advisor_url }}">{{ site.advisor }}</a>. Before that, I received my bachelor's degree from {{ site.previous_university }}.
             </p>
             <p>
-              我的研究兴趣主要包括 <strong>{{ site.research_interests }}</strong>。
+              My research interests broadly include <strong>{{ site.research_interests }}</strong>.
               {{ site.research_summary }}
             </p>
             <p>
@@ -58,7 +58,7 @@
             {% if site.avatar %}
             <img class="profile-photo" src="{{ site.avatar | relative_url }}" alt="{{ site.name }}">
             {% else %}
-            <div class="photo-placeholder" role="img" aria-label="个人照片占位符">
+            <div class="photo-placeholder" role="img" aria-label="Profile photo placeholder">
               <span>YOUR<br>PHOTO</span>
               <small>images/profile.jpg</small>
             </div>
@@ -78,22 +78,22 @@
 
       <section id="research" class="page-section">
         <h2>Research Directions</h2>
-        <p>我的研究主要围绕两个相互补充的方向展开：</p>
+        <p>My research centers on two complementary directions:</p>
         <p>
-          <strong>方向一：基础模型与多模态学习。</strong>
-          研究视觉、语言及其他模态之间的统一表征，探索数据高效的模型训练、适配与推理方法。
+          <strong>Foundation Models and Multimodal Learning.</strong>
+          I study unified representations across vision, language, and other modalities, with an emphasis on data-efficient training, adaptation, and inference.
         </p>
         <ul>
-          <li>视觉与语言表征：[<a href="#paper-1">ABC '26</a>]，[<a href="#paper-2">XYZ '25</a>]</li>
-          <li>高效模型适配：[<a href="#paper-2">XYZ '25</a>]</li>
+          <li>Vision-language representation: [<a href="#paper-1">ABC '26</a>], [<a href="#paper-2">XYZ '25</a>]</li>
+          <li>Efficient model adaptation: [<a href="#paper-2">XYZ '25</a>]</li>
         </ul>
         <p>
-          <strong>方向二：可信机器学习。</strong>
-          研究模型在分布偏移、噪声数据和开放环境中的可靠性，并设计可解释、可校准的智能系统。
+          <strong>Trustworthy Machine Learning.</strong>
+          I investigate reliability under distribution shifts, noisy data, and open-world conditions, and design interpretable and calibrated intelligent systems.
         </p>
         <ul>
-          <li>不确定性估计：[<a href="#paper-3">Journal '24</a>]</li>
-          <li>开放世界学习：[<a href="#paper-1">ABC '26</a>]</li>
+          <li>Uncertainty estimation: [<a href="#paper-3">Journal '24</a>]</li>
+          <li>Open-world learning: [<a href="#paper-1">ABC '26</a>]</li>
         </ul>
       </section>
 

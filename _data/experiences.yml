@@ -1,9 +1,9 @@
 - role: Ph.D. Student
-  organization: 某某大学，导师：Advisor Name
+  organization: "Example University, Advisor: Professor Advisor Name"
   date: 2024 — Now
 - role: Research Intern
-  organization: 某某研究院
+  organization: Example Research Institute
   date: Summer 2023
 - role: B.Eng.
-  organization: 某某大学，计算机科学
+  organization: Previous University, Computer Science
   date: 2020 — 2024

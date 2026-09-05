@@ -1,6 +1,6 @@
-- name: 国家奖学金
+- name: National Scholarship
   date: "2026"
-- name: 优秀论文提名，Conference XYZ
+- name: Outstanding Paper Nomination, Conference XYZ
   date: "2025"
-- name: 优秀毕业生，某某大学
+- name: Outstanding Graduate, Previous University
   date: "2024"

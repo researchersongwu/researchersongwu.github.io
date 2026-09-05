@@ -1,6 +1,5 @@
 name: Your Name
-name_cn: 你的名字
-description: Your Name 的个人学术主页
+description: Academic homepage of Your Name
 email: you@example.com
 github: YOUR_USERNAME
 scholar: "#"
@@ -8,15 +7,15 @@ linkedin: "#"
 cv: /assets/cv.pdf
 avatar:
 
-university: 某某大学
+university: Example University
 university_url: https://example.edu
-position: 计算机科学专业博士研究生
-advisor: 导师姓名教授
+position: a Ph.D. student in Computer Science
+advisor: Professor Advisor Name
 advisor_url: "#"
-previous_university: 某某大学
-research_interests: 人工智能、计算机视觉与可信机器学习
-research_summary: 我关注真实环境中的智能系统，并研究可靠、高效且可解释的学习方法。
-contact_note: 我乐于讨论研究想法与合作机会。如果你对我的工作感兴趣，欢迎通过邮件联系我。
+previous_university: Previous University
+research_interests: artificial intelligence, computer vision, and trustworthy machine learning
+research_summary: I study intelligent systems in real-world environments and develop reliable, efficient, and interpretable learning methods.
+contact_note: I am always happy to discuss research ideas and potential collaborations. Please feel free to reach out by email.
 
 url: "https://YOUR_USERNAME.github.io"
 baseurl: ""

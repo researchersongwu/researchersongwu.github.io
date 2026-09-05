@@ -15,6 +15,13 @@ if (baseline) {
 const layout = readFileSync('_layouts/default.html', 'utf8');
 const config = readFileSync('_config.yml', 'utf8');
 const workflow = readFileSync('.github/workflows/pages.yml', 'utf8');
+const englishSources = [
+  layout,
+  config,
+  readFileSync('_data/news.yml', 'utf8'),
+  readFileSync('_data/awards.yml', 'utf8'),
+  readFileSync('_data/experiences.yml', 'utf8')
+].join('\n');
 const assertions = [
   ['Jekyll entry', existsSync('index.md')],
   ['default layout', layout.startsWith('---\n---')],
@@ -27,7 +34,8 @@ const assertions = [
   ['sample talk Markdown', existsSync('_talks/2026-08-01-example-talk.md')],
   ['Sass entry', existsSync('style.scss')],
   ['Jekyll workflow', workflow.includes('actions/jekyll-build-pages@v1')],
-  ['GitHub Pages deployment', workflow.includes('actions/deploy-pages@v4')]
+  ['GitHub Pages deployment', workflow.includes('actions/deploy-pages@v4')],
+  ['English public content', !/[\u3400-\u9fff]/u.test(englishSources) && layout.includes('<html lang="en">')]
 ];
 
 const failed = assertions.filter(([, ok]) => !ok);

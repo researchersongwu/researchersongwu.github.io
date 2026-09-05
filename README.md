@@ -1,25 +1,25 @@
 # Jekyll Academic Homepage
 
-直接采用 `jackfromeast.github.io` 的 Jekyll 内容维护方式：每篇论文写成一个 `_posts/*.md` 文件，页面通过 Liquid 循环自动生成 Publications；报告放入 `_talks/*.md` 后自动生成 Talks。
+An English academic homepage using the same Jekyll content workflow as `jackfromeast.github.io`. Each publication is a Markdown file in `_posts/`; the Liquid template automatically generates the Publications section. Talks work the same way through `_talks/`.
 
-## 第一次配置
+## Initial configuration
 
-编辑 `_config.yml`，填写姓名、学校、导师、邮箱、GitHub、Scholar、LinkedIn 和研究方向。
+Edit `_config.yml` to set your name, university, advisor, email, GitHub profile, Google Scholar profile, LinkedIn profile, research interests, CV, and profile photo.
 
-## 新增论文
+## Add a publication
 
-复制示例：
+Copy an existing example:
 
 ```bash
 cp _posts/2026-08-01-open-world.md _posts/2027-01-01-my-paper.md
 ```
 
-修改新文件的 YAML Front Matter：
+Edit its YAML Front Matter:
 
 ```yaml
 ---
 layout: post
-title: "论文标题"
+title: "Paper Title"
 date: 2027-01-01
 categories: research
 authors: "Author A, <strong>Your Name</strong>, Author B"
@@ -31,41 +31,43 @@ award: "Oral Presentation"
 ---
 ```
 
-论文 PDF 放入 `assets/`。
+Place the associated PDF files in `assets/`.
 
-## 新增报告
+## Add a talk
 
-复制 `_talks/` 内的示例 Markdown，并修改 `title`、`date`、`role`、`venue`、`link`、`slides` 和 `video`。
+Copy an example from `_talks/` and update `title`, `date`, `display_date`, `role`, `venue`, `link`, `slides`, and `video`.
 
-## 其他内容
+## Other content
 
-- 最新动态：`_data/news.yml`
-- 奖项：`_data/awards.yml`
-- 学术服务：`_data/services.yml`
-- 经历：`_data/experiences.yml`
-- 页面结构：`_layouts/default.html`
-- 样式：`style.scss`
+- News: `_data/news.yml`
+- Awards: `_data/awards.yml`
+- Academic service: `_data/services.yml`
+- Experience: `_data/experiences.yml`
+- Page layout: `_layouts/default.html`
+- Styles: `style.scss`
 
-## 本地运行
+## Local development
+
+With Ruby and Bundler:
 
 ```bash
 bundle install
 bundle exec jekyll serve --livereload --port 8080
 ```
 
-访问 `http://localhost:8080`。
-
-如果使用 Docker：
+Or with Docker:
 
 ```bash
 npm run build:docker
 npm run dev:docker
 ```
 
+Open `http://localhost:8080`.
+
 ## GitHub Pages
 
-推送到 `main` 后，`.github/workflows/pages.yml` 会用 Jekyll 构建 `_site` 并部署。仓库 Settings → Pages → Source 选择 **GitHub Actions**。
+Push to `main`. The workflow in `.github/workflows/pages.yml` builds the Jekyll site and deploys it. In the repository, select **Settings → Pages → Source → GitHub Actions**.
 
 ## Attribution
 
-Template adapted from `jackfromeast.github.io`; upstream repository uses the MIT license and credits Jon Barron's academic website design.
+Template adapted from `jackfromeast.github.io`; the upstream repository uses the MIT license and credits Jon Barron's academic website design.
