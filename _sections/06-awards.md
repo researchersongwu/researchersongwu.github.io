@@ -4,7 +4,7 @@ nav: Awards
 order: 6
 ---
 
-## Awards
+## Selected Honors & Awards
 
 | Award | Year |
 | --- | --- |
