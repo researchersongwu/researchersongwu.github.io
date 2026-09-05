@@ -1,6 +1,7 @@
-Academic homepage local build verification
+jackfromeast academic homepage template verification
 Timestamp: 2026-09-05 Asia/Shanghai
-Changed branch/field: main / site.profile, site.news, site.research, site.publications, site.experience
+Changed branch/field: main / layout.about, layout.news, layout.research, layout.publications, layout.talks, layout.awards, layout.services, layout.experiences
+Upstream: https://github.com/jackfromeast/jackfromeast.github.io.git @ 4248b6f
 
 FOUR ARTIFACTS
 MODIFIED_FILE: /Users/xiaoming/mypersonalwebsite/index.html
@@ -10,45 +11,46 @@ ROLLBACK: /Users/xiaoming/mypersonalwebsite/ROLLBACK.sh
 
 ORIGINAL
 Path: /Users/xiaoming/mypersonalwebsite/.rollback/original-index.html
-SHA256: 98f5497dfd10daf97a5452c17556c99aeff082dda171673a8757c5953ba93ae0
+SHA256: e1b0716cf191caf07a8a90fed5cee46200482d8f7f4d5d81be8b1cb0662f0a37
 
 MODIFIED
 Path: /Users/xiaoming/mypersonalwebsite/index.html
-SHA256: e1b0716cf191caf07a8a90fed5cee46200482d8f7f4d5d81be8b1cb0662f0a37
-State: final academic homepage remains in index.html
+SHA256: 775744e17d4f64dacaed199c832ca6c80a01b63eee9d0e7e566241e4d74b8828
+State: jackfromeast-style academic homepage remains in index.html
 
 BASELINE
 Command: node scripts/test-site.mjs .rollback/original-index.html --baseline
 Input: .rollback/original-index.html
-Literal output/result: PASS baseline: 2/2 checks
+Literal output/result: PASS baseline: 1/1 checks
 Exit status: 0
 
 MODIFIED
 Command: npm test
 Input: index.html, styles.css, script.js, .github/workflows/pages.yml
-Literal output/result: PASS modified: 9/9 checks
+Literal output/result: PASS modified: 10/10 checks
 Exit status: 0
 
 BROWSER
 Command: Python Playwright interaction test against http://127.0.0.1:8080/
-Input: theme toggle, publication year 2026, 390x844 mobile menu
-Literal output/result: PASS interactions: theme=dark; 2026-filter=1 result; mobile-menu=visible
+Input: desktop 1280x900, scroll to #publications, mobile 390x844
+Literal output/result: PASS browser: desktop side-nav visible; Publications active on scroll; mobile side-nav hidden
 Exit status: 0
 
 HTTP
-Command: curl -sS -o /tmp/homepage-local.html -w 'HTTP %{http_code} bytes=%{size_download}\n' http://127.0.0.1:8080/
+Command: curl -sS -o /tmp/jack-template.html -w 'HTTP %{http_code} bytes=%{size_download}\n' http://127.0.0.1:8080/
 Input: GET /
-Literal output/result: HTTP 200 bytes=11572
+Literal output/result: HTTP 200 bytes=8530
 Exit status: 0
 
 ROLLBACK
 Command: cp index.html .rollback/rollback-test.html && ./ROLLBACK.sh .rollback/rollback-test.html && node scripts/test-site.mjs .rollback/rollback-test.html --baseline && cmp -s .rollback/original-index.html .rollback/rollback-test.html
 Input: .rollback/rollback-test.html
-Literal output/result: ROLLBACK restored .rollback/rollback-test.html from .rollback/original-index.html; PASS baseline: 2/2 checks; EXIT_STATUS script=0 test=0 cmp=0
+Literal output/result: ROLLBACK restored .rollback/rollback-test.html from .rollback/original-index.html; PASS baseline: 1/1 checks; EXIT_STATUS script=0 test=0 cmp=0
 Exit status: 0
-Restored behavior/status: baseline title and heading restored; SHA256 returned to 98f5497dfd10daf97a5452c17556c99aeff082dda171673a8757c5953ba93ae0. Live MODIFIED_FILE stayed changed at e1b0716cf191caf07a8a90fed5cee46200482d8f7f4d5d81be8b1cb0662f0a37.
+Restored behavior/status: prior homepage design restored in the rollback test copy; SHA256 returned to e1b0716cf191caf07a8a90fed5cee46200482d8f7f4d5d81be8b1cb0662f0a37. Live MODIFIED_FILE stayed changed at 775744e17d4f64dacaed199c832ca6c80a01b63eee9d0e7e566241e4d74b8828.
 
 VISUAL
-Screenshot: /Users/xiaoming/mypersonalwebsite/artifacts/homepage-final.png
-Literal output/result: PASS visual: full page rendered at 1280x4517
+Desktop screenshot: /Users/xiaoming/mypersonalwebsite/artifacts/jackfromeast-template.png
+Mobile screenshot: /Users/xiaoming/mypersonalwebsite/artifacts/jackfromeast-template-mobile.png
+Literal output/result: desktop 1280x2379; mobile 390x3099
 Exit status: 0

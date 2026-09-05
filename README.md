@@ -1,6 +1,6 @@
-# 学术主页模板
+# Academic Homepage Template
 
-一个零构建依赖、可直接部署到 GitHub Pages 的响应式学术主页。版块包括简介、动态、研究方向、代表论文、经历与荣誉，并内置深色模式、移动导航、论文筛选与滚动高亮。
+这是以 [jackfromeast/jackfromeast.github.io](https://github.com/jackfromeast/jackfromeast.github.io) 为直接视觉模板制作的静态版本：相同的窄栏学术主页布局、左侧固定目录、表格式 About/News，以及 Research、Publications、Talks、Awards、Services、Experiences 等版块。
 
 ## 本地预览
 
@@ -9,26 +9,35 @@ npm test
 npm run dev
 ```
 
-浏览器打开 `http://localhost:8080`。
+访问 `http://localhost:8080`。
 
-## 修改清单
+## 修改内容
 
-1. 在 `index.html` 搜索“你的名字”“某某”“Your Name”并替换。
-2. 将个人照片放入 `assets/profile.jpg`，把 `.portrait-placeholder` 替换为 `<img src="assets/profile.jpg" alt="你的名字">`。
-3. 将 PDF 简历放入 `assets/cv.pdf` 并修改简历链接。
-4. 更新邮箱、GitHub、Google Scholar、论文和经历。
+在 `index.html` 中搜索以下占位符：
 
-## 发布到 GitHub
+- `Your Name`、`你的名字`
+- `YOUR_USERNAME`
+- `you@example.com`
+- `某某大学`、`导师姓名`
+- 示例论文、报告、奖项和经历
+
+将个人照片保存为 `images/profile.jpg`，随后用下面的标签替换 `.photo-placeholder`：
+
+```html
+<img class="profile-photo" src="images/profile.jpg" alt="Your Name">
+```
+
+将简历保存为 `assets/cv.pdf`，并把简历链接改成 `assets/cv.pdf`。
+
+## GitHub Pages
 
 ```bash
-git init
-git add .
-git commit -m "Create academic homepage"
-git branch -M main
 git remote add origin https://github.com/YOUR_USERNAME/YOUR_USERNAME.github.io.git
 git push -u origin main
 ```
 
-随后在仓库 **Settings → Pages → Build and deployment → Source** 选择 **GitHub Actions**。工作流会自动部署，地址为 `https://YOUR_USERNAME.github.io/`。
+仓库 Settings → Pages → Source 选择 **GitHub Actions**。当前 `.github/workflows/pages.yml` 已配置静态部署。
 
-若使用普通项目仓库，地址通常为 `https://YOUR_USERNAME.github.io/REPOSITORY/`；本模板使用相对路径，可直接工作。
+## Attribution
+
+Template adapted from `jackfromeast.github.io`; its upstream repository retains the MIT license and credits Jon Barron's academic website design.
