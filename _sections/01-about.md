@@ -5,11 +5,11 @@ order: 1
 section_class: about-section
 ---
 
-![Song Wu](images/personal.png)
+![Song Wu](images/personal.png){:.profile-photo}
 
 # Song Wu
 
-I am an independent researcher currently looking for a Ph.D. position. I received my master's degree from [Wuhan University](https://en.wikipedia.org/wiki/Wuhan_University). My research interests broadly span web security, systems security, LLM security, and security/privacy measurement.
+I am a security researcher currently looking for a Ph.D. position. I got my master degree from [Wuhan University](https://en.wikipedia.org/wiki/Wuhan_University). My research interests broadly span web security, systems security, LLM security, and security and privacy measurement.
 
 
 
@@ -19,4 +19,8 @@ I study new vulnerability classes and underexplored real-world security/privacy 
 
 Before entering academic research, I led the binary security group of Xidian University’s CTF team and worked at a leading technology company in China. These experiences gave me extensive hands-on experience in reverse engineering and systems security, and prepared me to study security and privacy problems in emerging systems.
 
-**Email:** [researchersongwu@gmail.com](mailto:researchersongwu@gmail.com)
+<p class="social-links">
+  <a href="mailto:researchersongwu@gmail.com"><i class="fas fa-envelope"></i> Email</a>
+</p>
+
+<div class="clear"></div>

@@ -18,17 +18,11 @@
 </head>
 <body>
   {% assign homepage_sections = site.sections | sort: 'order' %}
-  {% assign research_posts = site.posts | where_exp: 'post', "post.categories contains 'research'" %}
-  {% assign published_talks = site.talks | where_exp: 'talk', 'talk.published != false' | sort: 'date' | reverse %}
   <div class="page-wrapper">
     <nav class="side-nav" aria-label="Section navigation">
       {% for section in homepage_sections %}
       {% assign visible_content = section.content | strip %}
-      {% assign visible_section = false %}
-      {% if visible_content != '' %}{% assign visible_section = true %}{% endif %}
-      {% if section.section_id == 'publications' and research_posts.size > 0 %}{% assign visible_section = true %}{% endif %}
-      {% if section.section_id == 'talks' and published_talks.size > 0 %}{% assign visible_section = true %}{% endif %}
-      {% if section.section_id and visible_section %}
+      {% if section.section_id and visible_content != '' %}
       <a href="#{{ section.section_id }}">{{ section.nav }}</a>
       {% endif %}
       {% endfor %}
@@ -37,19 +31,9 @@
     <main class="main-content">
       {% for section in homepage_sections %}
       {% assign visible_content = section.content | strip %}
-      {% assign visible_section = false %}
-      {% if visible_content != '' %}{% assign visible_section = true %}{% endif %}
-      {% if section.section_id == 'publications' and research_posts.size > 0 %}{% assign visible_section = true %}{% endif %}
-      {% if section.section_id == 'talks' and published_talks.size > 0 %}{% assign visible_section = true %}{% endif %}
-      {% if section.section_id and visible_section %}
+      {% if section.section_id and visible_content != '' %}
       <section id="{{ section.section_id }}" class="page-section {{ section.section_class }}">
-        {% if section.section_id == 'publications' %}
-        {% include publications.html posts=research_posts %}
-        {% elsif section.section_id == 'talks' %}
-        {% include talks.html talks=published_talks %}
-        {% else %}
         {{ section.content }}
-        {% endif %}
       </section>
       {% endif %}
       {% endfor %}

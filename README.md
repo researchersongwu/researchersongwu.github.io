@@ -2,75 +2,78 @@
 
 Live site: <https://researchersongwu.github.io/>
 
-All routine content changes are made in Markdown. Jekyll turns the Markdown into HTML and GitHub Pages publishes it automatically. You do not need to edit `_layouts/`, `_includes/`, `style.scss`, or any HTML file.
+Every piece of editable homepage content lives in a Markdown file. The HTML layout is only a rendering shell; routine updates do not require editing HTML, YAML data files, or CSS.
 
-## Edit the profile
+## Edit your profile
 
-Open [`_sections/01-about.md`](_sections/01-about.md) and edit only the Markdown below the second `---` line:
+Edit:
 
-```markdown
-![Song Wu](images/personal.png)
-
-# Song Wu
-
-Write the English biography here.
-
-**Email:** [researchersongwu@gmail.com](mailto:researchersongwu@gmail.com)
+```text
+_sections/01-about.md
 ```
 
-The email line is ordinary Markdown. Its visible text is the full email address and clicking it opens the visitor's mail application.
+This Markdown file contains your name, biography, university, advisor, research interests, email, GitHub, CV, Google Scholar, and LinkedIn links.
+
+The browser title and description live in the Front Matter of `index.md`, which is also a Markdown file.
 
 ## Edit homepage sections
 
-| Content | Markdown file |
-| --- | --- |
-| Profile | `_sections/01-about.md` |
-| News | `_sections/02-news.md` |
-| Research | `_sections/03-research.md` |
-| Awards | `_sections/06-awards.md` |
-| Services | `_sections/07-services.md` |
-| Experiences | `_sections/08-experiences.md` |
-
-Write ordinary Markdown below the Front Matter. Leave that area empty to hide the section and its navigation link.
-
-## Add a publication using only Markdown
-
-Copy [`_templates/publication.md`](_templates/publication.md) into `_posts/` and rename it with a date:
-
-```bash
-cp _templates/publication.md _posts/2027-01-01-my-paper.md
+```text
+_sections/01-about.md
+_sections/02-news.md
+_sections/03-research.md
+_sections/04-publications.md
+_sections/05-talks.md
+_sections/06-awards.md
+_sections/07-services.md
+_sections/08-experiences.md
 ```
 
-Then edit that new Markdown file. Use Markdown bold syntax such as `**Song Wu**` in the authors field. Blank optional fields stay hidden. Jekyll generates the Publications HTML automatically.
+All eight files are Markdown. Their Front Matter controls the navigation label and display order.
 
-## Add a talk using only Markdown
+Leave the body of a section Markdown file empty to hide that section and its navigation item. Empty publication and talk folders likewise produce no placeholder content.
 
-Copy [`_templates/talk.md`](_templates/talk.md) into `_talks/`:
+## Add a publication
 
-```bash
-cp _templates/talk.md _talks/2027-01-01-my-talk.md
+Create a dated Markdown file in `_posts/`:
+
+```text
+_posts/2027-01-01-my-paper.md
 ```
 
-Edit the new Markdown file. Jekyll generates the Talks section automatically. If `_posts/` or `_talks/` contains no filled entry, its section stays hidden.
+```yaml
+---
+layout: post
+title: "Paper Title"
+date: 2027-01-01
+categories: research
+authors: "Author A, <strong>Your Name</strong>, Author B"
+venue: "Conference Name, 2027"
+pdf: "/assets/paper.pdf"
+code: "https://github.com/USER/PROJECT"
+slides: "/assets/slides.pdf"
+award: "Oral Presentation"
+---
+```
 
-## Render locally
+Jekyll reads this Markdown automatically and adds it to Publications in reverse chronological order.
+
+## Add a talk
+
+Create a Markdown file in `_talks/` using the examples already present there. Jekyll automatically adds it to Talks.
+
+## Local development
 
 ```bash
 npm run build:docker
 npm run dev:docker
 ```
 
-Open <http://localhost:8080/>.
+Open `http://localhost:8080`.
 
-## Publish
+## GitHub Pages
 
-```bash
-git add .
-git commit -m "Update academic homepage"
-git push
-```
-
-The workflow in `.github/workflows/pages.yml` runs Jekyll and deploys the generated site to GitHub Pages.
+Push the Markdown files to `main`. The workflow in `.github/workflows/pages.yml` builds the Jekyll source into HTML and deploys it automatically.
 
 ## Attribution
 

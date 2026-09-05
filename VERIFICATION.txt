@@ -1,6 +1,6 @@
-Pure-Markdown Jekyll content verification
+Previous-version rollback verification
 Timestamp: 2026-09-05 Asia/Shanghai
-Changed branch/field: main / Markdown-only content workflow and _sections/01-about.md email field
+Changed branch/field: main / revert commit 7420fe6 and restore website source state from cc4034b
 
 FOUR ARTIFACTS
 MODIFIED_FILE: /Users/xiaoming/mypersonalwebsite/_sections/01-about.md
@@ -9,39 +9,32 @@ VERIFICATION: /Users/xiaoming/mypersonalwebsite/VERIFICATION.txt
 ROLLBACK: /Users/xiaoming/mypersonalwebsite/ROLLBACK.sh
 
 ORIGINAL
-Path: /Users/xiaoming/mypersonalwebsite/.rollback/pre-pure-markdown-01-about.md
-SHA256: a2acbd30a2d9c16be7ee63877ae6f7f8d8733baadfaa76609d74adf62ce29564
+Pre-rollback commit: 7420fe6c116036ddc6330ab2bc98e931a19f69b2
+Pre-rollback tree: 58cbdd1babdc5d4844281754b0cb09ab0d6de2da
+Archive: /Users/xiaoming/mypersonalwebsite/.rollback/pre-version-rollback-7420fe6.tar.gz
+Archive SHA256: 9e8af6804f44f5260c957b2f619c4a16951b5786b2c62937471890f79b6d7494
 
 MODIFIED
+Restored source commit: cc4034b
 Path: /Users/xiaoming/mypersonalwebsite/_sections/01-about.md
-SHA256: 8f67ba93f637d3821db6a3244a1b8ad9adf35d262286759cf14a4cb8863a4570
-State: the editable About body uses ordinary Markdown only; the full email address renders as a clickable mailto link; Jekyll handles HTML generation; blank Markdown sections remain hidden.
+SHA256: eb2da17bb67707bcc17c1b1f52835e0fde3826c0b0f410d939a0bc688f07de78
+State: website source returned to the version immediately before 7420fe6; About and News render, the profile photo renders, the email link displays the label Email, and empty sections remain hidden.
 
 BASELINE
-Command: node scripts/test-site.mjs .rollback/pre-pure-markdown-01-about.md --baseline
-Input: /Users/xiaoming/mypersonalwebsite/.rollback/pre-pure-markdown-01-about.md
-Literal output/result: PASS baseline: 2/2 checks; EXIT_STATUS=0
+Command: npm test && npm run build:docker
+Input: pre-rollback commit 7420fe6c116036ddc6330ab2bc98e931a19f69b2
+Literal output/result: PASS modified: 20/20 checks; Jekyll done in 0.059 seconds; BASELINE_COMMIT=7420fe6c116036ddc6330ab2bc98e931a19f69b2; BASELINE_TREE=58cbdd1babdc5d4844281754b0cb09ab0d6de2da; EXIT_STATUS test=0 build=0
 Exit status: 0
 
 MODIFIED
 Command: npm test && npm run build:docker
-Input: /Users/xiaoming/mypersonalwebsite Markdown/Jekyll source
-Literal output/result: PASS modified: 20/20 checks; Jekyll done in 0.05 seconds; RENDER_RESULT=TITLE=Song Wu; SECTIONS=about,news; EMAIL_TEXT=researchersongwu@gmail.com; EMAIL_HREF=mailto:researchersongwu@gmail.com; ABOUT_SOURCE_RAW_HTML=false; EXIT_STATUS test=0 build=0 render=0
-Exit status: 0
-
-MARKDOWN UPLOAD RENDER
-Command: create one temporary publication Markdown and one temporary talk Markdown; bundle exec jekyll build --destination /srv/_site-fixture; inspect generated HTML; remove fixtures; rebuild clean site
-Input: _posts/2026-01-01-render-check.md and _talks/2026-01-01-render-check.md
-Literal output/result: PUBLICATION_SECTION=true; PUBLICATION_TITLE=true; MARKDOWN_BOLD_AUTHOR=true; TALK_SECTION=true; TALK_TITLE=true; PASS markdown upload render: 5/5 checks; CLEAN_RENDER_RESTORED=1
+Input: website source restored from commit cc4034b
+Literal output/result: PASS modified: 16/16 checks; Jekyll done in 0.071 seconds; RENDER_RESULT=TITLE=Song Wu; SECTIONS=about,news; EMAIL_TEXT=Email; EMAIL_HREF=mailto:researchersongwu@gmail.com; PUBLICATIONS=0; EXIT_STATUS test=0 build=0 render=0
 Exit status: 0
 
 ROLLBACK
-Command: cp _sections/01-about.md .rollback/rollback-test-pure-markdown.md && ./ROLLBACK.sh .rollback/rollback-test-pure-markdown.md && cmp -s .rollback/pre-pure-markdown-01-about.md .rollback/rollback-test-pure-markdown.md
-Input: /Users/xiaoming/mypersonalwebsite/.rollback/rollback-test-pure-markdown.md
-Literal output/result: ROLLBACK restored .rollback/rollback-test-pure-markdown.md from .rollback/pre-pure-markdown-01-about.md; ROLLBACK_RESULT=restored SHA256=a2acbd30a2d9c16be7ee63877ae6f7f8d8733baadfaa76609d74adf62ce29564; EXIT_STATUS script=0 cmp=0
+Command: git worktree add --detach TARGET_COPY cc4034b && ./ROLLBACK.sh TARGET_COPY && verify HEAD/tree equal 7420fe6
+Input: another repository copy at restored source commit cc4034b
+Literal output/result: ROLLBACK restored TARGET_COPY to pre-rollback commit 7420fe6c116036ddc6330ab2bc98e931a19f69b2; ROLLBACK_RESULT=HEAD=7420fe6c116036ddc6330ab2bc98e931a19f69b2; TREE=58cbdd1babdc5d4844281754b0cb09ab0d6de2da; EXIT_STATUS worktree=0 script=0 head=0 tree=0; CLEANUP_EXIT_STATUS=0
 Exit status: 0
-Restored behavior/status: the rollback test copy returned to the prior About source containing embedded HTML; the real MODIFIED_FILE remains pure Markdown and renders the full clickable email address.
-
-RENDERED PREVIEWS
-Desktop: /Users/xiaoming/mypersonalwebsite/artifacts/pure-markdown-rendered.png
-Mobile: /Users/xiaoming/mypersonalwebsite/artifacts/pure-markdown-rendered-mobile.png
+Restored behavior/status: the rollback test copy returned to the pre-rollback pure-Markdown version at commit 7420fe6; the real MODIFIED_FILE remains in the requested previous version restored from cc4034b.

@@ -8,5 +8,3 @@ vendor/
 .bundle/
 
 .rollback/rollback-test-about.md
-
-.rollback/rollback-test-pure-markdown.md
