@@ -1,6 +1,6 @@
-Previous-version rollback verification
+About CV placeholder verification
 Timestamp: 2026-09-05 Asia/Shanghai
-Changed branch/field: main / revert commit 7420fe6 and restore website source state from cc4034b
+Changed branch/field: main / _sections/01-about.md social-links CV field and assets/cv.pdf placeholder
 
 FOUR ARTIFACTS
 MODIFIED_FILE: /Users/xiaoming/mypersonalwebsite/_sections/01-about.md
@@ -9,32 +9,35 @@ VERIFICATION: /Users/xiaoming/mypersonalwebsite/VERIFICATION.txt
 ROLLBACK: /Users/xiaoming/mypersonalwebsite/ROLLBACK.sh
 
 ORIGINAL
-Pre-rollback commit: 7420fe6c116036ddc6330ab2bc98e931a19f69b2
-Pre-rollback tree: 58cbdd1babdc5d4844281754b0cb09ab0d6de2da
-Archive: /Users/xiaoming/mypersonalwebsite/.rollback/pre-version-rollback-7420fe6.tar.gz
-Archive SHA256: 9e8af6804f44f5260c957b2f619c4a16951b5786b2c62937471890f79b6d7494
+Path: /Users/xiaoming/mypersonalwebsite/.rollback/pre-cv-placeholder-01-about.md
+SHA256: eb2da17bb67707bcc17c1b1f52835e0fde3826c0b0f410d939a0bc688f07de78
+Pre-change commit: 5a2e58f
 
 MODIFIED
-Restored source commit: cc4034b
 Path: /Users/xiaoming/mypersonalwebsite/_sections/01-about.md
-SHA256: eb2da17bb67707bcc17c1b1f52835e0fde3826c0b0f410d939a0bc688f07de78
-State: website source returned to the version immediately before 7420fe6; About and News render, the profile photo renders, the email link displays the label Email, and empty sections remain hidden.
+SHA256: f97cace7dcbae45c436408020123b94763000b97dc61a0796fbf24963fbbd232
+CV placeholder: /Users/xiaoming/mypersonalwebsite/assets/cv.pdf
+CV placeholder SHA256: 579be85918914b2a3de7807c6eff79b7173bcf8b1b2769ff6f9bd231fbab0a2b
+State: About renders Email / CV; CV opens assets/cv.pdf; replacing that file with the real PDF updates the linked document without changing About.
 
 BASELINE
-Command: npm test && npm run build:docker
-Input: pre-rollback commit 7420fe6c116036ddc6330ab2bc98e931a19f69b2
-Literal output/result: PASS modified: 20/20 checks; Jekyll done in 0.059 seconds; BASELINE_COMMIT=7420fe6c116036ddc6330ab2bc98e931a19f69b2; BASELINE_TREE=58cbdd1babdc5d4844281754b0cb09ab0d6de2da; EXIT_STATUS test=0 build=0
+Command: node -e assert pre-CV About has no assets/cv.pdf link
+Input: /Users/xiaoming/mypersonalwebsite/.rollback/pre-cv-placeholder-01-about.md
+Literal output/result: PASS baseline: CV link absent in pre-change About source; EXIT_STATUS=0
 Exit status: 0
 
 MODIFIED
-Command: npm test && npm run build:docker
-Input: website source restored from commit cc4034b
-Literal output/result: PASS modified: 16/16 checks; Jekyll done in 0.071 seconds; RENDER_RESULT=TITLE=Song Wu; SECTIONS=about,news; EMAIL_TEXT=Email; EMAIL_HREF=mailto:researchersongwu@gmail.com; PUBLICATIONS=0; EXIT_STATUS test=0 build=0 render=0
+Command: npm test && npm run build:docker; inspect _site/index.html and request http://127.0.0.1:8080/assets/cv.pdf
+Input: repository source with _sections/01-about.md and assets/cv.pdf
+Literal output/result: PASS modified: 18/18 checks; Jekyll done in 0.065 seconds; CV_TEXT=CV; CV_HREF=assets/cv.pdf; EMAIL_TEXT=Email; CV_PDF_BUILT=true; CV_PDF_HEADER=%PDF-1.4; LOCAL_CV_HTTP=200; PDF document, version 1.4, 1 pages
 Exit status: 0
 
 ROLLBACK
-Command: git worktree add --detach TARGET_COPY cc4034b && ./ROLLBACK.sh TARGET_COPY && verify HEAD/tree equal 7420fe6
-Input: another repository copy at restored source commit cc4034b
-Literal output/result: ROLLBACK restored TARGET_COPY to pre-rollback commit 7420fe6c116036ddc6330ab2bc98e931a19f69b2; ROLLBACK_RESULT=HEAD=7420fe6c116036ddc6330ab2bc98e931a19f69b2; TREE=58cbdd1babdc5d4844281754b0cb09ab0d6de2da; EXIT_STATUS worktree=0 script=0 head=0 tree=0; CLEANUP_EXIT_STATUS=0
+Command: create TARGET_COPY at 5a2e58f; copy modified About/README/test/CV; ./ROLLBACK.sh TARGET_COPY; verify clean previous state
+Input: another repository copy containing the CV-placeholder changes
+Literal output/result: ROLLBACK restored TARGET_COPY to 5a2e58f and removed assets/cv.pdf; ROLLBACK_RESULT=about SHA256=eb2da17bb67707bcc17c1b1f52835e0fde3826c0b0f410d939a0bc688f07de78; cv.pdf absent=true; git_clean=true; EXIT_STATUS worktree=0 script=0 compare=0 pdf_absent=0 clean=0; CLEANUP_EXIT_STATUS=0
 Exit status: 0
-Restored behavior/status: the rollback test copy returned to the pre-rollback pure-Markdown version at commit 7420fe6; the real MODIFIED_FILE remains in the requested previous version restored from cc4034b.
+Restored behavior/status: the rollback test copy returned to About with Email only and no CV document; the real MODIFIED_FILE remains changed with Email / CV and the valid placeholder PDF remains present.
+
+RENDERED PREVIEW
+/Users/xiaoming/mypersonalwebsite/artifacts/cv-placeholder-rendered.png

@@ -37,6 +37,8 @@ const assertions = [
   ['talk Markdown folder', existsSync('_talks/.gitkeep')],
   ['empty-section suppression', layout.includes("visible_content != ''")],
   ['uploaded profile image', sectionSources.includes('images/personal.png') && existsSync('images/personal.png')],
+  ['CV link in About', sectionSources.includes('href="assets/cv.pdf"')],
+  ['valid CV placeholder PDF', existsSync('assets/cv.pdf') && readFileSync('assets/cv.pdf').subarray(0, 5).toString() === '%PDF-'],
   ['Sass entry', existsSync('style.scss')],
   ['Jekyll workflow', workflow.includes('actions/jekyll-build-pages@v1')],
   ['GitHub Pages deployment', workflow.includes('actions/deploy-pages@v4')],
