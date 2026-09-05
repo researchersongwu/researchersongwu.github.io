@@ -17,7 +17,7 @@ I study new vulnerability classes and underexplored real-world security/privacy 
 
 
 
-Before entering academic research, I led the binary security group of Xidian University’s CTF team and worked at a leading technology company in China. These experiences gave me extensive hands-on experience in reverse engineering and systems security, and prepared me to study security and privacy problems in emerging systems.
+Besides, I ever led the binary security group of Xidian University’s CTF team and worked at a leading technology company in China. These experiences gave me extensive hands-on experience in reverse engineering and systems security, and prepared me to study security and privacy problems in emerging systems.
 
 <p class="social-links">
   <a href="mailto:researchersongwu@gmail.com"><i class="fas fa-envelope"></i> Email</a><span>/</span>
