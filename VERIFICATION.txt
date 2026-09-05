@@ -1,43 +1,40 @@
-Posters section verification
+Awards section verification
 Timestamp: 2026-09-05 Asia/Shanghai
-Changed branch/field: main / new Posters section and poster-category Markdown post
+Changed branch/field: main / _sections/06-awards.md Awards table
 
 FOUR ARTIFACTS
-MODIFIED_FILE: /Users/xiaoming/mypersonalwebsite/_posts/2026-04-01-understanding-risks-splash-ads-poster.md
+MODIFIED_FILE: /Users/xiaoming/mypersonalwebsite/_sections/06-awards.md
 DIFF_FILE: /Users/xiaoming/mypersonalwebsite/DIFF_FILE.patch
 VERIFICATION: /Users/xiaoming/mypersonalwebsite/VERIFICATION.txt
 ROLLBACK: /Users/xiaoming/mypersonalwebsite/ROLLBACK.sh
 
 ORIGINAL
-Post fixture: /Users/xiaoming/mypersonalwebsite/.rollback/pre-poster-post.empty
-Section fixture: /Users/xiaoming/mypersonalwebsite/.rollback/pre-poster-section.empty
-SHA256 for each empty fixture: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+Path: /Users/xiaoming/mypersonalwebsite/.rollback/pre-awards-06-awards.md
+SHA256: 65c426b8bf54ff4cfa661fbfa4a55bf174dc4f69473a17ae9c8a9839b45df944
 
 MODIFIED
-Poster Markdown: /Users/xiaoming/mypersonalwebsite/_posts/2026-04-01-understanding-risks-splash-ads-poster.md
-Poster Markdown SHA256: f16ef45fc9422ccc76f98ae86773c6bf115449add99d0ccca03218b2bd666163
-Posters section: /Users/xiaoming/mypersonalwebsite/_sections/05-posters.md
-Posters section SHA256: 86a9db1011811c335f534d5dbc0d4ec0f9280a9afd6de3a5b9117111903efc9d
-State: Posters appears after Publications, uses the same visual publication format, and renders the requested poster title, ordered authors, IEEE S&P 2026 venue, and abstract PDF link.
+Path: /Users/xiaoming/mypersonalwebsite/_sections/06-awards.md
+SHA256: ee2ef57acdb3c4cf88ee9bb5569a68a77ed7f3b98292577e9f4d0d15964896a4
+State: Awards renders ten entries in reverse chronological order as a two-column Markdown table with award title and year.
 
 BASELINE
-Command: assert original poster post and Posters section are empty fixtures
-Input: .rollback/pre-poster-post.empty and .rollback/pre-poster-section.empty
-Literal output/result: PASS baseline: no poster post and no Posters section; EXIT_STATUS=0
+Command: assert pre-change Awards body has no heading
+Input: /Users/xiaoming/mypersonalwebsite/.rollback/pre-awards-06-awards.md
+Literal output/result: PASS baseline: Awards body is empty; EXIT_STATUS=0
 Exit status: 0
 
 MODIFIED
-Command: npm test && npm run build:docker; inspect generated Posters section; request abstract URL
-Input: _posts/2026-04-01-understanding-risks-splash-ads-poster.md and _sections/05-posters.md
-Literal output/result: PASS modified: 25/25 checks; Jekyll done in 0.063 seconds; RENDER_RESULT=TITLE=Understanding Risks of Semi-Drive-By Splash Ads; AUTHORS=Song Wu, Yifan Zhang, Xueqiang Wang, Yinfeng Cao§, Bo Wang, Qin Wang; FIRST_AUTHOR_BOLD=Song Wu; ABSTRACT_TEXT=abstract; ABSTRACT_HREF=https://sp2026.ieee-security.org/downloads/posters/sp2026posters-final91.pdf; VENUE=Poster, IEEE Symposium on Security and Privacy (S&P), 2026.; SECTION_IDS=about,news,publications,posters; ABSTRACT_HTTP=200; CONTENT_TYPE=application/pdf; SIZE=1260705; PDF document, version 1.6; EXIT_STATUS test=0 build=0 render=0 abstract_url=0
+Command: npm test && npm run build:docker; inspect rendered Awards table
+Input: repository source with _sections/06-awards.md
+Literal output/result: PASS modified: 27/27 checks; Jekyll done in 0.066 seconds; AWARDS_SECTION=true; AWARD_ROWS=10; FIRST_AWARD=Outstanding Individual, Huawei HarmonyOS Security Training Camp | 2021; LAST_AWARD=Third Prize, Wangding Cup (National Online Competition) | 2018; SECTION_IDS=about,news,publications,posters,awards; NAV=About,News,Publications,Posters,Awards; EXIT_STATUS test=0 build=0 render=0
 Exit status: 0
 
 ROLLBACK
-Command: ./ROLLBACK.sh TARGET_COPY; compare test; verify poster post/section/preview absent
-Input: another copy containing the Posters section, poster Markdown, test, and preview
-Literal output/result: ROLLBACK removed the Posters section and poster Markdown from TARGET_COPY; ROLLBACK_RESULT=test_restored=true; post_absent=true; section_absent=true; preview_absent=true; EXIT_STATUS script=0 test=0 post_absent=0 section_absent=0 preview_absent=0; CLEANUP_EXIT_STATUS=0
+Command: ./ROLLBACK.sh TARGET_COPY; compare awards/test; verify preview absent
+Input: another copy containing the Awards Markdown, test, and preview
+Literal output/result: ROLLBACK restored the empty Awards section in TARGET_COPY; ROLLBACK_RESULT=awards_restored=true; test_restored=true; preview_absent=true; EXIT_STATUS script=0 awards=0 test=0 preview_absent=0; CLEANUP_EXIT_STATUS=0
 Exit status: 0
-Restored behavior/status: the rollback test copy returned to the state without Posters; the real MODIFIED_FILE remains changed and the Posters section remains rendered.
+Restored behavior/status: the rollback test copy returned to the empty Awards section; the real MODIFIED_FILE remains changed and all ten awards remain rendered.
 
 RENDERED PREVIEW
-/Users/xiaoming/mypersonalwebsite/artifacts/posters-section-rendered.png
+/Users/xiaoming/mypersonalwebsite/artifacts/awards-section-rendered.png

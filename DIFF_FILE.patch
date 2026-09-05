@@ -1,38 +1,24 @@
-diff --git a/.rollback/pre-poster-post.empty b/_posts/2026-04-01-understanding-risks-splash-ads-poster.md
-index e69de29..04897ff 100644
---- a/.rollback/pre-poster-post.empty
-+++ b/_posts/2026-04-01-understanding-risks-splash-ads-poster.md
-@@ -0,0 +1,9 @@
-+---
-+layout: post
-+title: "Understanding Risks of Semi-Drive-By Splash Ads"
-+date: 2026-04-01
-+categories: poster
-+authors: "<strong>Song Wu</strong>, Yifan Zhang, Xueqiang Wang, Yinfeng Cao§, Bo Wang, Qin Wang"
-+venue: "Poster, IEEE Symposium on Security and Privacy (S&P), 2026."
-+abstract: "https://sp2026.ieee-security.org/downloads/posters/sp2026posters-final91.pdf"
-+---
-diff --git a/.rollback/pre-poster-section.empty b/_sections/05-posters.md
-index e69de29..e2ca2ac 100644
---- a/.rollback/pre-poster-section.empty
-+++ b/_sections/05-posters.md
-@@ -0,0 +1,19 @@
-+---
-+section_id: posters
-+nav: Posters
-+order: 5
-+---
+diff --git a/.rollback/pre-awards-06-awards.md b/_sections/06-awards.md
+index 393c553..1668f1a 100644
+--- a/.rollback/pre-awards-06-awards.md
++++ b/_sections/06-awards.md
+@@ -3,3 +3,19 @@ section_id: awards
+ nav: Awards
+ order: 6
+ ---
 +
-+{% assign poster_posts = site.posts | where_exp: 'post', "post.categories contains 'poster'" %}
-+{% if poster_posts.size > 0 %}
-+## Posters
++## Awards
 +
-+{% for post in poster_posts %}
-+<article class="publication poster" id="poster-{{ forloop.index }}">
-+  <h3>{{ post.title }}</h3>
-+  <p>{{ post.authors }}</p>
-+  {% if post.abstract %}<p class="paper-links"><a href="{{ post.abstract }}">abstract</a></p>{% endif %}
-+  {% if post.venue %}<p><em>{{ post.venue }}</em></p>{% endif %}
-+</article>
-+{% endfor %}
-+{% endif %}
++| Award | Year |
++| --- | --- |
++| Outstanding Individual, Huawei HarmonyOS Security Training Camp | 2021 |
++| First Prize, Vivo Qianjing Cup Cybersecurity Competition | 2021 |
++| First Prize, National College Student Information Security Contest (CTF) | 2019 |
++| First Prize, National College Student Information Security Contest (Project) | 2019 |
++| Third Place, TCTF University Division | 2019 |
++| Third Prize, West Lake Cybersecurity Forum (Team Competition) | 2018 |
++| Second Place, Anheng Monthly Cybersecurity Competition (Individual) | 2018 |
++| Best Defense Team, China Cybersecurity Technology Competition (AWD) | 2018 |
++| Third Prize, China Cybersecurity Technology Competition (AI) | 2018 |
++| Third Prize, Wangding Cup (National Online Competition) | 2018 |
++{: .compact-table }
