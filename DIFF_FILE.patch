@@ -1,27 +1,28 @@
-diff --git a/.rollback/pre-render-01-about.md b/_sections/01-about.md
-index fde90b8..cbd72ec 100644
---- a/.rollback/pre-render-01-about.md
+diff --git a/.rollback/pre-pure-markdown-01-about.md b/_sections/01-about.md
+index 640a6a9..9642fa0 100644
+--- a/.rollback/pre-pure-markdown-01-about.md
 +++ b/_sections/01-about.md
-@@ -5,10 +5,7 @@ order: 1
+@@ -5,11 +5,11 @@ order: 1
  section_class: about-section
  ---
  
--<div class="photo-placeholder" role="img" aria-label="Profile photo placeholder">
--  <span>YOUR<br>PHOTO</span>
--  <small>images/personal.png</small>
--</div>
-+![Song Wu](images/personal.png){:.profile-photo}
+-![Song Wu](images/personal.png){:.profile-photo}
++![Song Wu](images/personal.png)
  
  # Song Wu
  
-@@ -23,9 +20,7 @@ I study new vulnerability classes and underexplored real-world security/privacy
+-I am a independent researcher currently looking for a Ph.D. position. I got my master degree from [Wuhan University](https://en.wikipedia.org/wiki/Wuhan_University). My research interests broadly span web security, systems security, LLM security, and security/privacy measurement.
++I am an independent researcher currently looking for a Ph.D. position. I received my master's degree from [Wuhan University](https://en.wikipedia.org/wiki/Wuhan_University). My research interests broadly span web security, systems security, LLM security, and security/privacy measurement.
+ 
+ 
+ 
+@@ -19,8 +19,4 @@ I study new vulnerability classes and underexplored real-world security/privacy
+ 
  Before entering academic research, I led the binary security group of Xidian University’s CTF team and worked at a leading technology company in China. These experiences gave me extensive hands-on experience in reverse engineering and systems security, and prepared me to study security and privacy problems in emerging systems.
  
- <p class="social-links">
--  <a href="mailto:researchersongwu@gmail.com"><i class="fas fa-envelope"></i> Email</a><span>/</span>
--  <a href="assets/cv.pdf"><i class="fas fa-file-pdf"></i> CV</a><span>/</span>
+-<p class="social-links">
+-  <a href="mailto:researchersongwu@gmail.com"><i class="fas fa-envelope"></i> Email</a>
+-</p>
 -
-+  <a href="mailto:researchersongwu@gmail.com"><i class="fas fa-envelope"></i> Email</a>
- </p>
- 
- <div class="clear"></div>
+-<div class="clear"></div>
++**Email:** [researchersongwu@gmail.com](mailto:researchersongwu@gmail.com)

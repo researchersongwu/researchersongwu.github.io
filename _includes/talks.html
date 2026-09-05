@@ -1,0 +1,16 @@
+<h2>Talks</h2>
+{% for talk in include.talks %}
+<div class="list-entry">
+  <div>
+    <strong>{{ talk.title }}</strong>
+    {% if talk.role or talk.venue %}<br>{{ talk.role }}{% if talk.role and talk.venue %}, {% endif %}<em>{{ talk.venue }}</em>{% endif %}
+    {% if talk.link or talk.slides or talk.video %}
+    <br>
+    {% if talk.link %}<a href="{{ talk.link }}">link</a>{% endif %}
+    {% if talk.slides %}<a href="{{ talk.slides | relative_url }}">slides</a>{% endif %}
+    {% if talk.video %}<a href="{{ talk.video }}">video</a>{% endif %}
+    {% endif %}
+  </div>
+  {% if talk.display_date %}<time>{{ talk.display_date }}</time>{% endif %}
+</div>
+{% endfor %}

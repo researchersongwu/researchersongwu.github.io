@@ -1,0 +1,18 @@
+<h2>Publications</h2>
+{% for post in include.posts %}
+<article class="publication" id="paper-{{ forloop.index }}">
+  <h3>{{ post.title }}</h3>
+  {% if post.authors %}<div class="publication-authors">{{ post.authors | markdownify }}</div>{% endif %}
+  {% if post.pdf or post.poster or post.code or post.slides %}
+  <p class="paper-links">
+    {% if post.pdf %}<a href="{{ post.pdf | relative_url }}">paper</a>{% endif %}
+    {% if post.poster %}<a href="{{ post.poster | relative_url }}">poster</a>{% endif %}
+    {% if post.code %}<a href="{{ post.code }}">code</a>{% endif %}
+    {% if post.slides %}<a href="{{ post.slides | relative_url }}">slides</a>{% endif %}
+  </p>
+  {% endif %}
+  {% if post.venue %}<p><em>{{ post.venue }}</em></p>{% endif %}
+  {% if post.features %}<p class="feature-line"><span class="square"></span>{{ post.features }}</p>{% endif %}
+  {% if post.award %}<p class="feature-line"><span class="square red"></span><strong>{{ post.award }}</strong></p>{% endif %}
+</article>
+{% endfor %}
