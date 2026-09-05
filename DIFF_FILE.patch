@@ -1,13 +1,13 @@
-diff --git a/.rollback/pre-selected-awards-06-awards.md b/_sections/06-awards.md
-index 1668f1a..c7cfcc6 100644
---- a/.rollback/pre-selected-awards-06-awards.md
-+++ b/_sections/06-awards.md
-@@ -4,7 +4,7 @@ nav: Awards
- order: 6
- ---
+diff --git a/.rollback/pre-reupload-about.md b/_sections/01-about.md
+index f4c9ef4..d40009f 100644
+--- a/.rollback/pre-reupload-about.md
++++ b/_sections/01-about.md
+@@ -9,7 +9,7 @@ section_class: about-section
  
--## Awards
-+## Selected Honors & Awards
+ # Song Wu
  
- | Award | Year |
- | --- | --- |
+-I am a indepent researcher currently looking for a Ph.D. position. I got my master degree from [Wuhan University](https://en.wikipedia.org/wiki/Wuhan_University). My research interests broadly span web security, systems security, LLM security, and security and privacy measurement.
++I am an independent researcher currently looking for a Ph.D. position. I got my master degree from [Wuhan University](https://en.wikipedia.org/wiki/Wuhan_University). My research interests broadly span web security, systems security, LLM security, and security and privacy measurement.
+ 
+ 
+ 

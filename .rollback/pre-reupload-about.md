@@ -9,7 +9,7 @@ section_class: about-section
 
 # Song Wu
 
-I am an independent researcher currently looking for a Ph.D. position. I got my master degree from [Wuhan University](https://en.wikipedia.org/wiki/Wuhan_University). My research interests broadly span web security, systems security, LLM security, and security and privacy measurement.
+I am a indepent researcher currently looking for a Ph.D. position. I got my master degree from [Wuhan University](https://en.wikipedia.org/wiki/Wuhan_University). My research interests broadly span web security, systems security, LLM security, and security and privacy measurement.
 
 
 

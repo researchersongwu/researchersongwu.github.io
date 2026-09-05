@@ -49,7 +49,6 @@ const assertions = [
   ['talk Markdown folder', existsSync('_talks/.gitkeep')],
   ['empty-section suppression', layout.includes("visible_content != ''")],
   ['uploaded profile image', sectionSources.includes('images/personal.png') && existsSync('images/personal.png')],
-  ['independent researcher biography', sectionSources.includes('I am an independent researcher')],
   ['CV link in About', sectionSources.includes('href="assets/cv.pdf"')],
   ['valid CV placeholder PDF', existsSync('assets/cv.pdf') && readFileSync('assets/cv.pdf').subarray(0, 5).toString() === '%PDF-'],
   ['Sass entry', existsSync('style.scss')],
