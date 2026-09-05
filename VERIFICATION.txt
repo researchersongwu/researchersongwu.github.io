@@ -1,40 +1,41 @@
-Selected Honors & Awards re-submit verification
+About re-upload verification
 Timestamp: 2026-09-05 Asia/Shanghai
-Changed branch/field: main / _sections/06-awards.md heading
+Changed branch/field: main / _sections/01-about.md researcher description
 
 FOUR ARTIFACTS
-MODIFIED_FILE: /Users/xiaoming/mypersonalwebsite/_sections/06-awards.md
+MODIFIED_FILE: /Users/xiaoming/mypersonalwebsite/_sections/01-about.md
 DIFF_FILE: /Users/xiaoming/mypersonalwebsite/DIFF_FILE.patch
 VERIFICATION: /Users/xiaoming/mypersonalwebsite/VERIFICATION.txt
 ROLLBACK: /Users/xiaoming/mypersonalwebsite/ROLLBACK.sh
 
 ORIGINAL
-Path: /Users/xiaoming/mypersonalwebsite/.rollback/pre-selected-awards-06-awards.md
-SHA256: ee2ef57acdb3c4cf88ee9bb5569a68a77ed7f3b98292577e9f4d0d15964896a4
+Path: /Users/xiaoming/mypersonalwebsite/.rollback/pre-reupload-about.md
+SHA256: 3ffecd979ac08a5cfae7973f9e2f9bf290a54d4318b1e586713d6a57e6b608a9
+State: captured the user's new independent-researcher wording before correcting the English article and spelling.
 
 MODIFIED
-Path: /Users/xiaoming/mypersonalwebsite/_sections/06-awards.md
-SHA256: 182aaef1c7f44468ffc00a26de33f773ef598a6fe2e930e6b661d5ed85ec594f
-State: the section heading renders as Selected Honors & Awards, the navigation label remains Awards, and all ten award rows remain present.
+Path: /Users/xiaoming/mypersonalwebsite/_sections/01-about.md
+SHA256: 335787df085d5e0935d36ff09dd5002b93d5596da130032a948bb4ff2aa86d16
+State: About renders “I am an independent researcher currently looking for a Ph.D. position.”; all existing sections and ten Awards rows remain present.
 
 BASELINE
-Command: assert previous Awards heading
-Input: /Users/xiaoming/mypersonalwebsite/.rollback/pre-selected-awards-06-awards.md
-Literal output/result: PASS baseline: previous heading is Awards; EXIT_STATUS=0
+Command: assert captured user-edited About source
+Input: /Users/xiaoming/mypersonalwebsite/.rollback/pre-reupload-about.md
+Literal output/result: PASS baseline: user-edited biography captured; EXIT_STATUS=0
 Exit status: 0
 
 MODIFIED
-Command: npm test && npm run build:docker; inspect rendered heading
-Input: repository source with the user's updated _sections/06-awards.md
-Literal output/result: PASS modified: 27/27 checks; Jekyll done in 0.062 seconds; HEADING=Selected Honors & Awards; AWARD_ROWS=10; NAV_LABEL=Awards; EXIT_STATUS test=0 build=0 render=0
+Command: npm test && npm run build:docker; inspect rendered About biography
+Input: repository source with corrected _sections/01-about.md
+Literal output/result: PASS modified: 28/28 checks; Jekyll done in 0.07 seconds; BIOGRAPHY_PRESENT=true; TYPO_ABSENT=true; SECTION_IDS=about,news,publications,posters,awards; AWARD_ROWS=10; EXIT_STATUS test=0 build=0 render=0
 Exit status: 0
 
 ROLLBACK
-Command: ./ROLLBACK.sh TARGET_COPY; compare awards/test; verify preview absent
-Input: another copy containing the updated Awards heading, test, and preview
-Literal output/result: ROLLBACK restored the Awards heading in TARGET_COPY; ROLLBACK_RESULT=awards_restored=true; test_restored=true; preview_absent=true; EXIT_STATUS script=0 awards=0 test=0 preview_absent=0; CLEANUP_EXIT_STATUS=0
+Command: ./ROLLBACK.sh TARGET_COPY; compare about/test; verify preview absent
+Input: another copy containing the corrected About source, test, and preview
+Literal output/result: ROLLBACK restored the pre-reupload About source in TARGET_COPY; ROLLBACK_RESULT=about_restored=true; test_restored=true; preview_absent=true; EXIT_STATUS script=0 about=0 test=0 preview_absent=0; CLEANUP_EXIT_STATUS=0
 Exit status: 0
-Restored behavior/status: the rollback test copy returned to the previous Awards heading; the real MODIFIED_FILE remains changed with Selected Honors & Awards.
+Restored behavior/status: the rollback test copy returned to the captured user edit; the real MODIFIED_FILE remains corrected and rendered.
 
 RENDERED PREVIEW
-/Users/xiaoming/mypersonalwebsite/artifacts/selected-honors-awards-rendered.png
+/Users/xiaoming/mypersonalwebsite/artifacts/reuploaded-about-rendered.png
