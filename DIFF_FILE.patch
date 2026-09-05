@@ -1,70 +1,26 @@
 diff --git a/_sections/09-starbugs.md b/_sections/09-starbugs.md
-new file mode 100644
-index 0000000..2a2a67c
---- /dev/null
+index 2a2a67c..a8ea189 100644
+--- a/_sections/09-starbugs.md
 +++ b/_sections/09-starbugs.md
-@@ -0,0 +1,5 @@
-+---
-+section_id: starbugs
-+nav: StarBugs
-+order: 9
-+---
-diff --git a/README.md b/README.md
-index 940a16f..bc8a861 100644
---- a/README.md
-+++ b/README.md
-@@ -39,0 +40 @@ _sections/08-experiences.md
-+_sections/09-starbugs.md
-@@ -42 +43 @@ _sections/08-experiences.md
--All eight files are Markdown. Their Front Matter controls the navigation label and display order.
-+All section files are Markdown. Their Front Matter controls the navigation label and display order.
-@@ -74,0 +76,23 @@ Create a Markdown file in `_talks/` using the examples already present there. Je
-+## Add StarBugs
+@@ -5,0 +6,13 @@ order: 9
 +
-+Edit this Markdown file:
-+
-+```text
-+_sections/09-starbugs.md
-+```
-+
-+Keep its existing Front Matter and add content below the closing `---`. The following Markdown matches the reference site's introductory paragraph and three-column vulnerability list:
-+
-+```md
 +## StarBugs
 +
-+I have discovered vulnerabilities in popular open-source projects and widely used products. A selective list is shown below.
++I have discovered vulnerabilities in popular open-source software (repositories with more than 1K stars on GitHub), as well as in products maintained by Xiaomi and Photonicat. A selective list is shown below.
 +
 +| Advisory | Project / Product | Impact |
 +| --- | --- | --- |
-+| [CVE-YYYY-NNNN](ADVISORY_URL) | [PROJECT_NAME](PROJECT_URL) | VULNERABILITY_TYPE |
++| [CVE-2026-55629](https://github.com/avwo/whistle/security/advisories/GHSA-3vfr-4gwf-qxfp) | [whistle](https://github.com/avwo/whistle) | Path Traversal / Arbitrary File Read |
++| [CVE-2026-59971](https://github.com/designcomputer/mysql_mcp_server/security/advisories/GHSA-rqfv-2mw9-78g2) | [mysql_mcp_server](https://github.com/designcomputer/mysql_mcp_server) | Unauthenticated SQL Execution |
++| [CVE-2020-14130](https://trust.mi.com/zh-CN/misrc/bulletins/advisory?cveId=27) | [Xiaomi](https://trust.mi.com/) | |
++| CNVD-2026-29936 | [Photonicat](https://photonicat.com/) | |
++| CNVD-2026-28302 | [Photonicat](https://photonicat.com/) | |
 +{: .compact-table }
-+```
-+
-+Duplicate the final table row for each vulnerability. Until content is added below the Front Matter, StarBugs stays hidden from the page and navigation.
-+
-diff --git a/_sections/01-about.md b/_sections/01-about.md
-index d40009f..894fbdb 100644
---- a/_sections/01-about.md
-+++ b/_sections/01-about.md
-@@ -12 +12 @@ section_class: about-section
--I am an independent researcher currently looking for a Ph.D. position. I got my master degree from [Wuhan University](https://en.wikipedia.org/wiki/Wuhan_University). My research interests broadly span web security, systems security, LLM security, and security and privacy measurement.
-+I am currently a remote research intern at Johns Hopkins University, advised by Prof. Yinzhi Cao. I am looking for a Ph.D. position. I received my master's degree from [Wuhan University](https://en.wikipedia.org/wiki/Wuhan_University). My research interests broadly span web security, systems security, LLM security, and security/privacy measurement.
 diff --git a/scripts/test-site.mjs b/scripts/test-site.mjs
-index 6dc4c7b..2f9c938 100644
+index 2f9c938..1781e70 100644
 --- a/scripts/test-site.mjs
 +++ b/scripts/test-site.mjs
-@@ -27,0 +28,3 @@ const experiencesSection = readFileSync('_sections/08-experiences.md', 'utf8');
-+const starbugsSection = readFileSync('_sections/09-starbugs.md', 'utf8');
-+const starbugsBody = starbugsSection.replace(/^---\s*[\s\S]*?---\s*/u, '').trim();
-+const readme = readFileSync('README.md', 'utf8');
-@@ -36 +39 @@ const assertions = [
--  ['nine Markdown sections', sectionFiles.length === 9],
-+  ['ten Markdown sections', sectionFiles.length === 10],
-@@ -48,0 +52,3 @@ const assertions = [
-+  ['StarBugs Markdown section', starbugsSection.includes('section_id: starbugs') && starbugsSection.includes('nav: StarBugs')],
-+  ['blank StarBugs stays hidden until filled', starbugsBody === ''],
-+  ['StarBugs Markdown authoring guide', readme.includes('## Add StarBugs') && readme.includes('| Advisory | Project / Product | Impact |')],
-@@ -55 +61,2 @@ const assertions = [
--  ['independent researcher biography', sectionSources.includes('I am an independent researcher')],
-+  ['JHU remote research internship biography', sectionSources.includes('I am currently a remote research intern at Johns Hopkins University, advised by Prof. Yinzhi Cao.')],
-+  ['master degree grammar', sectionSources.includes("I received my master's degree")],
+@@ -53 +53,2 @@ const assertions = [
+-  ['blank StarBugs stays hidden until filled', starbugsBody === ''],
++  ['StarBugs Markdown content', starbugsBody.includes('## StarBugs') && starbugsBody.includes('| Advisory | Project / Product | Impact |') && !starbugsBody.includes('CVE-YYYY-NNNN')],
++  ['five StarBugs entries', (starbugsBody.match(/^\|\s*(?:\[)?(?:CVE|CNVD)-\d{4}-\d+/gmu) || []).length === 5],
