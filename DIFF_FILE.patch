@@ -1,13 +1,15 @@
 diff --git a/_sections/09-starbugs.md b/_sections/09-starbugs.md
-index 3e8603b..a9eafe4 100644
+index a9eafe4..d398f0b 100644
 --- a/_sections/09-starbugs.md
 +++ b/_sections/09-starbugs.md
-@@ -9 +9 @@ order: 9
--I have discovered vulnerabilities in popular open-source software (30+ CVE repositories with more than 1K stars on GitHub), as well as in products maintained by Xiaomi and Photonicat. A selective list is shown below.
-+I have discovered vulnerabilities in popular open-source software (over 30 CVEs in repositories with more than 1K stars on GitHub), as well as in products maintained by Xiaomi, Photonicat, Microsoft, and others. A selective list is shown below.
+@@ -16,0 +17 @@ I have discovered vulnerabilities in popular open-source software (over 30 CVEs
++| [CVE-2021-32754](https://github.com/secure-software-engineering/FlowDroid/security/advisories/GHSA-39r7-275f-rvgw) | [FlowDroid](https://github.com/secure-software-engineering/FlowDroid) | XXE |
 diff --git a/scripts/test-site.mjs b/scripts/test-site.mjs
-index 02114f8..06e64f5 100644
+index 06e64f5..1339754 100644
 --- a/scripts/test-site.mjs
 +++ b/scripts/test-site.mjs
-@@ -57,0 +58 @@ const assertions = [
-+  ['StarBugs summary wording', starbugsBody.includes('over 30 CVEs in repositories with more than 1K stars on GitHub') && starbugsBody.includes('Xiaomi, Photonicat, Microsoft, and others')],
+@@ -55 +55 @@ const assertions = [
+-  ['five StarBugs entries', starbugsRows.length === 5],
++  ['six StarBugs entries', starbugsRows.length === 6],
+@@ -58,0 +59 @@ const assertions = [
++  ['FlowDroid StarBug entry', starbugsBody.includes('[CVE-2021-32754](https://github.com/secure-software-engineering/FlowDroid/security/advisories/GHSA-39r7-275f-rvgw)') && starbugsBody.includes('[FlowDroid](https://github.com/secure-software-engineering/FlowDroid) | XXE')],

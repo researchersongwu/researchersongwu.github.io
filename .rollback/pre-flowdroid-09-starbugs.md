@@ -1,0 +1,20 @@
+---
+section_id: starbugs
+nav: StarBugs
+order: 9
+---
+
+## StarBugs
+
+I have discovered vulnerabilities in popular open-source software (over 30 CVEs in repositories with more than 1K stars on GitHub), as well as in products maintained by Xiaomi, Photonicat, Microsoft, and others. A selective list is shown below.
+
+| Advisory | Project / Product | Impact |
+| --- | --- | --- |
+| [CVE-2026-55629](https://github.com/avwo/whistle/security/advisories/GHSA-3vfr-4gwf-qxfp) | [whistle](https://github.com/avwo/whistle) | Path Traversal / Arbitrary File Read |
+| [CVE-2026-59971](https://github.com/designcomputer/mysql_mcp_server/security/advisories/GHSA-rqfv-2mw9-78g2) | [mysql_mcp_server](https://github.com/designcomputer/mysql_mcp_server) | Unauthenticated SQL Execution |
+| CNVD-2026-29936 | [Photonicat](https://photonicat.com/) | Command Injection |
+| CNVD-2026-28302 | [Photonicat](https://photonicat.com/) | Command Injection |
+｜CVE-2021-32754(https://github.com/secure-software-engineering/FlowDroid/security/advisories/GHSA-39r7-275f-rvgw)|[flowdroid(https://github.com/secure-software-engineering/FlowDroid)]|XXE|
+| [CVE-2020-14130](https://trust.mi.com/zh-CN/misrc/bulletins/advisory?cveId=27) | [Xiaomi](https://trust.mi.com/) | One-Click Command Execution |
+
+{: .compact-table }

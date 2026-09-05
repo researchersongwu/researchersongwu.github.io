@@ -1,10 +1,10 @@
-StarBugs summary deployment verification
+FlowDroid StarBug deployment verification
 Timestamp: 2026-09-05 Asia/Shanghai
 
 Changed branch/field:
 - Branch: main
-- Field: _sections/09-starbugs.md / introductory summary
-- Result: the supplied summary is polished to “over 30 CVEs in repositories with more than 1K stars on GitHub” and lists Xiaomi, Photonicat, Microsoft, and others.
+- Field: _sections/09-starbugs.md / CVE-2021-32754 FlowDroid row
+- Result: the new FlowDroid XXE entry is normalized as a valid three-column Markdown row and placed before the Xiaomi entry.
 
 Artifacts:
 - MODIFIED_FILE: /Users/xiaoming/mypersonalwebsite/_sections/09-starbugs.md
@@ -13,36 +13,46 @@ Artifacts:
 - ROLLBACK: /Users/xiaoming/mypersonalwebsite/ROLLBACK.sh
 
 Preserved originals:
-- .rollback/pre-starbugs-summary-09-starbugs.md
-  SHA-256: 55acbcdc5a80235fc9046063f5ae62af3d2394201eb62896f6a57dd5580ce6d4
-- .rollback/pre-starbugs-summary-test-site.mjs
-  SHA-256: 92a121586a2b0899088ff563508e5b4700c4fa2b169e861a97dadc592d856b12
+- .rollback/pre-flowdroid-09-starbugs.md
+  SHA-256: 25fae5f859e9ed3899357f7147afb07ef432db320a6d5906c258eabf2724fe1e
+- .rollback/pre-flowdroid-test-site.mjs
+  SHA-256: 9dda77d60457aa1e3531a4e74fce302f5f49a597c417b2a99f9490b1f9a7b143
 
 Modified state:
 - _sections/09-starbugs.md
-  SHA-256: a1677f7c3bbdc714abf78fe1d51ce0a015fd258a8d3aacea9195611b77afd4d3
+  SHA-256: 2bf3f9db310772097a50b78234f01a95a51306687c422471c07febf006e56330
 - scripts/test-site.mjs
-  SHA-256: 9dda77d60457aa1e3531a4e74fce302f5f49a597c417b2a99f9490b1f9a7b143
+  SHA-256: 6bba63ccb4ee9c4de7a8069b15032604d831994a272440f6864fcf6349c43518
+
+LINK CHECK
+COMMAND: curl -k -L -sS -o OUTPUT -w '%{http_code} %{url_effective}' URL; inspect advisory title/CVE
+INPUT: FlowDroid GHSA advisory and project repository
+LITERAL OUTPUT/RESULT:
+200 https://github.com/secure-software-engineering/FlowDroid/security/advisories/GHSA-39r7-275f-rvgw
+200 https://github.com/secure-software-engineering/FlowDroid
+<title>Improper Restriction of XML External Entity Reference in de.tud.sse · Advisory · secure-software-engineering/FlowDroid · GitHub
+CVE-2021-32754
+EXIT STATUS: 0
 
 BASELINE
 COMMAND: git archive HEAD | tar -x -C TARGET_COPY; npm test
-INPUT: clean HEAD 4676a25ccbdb3f00e2be8090b31a0f9e336fdfec in a temporary copy
-LITERAL OUTPUT/RESULT:
-> academic-homepage-template@1.0.0 test
-> node scripts/test-site.mjs
-
-PASS modified: 37/37 checks
-BASELINE_EXIT_STATUS=0
-BASELINE_CLEANUP_EXIT_STATUS=0
-
-MODIFIED
-COMMAND: npm test; npm run build:docker; inspect _site/index.html StarBugs summary and table
-INPUT: _sections/09-starbugs.md with the updated introduction
+INPUT: clean HEAD cecfe2d9761c12c4281c435c390923a0ef77eaeb in a temporary copy
 LITERAL OUTPUT/RESULT:
 > academic-homepage-template@1.0.0 test
 > node scripts/test-site.mjs
 
 PASS modified: 38/38 checks
+BASELINE_EXIT_STATUS=0
+BASELINE_CLEANUP_EXIT_STATUS=0
+
+MODIFIED
+COMMAND: npm test; npm run build:docker; inspect _site/index.html StarBugs table
+INPUT: _sections/09-starbugs.md with CVE-2021-32754 / FlowDroid / XXE
+LITERAL OUTPUT/RESULT:
+> academic-homepage-template@1.0.0 test
+> node scripts/test-site.mjs
+
+PASS modified: 39/39 checks
 MODIFIED_TEST_EXIT_STATUS=0
 
 > academic-homepage-template@1.0.0 build:docker
@@ -55,21 +65,27 @@ Configuration file: /srv/_config.yml
        Destination: /srv/_site
  Incremental build: disabled. Enable with --incremental
       Generating...
-                    done in 0.084 seconds.
+                    done in 0.07 seconds.
  Auto-regeneration: disabled. Use --watch to enable.
 MODIFIED_BUILD_EXIT_STATUS=0
 STARBUGS_SECTION_RENDERED=true
-STARBUGS_SUMMARY_UPDATED=true
-STARBUGS_ROWS=5
-STARBUGS_COMPANIES=Xiaomi | Photonicat | Microsoft | others
+STARBUGS_ROWS=6
+FLOWDROID_ENTRY_RENDERED=true
+FLOWDROID_IMPACT=XXE
+STARBUGS_1=CVE-2026-55629 | whistle | Path Traversal / Arbitrary File Read
+STARBUGS_2=CVE-2026-59971 | mysql_mcp_server | Unauthenticated SQL Execution
+STARBUGS_3=CNVD-2026-29936 | Photonicat | Command Injection
+STARBUGS_4=CNVD-2026-28302 | Photonicat | Command Injection
+STARBUGS_5=CVE-2021-32754 | FlowDroid | XXE
+STARBUGS_6=CVE-2020-14130 | Xiaomi | One-Click Command Execution
 MODIFIED_RENDER_EXIT_STATUS=0
 
 ROLLBACK
 COMMAND: ./ROLLBACK.sh TARGET_COPY; compare StarBugs and test files
-INPUT: /tmp/mypersonalwebsite-starbugs-summary-rollback-TARGET
+INPUT: /tmp/mypersonalwebsite-flowdroid-rollback-TARGET
 LITERAL OUTPUT/RESULT:
-ROLLBACK restored the pre-normalization StarBugs summary and tests in /tmp/mypersonalwebsite-starbugs-summary-rollback-TARGET
+ROLLBACK restored the pre-normalization FlowDroid entry and tests in /tmp/mypersonalwebsite-flowdroid-rollback-TARGET
 ROLLBACK_RESULT=starbugs_restored=true; test_restored=true
 ROLLBACK_EXIT_STATUS=script=0 starbugs=0 test=0
 ROLLBACK_CLEANUP_EXIT_STATUS=0
-RESTORED BEHAVIOR/STATUS: the test copy returned to the user-supplied pre-normalization summary and tests. The workspace MODIFIED_FILE remains changed with the polished English summary.
+RESTORED BEHAVIOR/STATUS: the test copy returned to the user-supplied pre-normalization FlowDroid row and tests. The workspace MODIFIED_FILE remains changed with the valid FlowDroid row.
