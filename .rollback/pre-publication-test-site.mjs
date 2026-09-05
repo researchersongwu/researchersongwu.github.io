@@ -31,8 +31,6 @@ const assertions = [
   ['eight Markdown sections', sectionFiles.length === 8],
   ['publication loop in Markdown', publicationSection.includes('for post in research_posts')],
   ['research category', publicationSection.includes("post.categories contains 'research'")],
-  ['artifact publication link', publicationSection.includes('post.artifact')],
-  ['CCS 2026 publication Markdown', existsSync('_posts/2026-08-01-when-ad-networks-misbehave.md')],
   ['blank talk Markdown stays empty', talksSection.trim() === ''],
   ['sections collection', config.includes('sections:') && config.includes('output: false')],
   ['publication Markdown folder', existsSync('_posts/.gitkeep')],

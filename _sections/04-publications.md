@@ -13,10 +13,12 @@ order: 4
   <h3>{{ post.title }}</h3>
   <p>{{ post.authors }}</p>
   <p class="paper-links">
-    {% if post.pdf %}<a href="{{ post.pdf | relative_url }}">paper</a> /{% endif %}
-    {% if post.poster %} <a href="{{ post.poster | relative_url }}">poster</a> /{% endif %}
-    {% if post.code %} <a href="{{ post.code }}">code</a> /{% endif %}
-    {% if post.slides %} <a href="{{ post.slides | relative_url }}">slides</a> /{% endif %}
+    {% assign has_previous_link = false %}
+    {% if post.paper %}<a href="{{ post.paper }}">paper</a>{% assign has_previous_link = true %}{% elsif post.pdf %}<a href="{{ post.pdf | relative_url }}">paper</a>{% assign has_previous_link = true %}{% endif %}
+    {% if post.artifact %}{% if has_previous_link %} / {% endif %}<a href="{{ post.artifact }}">artifact</a>{% assign has_previous_link = true %}{% endif %}
+    {% if post.poster %}{% if has_previous_link %} / {% endif %}<a href="{{ post.poster | relative_url }}">poster</a>{% assign has_previous_link = true %}{% endif %}
+    {% if post.code %}{% if has_previous_link %} / {% endif %}<a href="{{ post.code }}">code</a>{% assign has_previous_link = true %}{% endif %}
+    {% if post.slides %}{% if has_previous_link %} / {% endif %}<a href="{{ post.slides | relative_url }}">slides</a>{% endif %}
   </p>
   <p><em>{{ post.venue }}</em></p>
   {% if post.features %}<p class="feature-line"><span class="square"></span>{{ post.features }}</p>{% endif %}

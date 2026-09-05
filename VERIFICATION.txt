@@ -1,43 +1,42 @@
-About CV placeholder verification
+CCS 2026 publication verification
 Timestamp: 2026-09-05 Asia/Shanghai
-Changed branch/field: main / _sections/01-about.md social-links CV field and assets/cv.pdf placeholder
+Changed branch/field: main / _posts research publication fields plus _sections/04-publications.md artifact-link rendering
 
 FOUR ARTIFACTS
-MODIFIED_FILE: /Users/xiaoming/mypersonalwebsite/_sections/01-about.md
+MODIFIED_FILE: /Users/xiaoming/mypersonalwebsite/_posts/2026-08-01-when-ad-networks-misbehave.md
 DIFF_FILE: /Users/xiaoming/mypersonalwebsite/DIFF_FILE.patch
 VERIFICATION: /Users/xiaoming/mypersonalwebsite/VERIFICATION.txt
 ROLLBACK: /Users/xiaoming/mypersonalwebsite/ROLLBACK.sh
 
 ORIGINAL
-Path: /Users/xiaoming/mypersonalwebsite/.rollback/pre-cv-placeholder-01-about.md
-SHA256: eb2da17bb67707bcc17c1b1f52835e0fde3826c0b0f410d939a0bc688f07de78
-Pre-change commit: 5a2e58f
+Path: /Users/xiaoming/mypersonalwebsite/.rollback/pre-publication-post.empty
+SHA256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+Renderer backup: /Users/xiaoming/mypersonalwebsite/.rollback/pre-publication-renderer.md
+Renderer SHA256: 7df3adb487f7bd9f4ff7ed433b9a349adfee2f4918cd56cbbe2647e19ddd5954
 
 MODIFIED
-Path: /Users/xiaoming/mypersonalwebsite/_sections/01-about.md
-SHA256: f97cace7dcbae45c436408020123b94763000b97dc61a0796fbf24963fbbd232
-CV placeholder: /Users/xiaoming/mypersonalwebsite/assets/cv.pdf
-CV placeholder SHA256: 579be85918914b2a3de7807c6eff79b7173bcf8b1b2769ff6f9bd231fbab0a2b
-State: About renders Email / CV; CV opens assets/cv.pdf; replacing that file with the real PDF updates the linked document without changing About.
+Path: /Users/xiaoming/mypersonalwebsite/_posts/2026-08-01-when-ad-networks-misbehave.md
+SHA256: 5f8c43e22896edf9151aa2d449d57f79571e13f63d70a8785d95c83eb9184ae1
+State: one CCS 2026 publication renders with the requested title, ordered authors, venue, paper link, artifact link, and one English summary sentence.
 
 BASELINE
-Command: node -e assert pre-CV About has no assets/cv.pdf link
-Input: /Users/xiaoming/mypersonalwebsite/.rollback/pre-cv-placeholder-01-about.md
-Literal output/result: PASS baseline: CV link absent in pre-change About source; EXIT_STATUS=0
+Command: assert empty original post and renderer without artifact field
+Input: .rollback/pre-publication-post.empty and .rollback/pre-publication-renderer.md
+Literal output/result: PASS baseline: no publication post and no artifact field; EXIT_STATUS=0
 Exit status: 0
 
 MODIFIED
-Command: npm test && npm run build:docker; inspect _site/index.html and request http://127.0.0.1:8080/assets/cv.pdf
-Input: repository source with _sections/01-about.md and assets/cv.pdf
-Literal output/result: PASS modified: 18/18 checks; Jekyll done in 0.065 seconds; CV_TEXT=CV; CV_HREF=assets/cv.pdf; EMAIL_TEXT=Email; CV_PDF_BUILT=true; CV_PDF_HEADER=%PDF-1.4; LOCAL_CV_HTTP=200; PDF document, version 1.4, 1 pages
+Command: npm test && npm run build:docker; inspect generated publication
+Input: repository source and _posts/2026-08-01-when-ad-networks-misbehave.md
+Literal output/result: PASS modified: 20/20 checks; Jekyll done in 0.063 seconds; RENDER_RESULT=TITLE=When Ad Networks Misbehave: Understanding Risks of Semi-Drive-By Splash Ads; AUTHORS=Song Wu, Bo Wang, Yifan Zhang, Yinfeng Cao, Xueqiang Wang; FIRST_AUTHOR_BOLD=Song Wu; PAPER_LINK=https://researchersongwu.github.io/; ARTIFACT_LINK=https://researchersongwu.github.io/; VENUE=To appear in the proceedings of the ACM Conference on Computer and Communications Security (CCS), 2026.; SENTENCE=We investigate the security risks posed by semi-drive-by splash advertisements when ad networks misbehave.; LINK_TEXT=paper / artifact; EXIT_STATUS test=0 build=0 render=0
 Exit status: 0
 
 ROLLBACK
-Command: create TARGET_COPY at 5a2e58f; copy modified About/README/test/CV; ./ROLLBACK.sh TARGET_COPY; verify clean previous state
-Input: another repository copy containing the CV-placeholder changes
-Literal output/result: ROLLBACK restored TARGET_COPY to 5a2e58f and removed assets/cv.pdf; ROLLBACK_RESULT=about SHA256=eb2da17bb67707bcc17c1b1f52835e0fde3826c0b0f410d939a0bc688f07de78; cv.pdf absent=true; git_clean=true; EXIT_STATUS worktree=0 script=0 compare=0 pdf_absent=0 clean=0; CLEANUP_EXIT_STATUS=0
+Command: ./ROLLBACK.sh TARGET_COPY; compare renderer/test; verify publication and preview absent
+Input: another copy containing the modified renderer, test, publication Markdown, and preview
+Literal output/result: ROLLBACK restored publication renderer and removed the CCS 2026 publication from TARGET_COPY; ROLLBACK_RESULT=renderer_restored=true; test_restored=true; post_absent=true; preview_absent=true; EXIT_STATUS script=0 renderer=0 test=0 post_absent=0 preview_absent=0; CLEANUP_EXIT_STATUS=0
 Exit status: 0
-Restored behavior/status: the rollback test copy returned to About with Email only and no CV document; the real MODIFIED_FILE remains changed with Email / CV and the valid placeholder PDF remains present.
+Restored behavior/status: the rollback test copy returned to the no-publication state and the artifact field disappeared; the real MODIFIED_FILE remains changed and the CCS 2026 publication remains rendered.
 
 RENDERED PREVIEW
-/Users/xiaoming/mypersonalwebsite/artifacts/cv-placeholder-rendered.png
+/Users/xiaoming/mypersonalwebsite/artifacts/ccs-2026-publication-rendered.png

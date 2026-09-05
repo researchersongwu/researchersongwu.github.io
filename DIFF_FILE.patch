@@ -1,14 +1,37 @@
-diff --git a/.rollback/pre-cv-placeholder-01-about.md b/_sections/01-about.md
-index cbd72ec..818ffa5 100644
---- a/.rollback/pre-cv-placeholder-01-about.md
-+++ b/_sections/01-about.md
-@@ -20,7 +20,8 @@ I study new vulnerability classes and underexplored real-world security/privacy
- Before entering academic research, I led the binary security group of Xidian University’s CTF team and worked at a leading technology company in China. These experiences gave me extensive hands-on experience in reverse engineering and systems security, and prepared me to study security and privacy problems in emerging systems.
- 
- <p class="social-links">
--  <a href="mailto:researchersongwu@gmail.com"><i class="fas fa-envelope"></i> Email</a>
-+  <a href="mailto:researchersongwu@gmail.com"><i class="fas fa-envelope"></i> Email</a><span>/</span>
-+  <a href="assets/cv.pdf"><i class="fas fa-file-pdf"></i> CV</a>
- </p>
- 
- <div class="clear"></div>
+diff --git a/.rollback/pre-publication-renderer.md b/_sections/04-publications.md
+index f327e20..815863a 100644
+--- a/.rollback/pre-publication-renderer.md
++++ b/_sections/04-publications.md
+@@ -13,10 +13,12 @@ order: 4
+   <h3>{{ post.title }}</h3>
+   <p>{{ post.authors }}</p>
+   <p class="paper-links">
+-    {% if post.pdf %}<a href="{{ post.pdf | relative_url }}">paper</a> /{% endif %}
+-    {% if post.poster %} <a href="{{ post.poster | relative_url }}">poster</a> /{% endif %}
+-    {% if post.code %} <a href="{{ post.code }}">code</a> /{% endif %}
+-    {% if post.slides %} <a href="{{ post.slides | relative_url }}">slides</a> /{% endif %}
++    {% assign has_previous_link = false %}
++    {% if post.paper %}<a href="{{ post.paper }}">paper</a>{% assign has_previous_link = true %}{% elsif post.pdf %}<a href="{{ post.pdf | relative_url }}">paper</a>{% assign has_previous_link = true %}{% endif %}
++    {% if post.artifact %}{% if has_previous_link %} / {% endif %}<a href="{{ post.artifact }}">artifact</a>{% assign has_previous_link = true %}{% endif %}
++    {% if post.poster %}{% if has_previous_link %} / {% endif %}<a href="{{ post.poster | relative_url }}">poster</a>{% assign has_previous_link = true %}{% endif %}
++    {% if post.code %}{% if has_previous_link %} / {% endif %}<a href="{{ post.code }}">code</a>{% assign has_previous_link = true %}{% endif %}
++    {% if post.slides %}{% if has_previous_link %} / {% endif %}<a href="{{ post.slides | relative_url }}">slides</a>{% endif %}
+   </p>
+   <p><em>{{ post.venue }}</em></p>
+   {% if post.features %}<p class="feature-line"><span class="square"></span>{{ post.features }}</p>{% endif %}
+diff --git a/.rollback/pre-publication-post.empty b/_posts/2026-08-01-when-ad-networks-misbehave.md
+index e69de29..22f9bbd 100644
+--- a/.rollback/pre-publication-post.empty
++++ b/_posts/2026-08-01-when-ad-networks-misbehave.md
+@@ -0,0 +1,11 @@
++---
++layout: post
++title: "When Ad Networks Misbehave: Understanding Risks of Semi-Drive-By Splash Ads"
++date: 2026-08-01
++categories: research
++authors: "<strong>Song Wu</strong>, Bo Wang, Yifan Zhang, Yinfeng Cao, Xueqiang Wang"
++venue: "To appear in the proceedings of the ACM Conference on Computer and Communications Security (CCS), 2026."
++paper: "https://researchersongwu.github.io/"
++artifact: "https://researchersongwu.github.io/"
++features: "We investigate the security risks posed by semi-drive-by splash advertisements when ad networks misbehave."
++---
