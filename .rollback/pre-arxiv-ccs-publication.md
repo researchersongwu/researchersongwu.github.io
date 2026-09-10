@@ -5,7 +5,7 @@ date: 2026-08-01
 categories: research
 authors: "<strong>Song Wu</strong>, Bo Wang, Yifan Zhang, Yinfeng Cao, Xueqiang Wang"
 venue: "To appear in the proceedings of the ACM Conference on Computer and Communications Security (CCS), 2026."
-paper: "https://arxiv.org/pdf/2609.09574"
+paper: "https://researchersongwu.github.io/"
 artifact: "https://researchersongwu.github.io/"
 features:
   - "Discovered Semi-Drive-By Ads, triggered by incidental rather than explicit user actions."

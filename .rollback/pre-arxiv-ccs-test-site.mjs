@@ -42,7 +42,6 @@ const assertions = [
   ['research category', publicationSection.includes("post.categories contains 'research'")],
   ['artifact publication link', publicationSection.includes('post.artifact')],
   ['CCS 2026 publication Markdown', existsSync('_posts/2026-08-01-when-ad-networks-misbehave.md')],
-  ['CCS 2026 arXiv paper link', ccsPublication.includes('paper: "https://arxiv.org/pdf/2609.09574"')],
   ['publication feature list', ccsPublication.includes('features:\n  - ') && publicationSection.includes('for feature in post.features')],
   ['poster loop in Markdown', posterSection.includes('for post in poster_posts')],
   ['poster category', posterSection.includes("post.categories contains 'poster'")],
