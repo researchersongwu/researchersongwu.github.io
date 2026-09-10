@@ -1,26 +1,21 @@
-diff --git a/_sections/01-about.md b/_sections/01-about.md
-index 894fbdb..a8442c4 100644
---- a/_sections/01-about.md
-+++ b/_sections/01-about.md
-@@ -21,7 +21,7 @@ Besides, I ever led the binary security group of Xidian University’s CTF team
- 
- <p class="social-links">
-   <a href="mailto:researchersongwu@gmail.com"><i class="fas fa-envelope"></i> Email</a><span>/</span>
--  <a href="assets/cv.pdf"><i class="fas fa-file-pdf"></i> CV</a>
-+  <a href="https://drive.google.com/file/d/1LQzn6nGzeM7zSsRffSrk5yQ1WG8pyLWe/view?usp=drive_link"><i class="fas fa-file-pdf"></i> CV</a>
- </p>
- 
- <div class="clear"></div>
-diff --git a/scripts/test-site.mjs b/scripts/test-site.mjs
-index 1339754..b0ebabb 100644
+--- a/_posts/2026-08-01-when-ad-networks-misbehave.md
++++ b/_posts/2026-08-01-when-ad-networks-misbehave.md
+@@ -5,7 +5,7 @@
+ categories: research
+ authors: "<strong>Song Wu</strong>, Bo Wang, Yifan Zhang, Yinfeng Cao, Xueqiang Wang"
+ venue: "To appear in the proceedings of the ACM Conference on Computer and Communications Security (CCS), 2026."
+-paper: "https://researchersongwu.github.io/"
++paper: "https://arxiv.org/pdf/2609.09574"
+ artifact: "https://researchersongwu.github.io/"
+ features:
+   - "Discovered Semi-Drive-By Ads, triggered by incidental rather than explicit user actions."
 --- a/scripts/test-site.mjs
 +++ b/scripts/test-site.mjs
-@@ -66,7 +66,7 @@ const assertions = [
-   ['uploaded profile image', sectionSources.includes('images/personal.png') && existsSync('images/personal.png')],
-   ['JHU remote research internship biography', sectionSources.includes('I am currently a remote research intern at Johns Hopkins University, advised by Prof. Yinzhi Cao.')],
-   ['master degree grammar', sectionSources.includes("I received my master's degree")],
--  ['CV link in About', sectionSources.includes('href="assets/cv.pdf"')],
-+  ['CV link in About', sectionSources.includes('href="https://drive.google.com/file/d/1LQzn6nGzeM7zSsRffSrk5yQ1WG8pyLWe/view?usp=drive_link"')],
-   ['valid CV placeholder PDF', existsSync('assets/cv.pdf') && readFileSync('assets/cv.pdf').subarray(0, 5).toString() === '%PDF-'],
-   ['Sass entry', existsSync('style.scss')],
-   ['Jekyll workflow', workflow.includes('actions/jekyll-build-pages@v1')],
+@@ -42,6 +42,7 @@
+   ['research category', publicationSection.includes("post.categories contains 'research'")],
+   ['artifact publication link', publicationSection.includes('post.artifact')],
+   ['CCS 2026 publication Markdown', existsSync('_posts/2026-08-01-when-ad-networks-misbehave.md')],
++  ['CCS 2026 arXiv paper link', ccsPublication.includes('paper: "https://arxiv.org/pdf/2609.09574"')],
+   ['publication feature list', ccsPublication.includes('features:\n  - ') && publicationSection.includes('for feature in post.features')],
+   ['poster loop in Markdown', posterSection.includes('for post in poster_posts')],
+   ['poster category', posterSection.includes("post.categories contains 'poster'")],
