@@ -10,6 +10,7 @@ I have discovered vulnerabilities in popular open-source software (over 30 CVEs 
 
 | Advisory | Project / Product | Impact |
 | --- | --- | --- |
+| [CVE-2026-7064](https://www.cve.org/CVERecord?id=CVE-2026-7064) | [browser-tools-mcp](https://github.com/AgentDeskAI/browser-tools-mcp) | Command Injection |
 | [CVE-2026-55629](https://github.com/avwo/whistle/security/advisories/GHSA-3vfr-4gwf-qxfp) | [whistle](https://github.com/avwo/whistle) | Path Traversal / Arbitrary File Read |
 | [CVE-2026-59971](https://github.com/designcomputer/mysql_mcp_server/security/advisories/GHSA-rqfv-2mw9-78g2) | [mysql_mcp_server](https://github.com/designcomputer/mysql_mcp_server) | Unauthenticated SQL Execution |
 | CNVD-2026-29936 | [Photonicat](https://photonicat.com/) | Command Injection |
