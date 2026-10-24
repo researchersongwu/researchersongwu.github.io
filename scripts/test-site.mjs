@@ -26,6 +26,7 @@ const talksSection = readFileSync('_sections/05-talks.md', 'utf8');
 const awardsSection = readFileSync('_sections/06-awards.md', 'utf8');
 const experiencesSection = readFileSync('_sections/08-experiences.md', 'utf8');
 const starbugsSection = readFileSync('_sections/09-starbugs.md', 'utf8');
+const miscSection = readFileSync('_sections/10-misc.md', 'utf8');
 const starbugsBody = starbugsSection.replace(/^---\s*[\s\S]*?---\s*/u, '').trim();
 const starbugsRows = starbugsBody.split('\n').filter((line) => /^\|\s*(?:\[)?(?:CVE|CNVD)-\d{4}-\d+/u.test(line));
 const readme = readFileSync('README.md', 'utf8');
@@ -37,7 +38,7 @@ const assertions = [
   ['Jekyll entry Markdown', existsSync('index.md')],
   ['minimal default layout', layout.includes('{{ section.content }}')],
   ['Markdown section loop', layout.includes('site.sections')],
-  ['ten Markdown sections', sectionFiles.length === 10],
+  ['eleven Markdown sections', sectionFiles.length === 11],
   ['publication loop in Markdown', publicationSection.includes('for post in research_posts')],
   ['research category', publicationSection.includes("post.categories contains 'research'")],
   ['artifact publication link', publicationSection.includes('post.artifact')],
@@ -59,6 +60,8 @@ const assertions = [
   ['StarBugs summary wording', starbugsBody.includes('over 30 CVEs in repositories with more than 1K stars on GitHub') && starbugsBody.includes('Xiaomi, Photonicat, Microsoft, and others')],
   ['browser-tools-mcp StarBug entry', starbugsBody.includes('[CVE-2026-7064](https://www.cve.org/CVERecord?id=CVE-2026-7064)') && starbugsBody.includes('[browser-tools-mcp](https://github.com/AgentDeskAI/browser-tools-mcp) | Command Injection')],
   ['FlowDroid StarBug entry', starbugsBody.includes('[CVE-2021-32754](https://github.com/secure-software-engineering/FlowDroid/security/advisories/GHSA-39r7-275f-rvgw)') && starbugsBody.includes('[FlowDroid](https://github.com/secure-software-engineering/FlowDroid) | XXE')],
+  ['Misc Markdown section', miscSection.includes('section_id: misc') && miscSection.includes('nav: Misc') && miscSection.includes('order: 10')],
+  ['natural interests wording', miscSection.includes('Outside of research, I enjoy swimming, working out, and hiking. They help me relax and recharge.')],
   ['StarBugs Markdown authoring guide', readme.includes('## Add StarBugs') && readme.includes('| Advisory | Project / Product | Impact |')],
   ['blank talk Markdown stays empty', talksSection.trim() === ''],
   ['sections collection', config.includes('sections:') && config.includes('output: false')],
@@ -66,7 +69,7 @@ const assertions = [
   ['talk Markdown folder', existsSync('_talks/.gitkeep')],
   ['empty-section suppression', layout.includes("visible_content != ''")],
   ['uploaded profile image', sectionSources.includes('images/personal.png') && existsSync('images/personal.png')],
-  ['JHU remote research internship biography', sectionSources.includes('I am currently a remote research intern at Johns Hopkins University, advised by Prof. Yinzhi Cao.')],
+  ['JHU remote research internship biography', sectionSources.includes('Luckily, I am currently a remote research intern at Johns Hopkins University, advised by Prof. Yinzhi Cao.')],
   ['master degree grammar', sectionSources.includes("I received my master's degree")],
   ['CV removed from About', !sectionSources.includes('assets/cv.pdf')],
   ['CV PDF removed', !existsSync('assets/cv.pdf')],

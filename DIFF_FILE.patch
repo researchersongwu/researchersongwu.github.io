@@ -1,21 +1,46 @@
---- a/_posts/2026-08-01-when-ad-networks-misbehave.md
-+++ b/_posts/2026-08-01-when-ad-networks-misbehave.md
-@@ -5,7 +5,7 @@
- categories: research
- authors: "<strong>Song Wu</strong>, Bo Wang, Yifan Zhang, Yinfeng Cao, Xueqiang Wang"
- venue: "To appear in the proceedings of the ACM Conference on Computer and Communications Security (CCS), 2026."
--paper: "https://researchersongwu.github.io/"
-+paper: "https://arxiv.org/pdf/2609.09574"
- artifact: "https://researchersongwu.github.io/"
- features:
-   - "Discovered Semi-Drive-By Ads, triggered by incidental rather than explicit user actions."
+--- a/_sections/10-miscellaneous.md
++++ /dev/null
+@@ -1,9 +0,0 @@
+----
+-section_id: miscellaneous
+-nav: Miscellaneous
+-order: 10
+----
+-
+-## Miscellaneous
+-
+-Outside of research, I enjoy swimming, working out, and hiking. They help me relax and recharge.
+--- /dev/null
++++ b/_sections/10-misc.md
+@@ -0,0 +1,9 @@
++---
++section_id: misc
++nav: Misc
++order: 10
++---
++
++## Misc
++
++Outside of research, I enjoy swimming, working out, and hiking. They help me relax and recharge.
 --- a/scripts/test-site.mjs
 +++ b/scripts/test-site.mjs
-@@ -42,6 +42,7 @@
-   ['research category', publicationSection.includes("post.categories contains 'research'")],
-   ['artifact publication link', publicationSection.includes('post.artifact')],
-   ['CCS 2026 publication Markdown', existsSync('_posts/2026-08-01-when-ad-networks-misbehave.md')],
-+  ['CCS 2026 arXiv paper link', ccsPublication.includes('paper: "https://arxiv.org/pdf/2609.09574"')],
-   ['publication feature list', ccsPublication.includes('features:\n  - ') && publicationSection.includes('for feature in post.features')],
-   ['poster loop in Markdown', posterSection.includes('for post in poster_posts')],
-   ['poster category', posterSection.includes("post.categories contains 'poster'")],
+@@ -26,7 +26,7 @@
+ const awardsSection = readFileSync('_sections/06-awards.md', 'utf8');
+ const experiencesSection = readFileSync('_sections/08-experiences.md', 'utf8');
+ const starbugsSection = readFileSync('_sections/09-starbugs.md', 'utf8');
+-const miscellaneousSection = readFileSync('_sections/10-miscellaneous.md', 'utf8');
++const miscSection = readFileSync('_sections/10-misc.md', 'utf8');
+ const starbugsBody = starbugsSection.replace(/^---\s*[\s\S]*?---\s*/u, '').trim();
+ const starbugsRows = starbugsBody.split('\n').filter((line) => /^\|\s*(?:\[)?(?:CVE|CNVD)-\d{4}-\d+/u.test(line));
+ const readme = readFileSync('README.md', 'utf8');
+@@ -59,8 +59,8 @@
+   ['StarBugs impact wording', starbugsBody.includes('Command Injection') && starbugsBody.includes('One-Click Command Execution')],
+   ['StarBugs summary wording', starbugsBody.includes('over 30 CVEs in repositories with more than 1K stars on GitHub') && starbugsBody.includes('Xiaomi, Photonicat, Microsoft, and others')],
+   ['FlowDroid StarBug entry', starbugsBody.includes('[CVE-2021-32754](https://github.com/secure-software-engineering/FlowDroid/security/advisories/GHSA-39r7-275f-rvgw)') && starbugsBody.includes('[FlowDroid](https://github.com/secure-software-engineering/FlowDroid) | XXE')],
+-  ['Miscellaneous Markdown section', miscellaneousSection.includes('section_id: miscellaneous') && miscellaneousSection.includes('nav: Miscellaneous') && miscellaneousSection.includes('order: 10')],
+-  ['natural interests wording', miscellaneousSection.includes('Outside of research, I enjoy swimming, working out, and hiking. They help me relax and recharge.')],
++  ['Misc Markdown section', miscSection.includes('section_id: misc') && miscSection.includes('nav: Misc') && miscSection.includes('order: 10')],
++  ['natural interests wording', miscSection.includes('Outside of research, I enjoy swimming, working out, and hiking. They help me relax and recharge.')],
+   ['StarBugs Markdown authoring guide', readme.includes('## Add StarBugs') && readme.includes('| Advisory | Project / Product | Impact |')],
+   ['blank talk Markdown stays empty', talksSection.trim() === ''],
+   ['sections collection', config.includes('sections:') && config.includes('output: false')],

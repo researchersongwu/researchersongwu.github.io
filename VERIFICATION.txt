@@ -1,78 +1,74 @@
-CCS 2026 arXiv publication-link verification
-Timestamp: 2026-09-10 Asia/Shanghai
+Misc section label verification
+Timestamp: 2026-09-11 Asia/Shanghai
 
 Changed branch/field:
 - Branch: main
-- Field: _posts/2026-08-01-when-ad-networks-misbehave.md / paper
-- Result: the existing ACM CCS 2026 publication entry now links its paper button to https://arxiv.org/pdf/2609.09574; the matching site test verifies the exact URL.
+- Field: _sections/10-misc.md / filename, section_id, nav, heading, paragraph
+- Result: the interests paragraph now appears under the navigation item and section heading “Misc”; the previous “Miscellaneous” label is absent from the rendered site.
 
 Artifacts:
-- MODIFIED_FILE: /Users/xiaoming/mypersonalwebsite/_posts/2026-08-01-when-ad-networks-misbehave.md
+- MODIFIED_FILE: /Users/xiaoming/mypersonalwebsite/_sections/10-misc.md
 - DIFF_FILE: /Users/xiaoming/mypersonalwebsite/DIFF_FILE.patch
 - VERIFICATION: /Users/xiaoming/mypersonalwebsite/VERIFICATION.txt
 - ROLLBACK: /Users/xiaoming/mypersonalwebsite/ROLLBACK.sh
 
 Preserved originals:
-- /Users/xiaoming/mypersonalwebsite/.rollback/pre-arxiv-ccs-publication.md
-  SHA-256: 3a04a9bd23efc767c66d18dd513a7af34ec56e9e69c3b5c26894e8c684a216b3
-- /Users/xiaoming/mypersonalwebsite/.rollback/pre-arxiv-ccs-test-site.mjs
-  SHA-256: d6b5deb0c4dde5538026b1b97ed8d57924969763a0f0907ae74e7b426d4637b8
+- /Users/xiaoming/mypersonalwebsite/.rollback/pre-misc-label-10-miscellaneous.md
+  SHA-256: 400abf0f3f2e8662d5befae1166e61751082fe6f4e86b46f3d8ca95ac06b744d
+- /Users/xiaoming/mypersonalwebsite/.rollback/pre-misc-label-10-misc.empty
+  SHA-256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+- /Users/xiaoming/mypersonalwebsite/.rollback/pre-misc-label-test-site.mjs
+  SHA-256: ea58571d98cd3cbff36486a9510ed920c450069980c87caafbcb78e680ea5a16
 
 Modified state:
-- /Users/xiaoming/mypersonalwebsite/_posts/2026-08-01-when-ad-networks-misbehave.md
-  SHA-256: b0258a0fb16147973be0dd1f8b336e98a909bbd0f4bffa466449a097a9510ed2
+- /Users/xiaoming/mypersonalwebsite/_sections/10-misc.md
+  SHA-256: d4bfbaa6aff23812a8b75ac199c5c92a2583c3c60596f2dbdc2b46c0b53fc608
 - /Users/xiaoming/mypersonalwebsite/scripts/test-site.mjs
-  SHA-256: 79d53c1528f8764a87e8cc75849af6860ebe1473458b6eba7646e17ebdc26c45
-
-LINK CHECK
-COMMAND: curl -L -sS -o /dev/null -w 'HTTP=%{http_code}\nEFFECTIVE_URL=%{url_effective}\n' https://arxiv.org/pdf/2609.09574
-INPUT: https://arxiv.org/pdf/2609.09574
-LITERAL OUTPUT/RESULT:
-HTTP=200
-EFFECTIVE_URL=https://arxiv.org/pdf/2609.09574
-LINK_EXIT_STATUS=0
+  SHA-256: 6ca3214f97527ff4cff81fa6970f8b7c3cecb538d7e85a2d48e26e05acc8a787
 
 BASELINE
 COMMAND: npm test
-INPUT: current workspace before arXiv-link update
+INPUT: current workspace with the interests paragraph under Miscellaneous
 LITERAL OUTPUT/RESULT:
 > academic-homepage-template@1.0.0 test
 > node scripts/test-site.mjs
 
-PASS modified: 39/39 checks
+PASS modified: 42/42 checks
 BASELINE_EXIT_STATUS=0
 
 MODIFIED
 COMMAND: npm test; bundle exec jekyll build; inspect _site/index.html
-INPUT: updated publication front matter and exact-link assertion
+INPUT: renamed _sections/10-misc.md with section_id, navigation label, and heading set to Misc
 LITERAL OUTPUT/RESULT:
 > academic-homepage-template@1.0.0 test
 > node scripts/test-site.mjs
 
-PASS modified: 40/40 checks
+PASS modified: 42/42 checks
 Configuration file: /Users/xiaoming/mypersonalwebsite/_config.yml
             Source: /Users/xiaoming/mypersonalwebsite
        Destination: /Users/xiaoming/mypersonalwebsite/_site
  Incremental build: disabled. Enable with --incremental
       Generating...
-                    done in 0.077 seconds.
+                    done in 0.104 seconds.
  Auto-regeneration: disabled. Use --watch to enable.
-RENDERED_ARXIV_LINK=true
-RENDERED_ARXIV_HREF=https://arxiv.org/pdf/2609.09574
+RENDERED_MISC_NAV=true
+RENDERED_MISC_HEADING=true
+RENDERED_TEXT=true
+OLD_MISCELLANEOUS_NAV=false
 MODIFIED_TEST_EXIT_STATUS=0
 MODIFIED_BUILD_EXIT_STATUS=0
 MODIFIED_RENDER_EXIT_STATUS=0
 
 ROLLBACK
-COMMAND: ./ROLLBACK.sh /tmp/mypersonalwebsite-arxiv-rollback.M6E1Vs; compare publication and test files; npm test
-INPUT: modified copies of the publication post and test suite in /tmp/mypersonalwebsite-arxiv-rollback.M6E1Vs
+COMMAND: ./ROLLBACK.sh /tmp/mypersonalwebsite-misc-label-rollback.hPUYNj; compare both section paths and test file; npm test
+INPUT: modified workspace copy at /tmp/mypersonalwebsite-misc-label-rollback.hPUYNj
 LITERAL OUTPUT/RESULT:
-ROLLBACK restored the previous publication paper link and its test in /tmp/mypersonalwebsite-arxiv-rollback.M6E1Vs
+ROLLBACK restored the previous Miscellaneous section and test suite in /tmp/mypersonalwebsite-misc-label-rollback.hPUYNj
 
 > academic-homepage-template@1.0.0 test
 > node scripts/test-site.mjs
 
-PASS modified: 39/39 checks
-ROLLBACK_RESULT=publication_restored=true; test_restored=true
-ROLLBACK_EXIT_STATUS=script=0 publication=0 test=0 behavior=0
-RESTORED BEHAVIOR/STATUS: the test copy returned to https://researchersongwu.github.io/ and its baseline 39/39 test suite passed. The workspace MODIFIED_FILE remains changed with the arXiv PDF link.
+PASS modified: 42/42 checks
+ROLLBACK_RESULT=misc_removed=true; miscellaneous_restored=true; test_restored=true
+ROLLBACK_EXIT_STATUS=script=0 new=0 old=0 test=0 behavior=0
+RESTORED BEHAVIOR/STATUS: the rollback copy restored the previous Miscellaneous filename, section ID, navigation label, heading, and test suite; all 42 baseline checks passed. The workspace MODIFIED_FILE remains changed with the paragraph under Misc.
