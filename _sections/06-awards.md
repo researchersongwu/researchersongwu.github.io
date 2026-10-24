@@ -8,7 +8,6 @@ order: 6
 
 | Award | Year |
 | --- | --- |
-| Outstanding Individual, Huawei HarmonyOS Security Training Camp | 2021 |
 | First Prize, Vivo Qianjing Cup Cybersecurity Competition | 2021 |
 | First Prize, National College Student Information Security Contest (CTF) | 2019 |
 | First Prize, National College Student Information Security Contest (Project) | 2019 |
